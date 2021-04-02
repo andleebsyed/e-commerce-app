@@ -1,0 +1,30 @@
+.image-resize{
+    height: 250px;
+    width: 250px;
+}
+
+.products-main{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.card-badge{
+    margin: 0.2rem;
+    align-items: center;
+    justify-items: center;
+}
+
+
+.bold{
+    margin: 0;
+}
+
+@media only screen and (max-width: 600px) {
+  
+    .products-main{
+        display: flex;
+        align-items: center;
+        justify-items: center;
+    }
+
+}
