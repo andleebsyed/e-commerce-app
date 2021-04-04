@@ -28,16 +28,23 @@ body{
 
  .right-navbar-links {
      margin-top: 1rem;
-    /* justify-content: flex-end; */
-    /* float: right; */
-
-
+     display: flex;
+     justify-content: space-between;
 }
 
+.individual-icons{
+    margin-right : 2rem;
+}
 .list-item{
     text-decoration: none;
 }
+/* .list-item :hover{
 
+} */
+.badge-container{
+    /* display: flex; */
+    /* justify-content: space-be; */
+}
 @media only screen and (max-width: 600px) {
     
     .left-navbar-links{
@@ -48,6 +55,10 @@ body{
     }
     .right-navbar-links{
         position: relative;
-        right: 1.8rem;
+        right: 2.3rem;
+    }
+  
+    .last-icon{
+        margin-right: 0.1rem;
     }
 }
