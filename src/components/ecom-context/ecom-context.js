@@ -8,7 +8,7 @@ const EcomContext = createContext()
 
 // reducer function
 function  ecomReducer(state  , {type , payload}){
-    const {route  , wishlist , cart} = state
+    const {route  , wishlist , cart , wishlistStatus} = state
     
     switch (type){
        
@@ -25,7 +25,8 @@ function  ecomReducer(state  , {type , payload}){
             
         // second part to handle cart and wishlist
         case 'ADD_TO_WISHLIST':
-            return {...state  , wishlist : [...wishlist ,  payload]}
+            return {...state  ,  wishlist : [...wishlist , payload] , 
+                data :  data.map(product => product.id === payload.id ? {...product , wishlistStatus : true } :  {...product} ) }
 
         case 'ADD_TO_CART':
 
@@ -51,8 +52,9 @@ const route = {value : 'products'}
 export function EcomProvider({children}){
     let wishlist = []
     let cart = []
+    let wishlistStatus = false; 
     
-    const [state , dispatch] = useReducer(ecomReducer , {route , wishlist , cart} )
+    const [state , dispatch] = useReducer(ecomReducer , {data , route , wishlist , cart , wishlistStatus} )
 
     return(
         <EcomContext.Provider value = {{state , dispatch}}>
