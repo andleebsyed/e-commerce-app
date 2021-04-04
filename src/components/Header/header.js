@@ -20,32 +20,27 @@ export function Header(){
                     </ul>
                 </div>
                 <div className = "navbar right-navbar-links">
-                    {/* <div class = "right-links"> */}
+                            
                             <div className = "individual-icons">
-                            <a onClick = {() => dispatch({type : 'wishlist'})} className = "" href = "#">
-                                <div class="badge-container"> 
-                                <i class="material-icons">favorite_border</i>
-                                 <div class="badge-common badge-one">{wishlist.length}</div>
-                                  </div>
-                            </a>
-                            {/* </li> */}
-                    </div>
+                                <a onClick = {() => dispatch({type : 'wishlist'})} className = "" href = "#">
+                                    <div class="badge-container"> 
+                                    <i class="material-icons">favorite_border</i>
+                                    <div class="badge-common badge-one">{wishlist.length}</div>
+                                    </div>
+                                </a>
+                       
+                            </div>
 
-                    {/* <span> */}
-                    {/* <li> */}
+                 
                         <div className = "individual-icons">
                             <a  href = "#">
                               <div class="badge-container "> 
                                 <i class="material-icons "> account_circle </i> 
-                                {/* <div class="badge-common badge-one">3</div>  */}
                               </div>
 
                             </a>
                             </div>
-                            {/* </li> */}
-                    {/* </span> */}
-
-                    {/* <span> */}
+                           
                     <div className = "individual-icons last-icon">
                         
                             <a onClick = {() => dispatch({type : 'cart'})} className = ""  href = "#">
@@ -56,9 +51,9 @@ export function Header(){
 
                             </a>
                             </div>
-                    {/* </span> */}
+                   
                 </div>
-                {/* </div> */}
+               
             </nav>
         </div>
     )
