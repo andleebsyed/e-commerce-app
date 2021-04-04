@@ -1,7 +1,8 @@
 import './header.css'
 import {useEcom} from '../ecom-context/ecom-context'
 export function Header(){
-    const {dispatch} = useEcom()
+    const {state , dispatch} = useEcom();
+    const { wishlist , cart } = state;
     return(
         <div>
             <div>
@@ -19,21 +20,45 @@ export function Header(){
                     </ul>
                 </div>
                 <div className = "navbar right-navbar-links">
-                    <span>
-                        
-                            <a onClick = {() => dispatch({type : 'wishlist'})} className = "list-item" href = "#">WL</a>
-                    </span>
+                    {/* <div class = "right-links"> */}
+                            <div className = "individual-icons">
+                            <a onClick = {() => dispatch({type : 'wishlist'})} className = "" href = "#">
+                                <div class="badge-container"> 
+                                <i class="material-icons">favorite_border</i>
+                                 <div class="badge-common badge-one">{wishlist.length}</div>
+                                  </div>
+                            </a>
+                            {/* </li> */}
+                    </div>
 
-                    <span>
-                        
-                            <a className = "list-item"  href = "#">Acc</a>
-                    </span>
+                    {/* <span> */}
+                    {/* <li> */}
+                        <div className = "individual-icons">
+                            <a  href = "#">
+                              <div class="badge-container "> 
+                                <i class="material-icons "> account_circle </i> 
+                                {/* <div class="badge-common badge-one">3</div>  */}
+                              </div>
 
-                    <span>
+                            </a>
+                            </div>
+                            {/* </li> */}
+                    {/* </span> */}
+
+                    {/* <span> */}
+                    <div className = "individual-icons last-icon">
                         
-                            <a onClick = {() => dispatch({type : 'cart'})} className = "list-item"  href = "#">Cart</a>
-                    </span>
+                            <a onClick = {() => dispatch({type : 'cart'})} className = ""  href = "#">
+                                <div class="badge-container">
+                                     <i class="material-icons"> add_shopping_cart </i>
+                                      <div class="badge-common badge-one">{cart.length}</div>
+                                </div>
+
+                            </a>
+                            </div>
+                    {/* </span> */}
                 </div>
+                {/* </div> */}
             </nav>
         </div>
     )
