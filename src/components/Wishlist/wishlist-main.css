@@ -1,0 +1,11 @@
+.wishlist-main{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-left: 10rem;
+    margin-right: 10rem;
+}
+
+.buttons-wishlist{
+    display: flex;
+}

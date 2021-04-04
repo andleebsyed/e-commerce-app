@@ -22,6 +22,8 @@
 
 .products {
   grid-area: products;
+  display: flex;
+  flex-wrap: wrap;
   align-items: center;
 }
 
