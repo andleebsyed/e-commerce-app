@@ -1,4 +1,4 @@
-
+import {Checkout} from '../Checkout/checkout'
 import {useEcom} from '../ecom-context/ecom-context'
 import './cart.css'
 export function Cart(){
@@ -13,7 +13,7 @@ export function Cart(){
         console.log("cart is " ,  cart)
         return(
             <div>
-
+               
             <h1>Cart</h1>
             {cart.map(
                 product => 
@@ -24,13 +24,20 @@ export function Cart(){
                             <p class="bold">{product.productName}</p>
                             <p>{product.description}</p>
                             <span class="bold">Rs {product.price} </span><br />
+                            <div class = "quantity-manager">
+                                <button onClick = {() => dispatch({type : 'DECREASE_QUANTITY' , payload : product})}>-</button>
+                                    <span class = "quantity-count">{product.quantity}</span>
+                                <button onClick = {() => dispatch({type : 'INCREASE_QUANTITY' , payload : product})}>+</button>
+                             </div>
                             <div class = "cart-buttons">
+                               
                             <button class="button button-success" id = {product.id} onClick = {() => dispatch({type : 'MOVE_TO_WISHLIST' , payload : product})}>Move To Wishlist</button>
                             <button class="button button-warning" id = {product.id} onClick = {() => dispatch({type : 'REMOVE_FROM_CART' , payload : product})}>Remove From Cart</button>
                             </div>
                         </div>
                     </div>
                 )}
+                 <Checkout />
                 </div>
         )}
 }
