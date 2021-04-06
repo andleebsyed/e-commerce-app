@@ -2,3 +2,13 @@
     display: flex;
     
 }
+
+.quantity-manager{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quantity-count{
+    margin : 0.3rem;
+}
