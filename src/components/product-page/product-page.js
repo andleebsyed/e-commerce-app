@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import {useEcom} from '../ecom-context/ecom-context'
+import {Card} from '../ProductCard/card'
 import '../product-page/product-page.css'
 
 export function Products(){
@@ -24,28 +25,29 @@ export function Products(){
     return(
         <div className = "products-main">
             {data.map(product => 
-           
-                <div class="card-badge">
-                    <img class="image-resize" src={product.image} /> 
-                    <div class="card-badge-content"> 
-                        <p class="bold">{product.productName}</p>
-                        <p>{product.description}</p>
-                        <span class="bold">Rs {product.price} </span>
-                       <button  
+
+                <Card product = {product} />
+                // <div class="card-badge">
+                //     <img class="image-resize" src={product.image} /> 
+                //     <div class="card-badge-content"> 
+                //         <p class="bold">{product.productName}</p>
+                //         <p>{product.description}</p>
+                //         <span class="bold">Rs {product.price} </span>
+                //        <button  
                       
-                        {...currentStyleStatus =  wishlist.find(item => item.id === product.id ? true : false) } 
-                          disabled ={currentStyleStatus}
-                        className = {currentStyleStatus ? clicked.currentClass : unclicked.currentClass} 
+                //         {...currentStyleStatus =  wishlist.find(item => item.id === product.id ? true : false) } 
+                //           disabled ={currentStyleStatus}
+                //         className = {currentStyleStatus ? clicked.currentClass : unclicked.currentClass} 
                        
                        
-                        id = {product.id} 
-                        onClick = {() =>
-                        { dispatch({type : 'ADD_TO_WISHLIST' , payload : product})
-                        }}>
-                            {currentStyleStatus ? clicked.currentText : unclicked.currentText}
-                        </button>
-                    </div>
-                </div>
+                //         id = {product.id} 
+                //         onClick = {() =>
+                //         { dispatch({type : 'ADD_TO_WISHLIST' , payload : product})
+                //         }}>
+                //             {currentStyleStatus ? clicked.currentText : unclicked.currentText}
+                //         </button>
+                //     </div>
+                // </div>
 )}
 
 
