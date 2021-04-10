@@ -26,9 +26,8 @@ function  ecomReducer(state  , {type , payload}){
             
         // second part to handle cart and wishlist
         case 'ADD_TO_WISHLIST':
-            return {...state  , wishlist :  [...wishlist , payload] }
-                // ,  
-                // data :  data.map(product => product.id === payload.id ? {...product , wishlistStatus : true } :  {...product} ) } 
+            // console.log("mai aaraha hu with  ", payload)
+            return {...state  , wishlist :  [...wishlist , payload] } 
         case 'ADD_TO_CART':
             return {...state  , wishlist : wishlist.filter((item) => item.id !== payload.id) ,  cart : [...cart ,  {...payload , quantity : 1}]}
         case 'REMOVE_FROM_CART':
