@@ -1,6 +1,7 @@
 
-import {useContext  , createContext , useReducer, useState} from 'react'
-import {data} from '../faker'
+import {useContext  , createContext , useReducer} from 'react'
+import {data}  from '../faker' 
+const orgData = data;
 
 
 // creating context
@@ -8,7 +9,7 @@ const EcomContext = createContext()
 
 // reducer function
 function  ecomReducer(state  , {type , payload}){
-    const {route  , wishlist , cart , wishlistStatus} = state
+    const {route  , wishlist , cart , data} = state
     
     switch (type){
        
@@ -24,17 +25,10 @@ function  ecomReducer(state  , {type , payload}){
             return {...state  , route : {...route , value : 'wishlist'}}
             
         // second part to handle cart and wishlist
-
-        // state is an array with objects data and wishlist
-        // payload is coming product
-        // when payload is  coming simply add that to wishlist
-        // but update the data on the main products page so that same item can't be added to wishlist again
-        // here for that i am putting a property of wishlistStatus : true(for items being added to wishlist) on the main data which is being mapped on products page
-        // it works but only once , state is not persisting
-        // when i click ADD TO WISHSLIST that product goes disabled which i want but when i click any other item that one goes disabled but previous item looses the property of wishlistStatus and gets enabled
         case 'ADD_TO_WISHLIST':
-            return {...state  , wishlist :  [...wishlist , payload] ,  
-                data :  data.map(product => product.id === payload.id ? {...product , wishlistStatus : true } :  {...product} ) } 
+            return {...state  , wishlist :  [...wishlist , payload] }
+                // ,  
+                // data :  data.map(product => product.id === payload.id ? {...product , wishlistStatus : true } :  {...product} ) } 
         case 'ADD_TO_CART':
             return {...state  , wishlist : wishlist.filter((item) => item.id !== payload.id) ,  cart : [...cart ,  {...payload , quantity : 1}]}
         case 'REMOVE_FROM_CART':
@@ -50,7 +44,20 @@ function  ecomReducer(state  , {type , payload}){
                  return {...state , cart : cart.filter((product) => product.id !== payload.id )}
              }
             return {...state , cart : cart.map(product => product.id === payload.id ? {...product , quantity : product.quantity-1} : {...product})}
-
+        case 'SORT_LOW_TO_HIGH':
+            return {...state  , data : data.sort((a,b) => a.price-b.price) } 
+        case 'SORT_HIGH_TO_LOW':
+            return {...state  , data : data.sort((a,b) => b.price-a.price) } 
+        case 'REMOVE_OUT_OF_STOCK' :
+            if(payload === true ) return {...state , data : data.filter(product => product.inStock === true)}; else return {...state , data : orgData}
+        case "SHOW_FAST_DELIVERY_ONLY":
+            if(payload === true ) return {...state , data : data.filter(product => product.fastDelivery === true)}; else return {...state , data : orgData}
+        case 'SEARCH_FOR_ITEM':
+           return {...state , data : data.filter(product =>
+                    product.productName.toLowerCase().includes(payload.toLowerCase())
+           )}
+        case 'REMOVE_ALL_CONDITIONS':
+            return {...state  , data : orgData}
         default:
            return  {...state}
 
@@ -61,13 +68,12 @@ function  ecomReducer(state  , {type , payload}){
 const route = {value : 'products'}
 
 
-// making a function which will nest main App and will take values to make them global
 export function EcomProvider({children}){
     let wishlist = []
     let cart = []
-    let wishlistStatus = false; 
+ 
     
-    const [state , dispatch] = useReducer(ecomReducer , {data , route , wishlist , cart , wishlistStatus} )
+    const [state , dispatch] = useReducer(ecomReducer , {data , route , wishlist , cart} )
 
     return(
         <EcomContext.Provider value = {{state , dispatch}}>
@@ -79,3 +85,23 @@ export function EcomProvider({children}){
 export function useEcom(){
     return useContext(EcomContext)
 }
+
+
+
+// new context for applying filters 
+// const FilterContext = createContext();
+
+// export function FilterContextProvider({children}){
+    
+//     return(
+//         <FilterContext>
+//             {children}
+//         </FilterContext>
+//     )
+
+// }
+
+
+// export function useFilter(){
+//     return useContext(FilterContext)
+// }
