@@ -3,22 +3,20 @@ import {Products} from './components/product-page/product-page'
 import {Header} from './components/Header/header'
 import {Wishlist} from './components/Wishlist/wishlist'
 import {Cart} from './components/Cart/cart'
-
-// custom Hook filled with useContext , whoch is passing state and dispatch (created using useReducer)
+import {Filters} from './components/Filters/filters'
 import {useEcom} from './components/ecom-context/ecom-context'
 
 function App() {
 
   const {state , dispatch} = useEcom()
-
-  //destructure state and get value out of it to use as route value
   const {route : {value}} = state
 
   return (
-    <div>
+    <div className = "main-div">
     <div className="App">
     <div className = "app-header"><Header /></div>
-    <div className = "products" >{ value === 'products'  && <Products /> } </div>
+    <div className = "sidebar">{ value === 'products' && <Filters />}</div>
+    <div className = "products">{ value === 'products'  && <Products /> } </div>
  
     
     </div>
