@@ -4,7 +4,7 @@ import '../product-page/product-page.css'
 
 export function Products(){
     const {state , dispatch} = useEcom()
-    const {data} = state 
+    const {data , wishlist} = state 
     console.log("data is " , data)
 
 
@@ -19,6 +19,7 @@ export function Products(){
         currentText : "Add To Wishlist" , 
         visibility : false
     }         
+    let currentStyleStatus;
 
     return(
         <div className = "products-main">
@@ -30,14 +31,18 @@ export function Products(){
                         <p class="bold">{product.productName}</p>
                         <p>{product.description}</p>
                         <span class="bold">Rs {product.price} </span>
-                       <button 
-                        class = {product.wishlistStatus ?   clicked.currentClass : unclicked.currentClass} 
-                        disabled =  {product.wishlistStatus ?   clicked.visibility : unclicked.visibility} 
+                       <button  
+                      
+                        {...currentStyleStatus =  wishlist.find(item => item.id === product.id ? true : false) } 
+                          disabled ={currentStyleStatus}
+                        className = {currentStyleStatus ? clicked.currentClass : unclicked.currentClass} 
+                       
+                       
                         id = {product.id} 
                         onClick = {() =>
                         { dispatch({type : 'ADD_TO_WISHLIST' , payload : product})
                         }}>
-                            {product.wishlistStatus ?  clicked.currentText : unclicked.currentText}
+                            {currentStyleStatus ? clicked.currentText : unclicked.currentText}
                         </button>
                     </div>
                 </div>
