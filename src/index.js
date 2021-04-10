@@ -6,9 +6,9 @@ import reportWebVitals from './reportWebVitals';
 import {EcomProvider} from './components/ecom-context/ecom-context'
 ReactDOM.render(
   <React.StrictMode>
-    <EcomProvider>
-    <App />
-    </EcomProvider>
+      <EcomProvider>
+        <App />
+      </EcomProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
