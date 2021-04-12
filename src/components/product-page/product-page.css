@@ -1,3 +1,6 @@
+body{
+    --products-bg-color : #475841;
+}
 .image-resize{
     height: 250px;
     width: 250px;
@@ -6,6 +9,7 @@
 .products-main{
     display: flex;
     flex-wrap: wrap;
+    /* background-color: var(--products-bg-color); */
 }
 
 .card-badge{
