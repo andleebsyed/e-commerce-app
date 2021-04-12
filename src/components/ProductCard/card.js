@@ -2,11 +2,21 @@ import './card.css'
 import {useEcom} from '../ecom-context/ecom-context'
 export function Card({product}){
   const {state , dispatch} = useEcom()
-  const {wishlist} = state
+  const {wishlist , cart} = state
+  const clicked = {
+        currentClass : "button button-secondary" , 
+        currentText : "✅Added To Cart" , 
+        visibility : true
+    }
+    const  unclicked = {
+        currentClass : "button button-success" , 
+        currentText : "Add To Cart" , 
+        visibility : false
+    }
   let productInWishlistStatus = [];
-
   wishlist.length === 0 ? productInWishlistStatus = [] : productInWishlistStatus = wishlist.filter(item => item.id === product.id) 
  
+  let ifProductInCart = cart.filter(item => item.id === product.id)
   return(
         <div class = "ecom-card">
             <img class = "card-image" src = {product.image} />
@@ -30,9 +40,13 @@ export function Card({product}){
                 <p>{product.description}</p>
                 <strong>Rs {product.price}</strong>
             </div>
-            <div class = "button-encloser">
-            <button class = "card-button">Add to Cart</button>
-                </div>
+                 {/* class = "button button-success" */}
+            <button
+            className = {ifProductInCart.length > 0 ? clicked.currentClass : unclicked.currentClass }
+            disabled = {ifProductInCart.length > 0 ? clicked.visibility : unclicked.visibility }
+            onClick  = {() => dispatch({type : 'ADD_TO_CART' , payload : product})}>
+                {ifProductInCart.length > 0 ? clicked.currentText : unclicked.currentText }
+                </button>
        </div>
     )
 }
