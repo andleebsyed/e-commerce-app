@@ -3,7 +3,7 @@ import '../product-page/product-page.css'
 import './wishlist-main.css'
 export function Wishlist(){
     const {state  , dispatch} = useEcom()
-    const {wishlist , wishlistStatus} = state
+    const {wishlist} = state
     
     if(wishlist.length === 0){
         return(
@@ -11,28 +11,28 @@ export function Wishlist(){
         )
     }
     else{
-        console.log("wishlist is "  , wishlist)
         return(
             <div className = "wishlist-main">
-            {wishlist.map(product => 
+                {wishlist.map(product => 
+                    <div class = "ecom-card">
+                        <img class = "card-image" src = {product.image} />
 
-                <div class="card-badge">
-                    <img class="image-resize" src={product.image} /> 
-                    <div class="card-badge-content"> 
-                        <p class="bold">{product.productName}</p>
-                        <p>{product.description}</p>
-                        <span class="bold">Rs {product.price} </span>
-                        <div className = "buttons-wishlist">
-                            {/* {{wishlistStatus} ? className = "button button-success" : className = "button button-secondary"} */}
-                       <button  class="button button-primary" id = {product.id} onClick = {() => dispatch({type : 'ADD_TO_CART' , payload : product})}>Add To Cart</button>
-                        <button class="button button-warning" id = {product.id} onClick = {() => dispatch({type : 'REMOVE_FROM_WISHLIST' , payload : product})}>Remove From Wishlist</button>
+                
+                        <div class = "card-info">
+                            <strong>{product.productName}</strong> 
+                            <p>{product.description}</p>
+                            <strong>Rs {product.price}</strong>
                         </div>
+                            
+                            <div className = "buttons-wishlist">
+                                <button  class="button button-primary" id = {product.id} onClick = {() => dispatch({type : 'ADD_TO_CART' , payload : product})}>Add To Cart</button>
+                                <button class="button button-warning" id = {product.id} onClick = {() => dispatch({type : 'REMOVE_FROM_WISHLIST' , payload : product})}>Remove From Wishlist</button>
+                            </div>
                     </div>
-                </div>
-            )}
+                )}
 
 
-        </div>
+            </div>
         )
     }
 
