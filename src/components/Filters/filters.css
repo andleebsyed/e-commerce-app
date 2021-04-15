@@ -3,9 +3,19 @@
 }
 
 .side-div{
-    border: 1px solid red;
+    /* border: 1px solid red; */
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    /* margin-left: 1rem; */
+}
+
+.heading-of-filters{
+    margin-left: 1rem;
+}
+
+.reset-button{
+    /* align-items: center;
+    justify-content: center; */
+    /* align-items: center; */
+    margin-left : 5rem;
 }

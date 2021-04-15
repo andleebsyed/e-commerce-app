@@ -4,7 +4,7 @@ export function Filters() {
     const { dispatch } = useEcom()
     return (
         <div className="side-div">
-            <strong>Sort</strong>
+            <strong className="heading-of-filters">Sort</strong>
             <ul className="sort-radio-buttons">
                 <li>
                     <input type="radio" name="sort" onChange={() => dispatch({ type: 'SORT_LOW_TO_HIGH' })} /><label>Low to High</label>
@@ -14,7 +14,7 @@ export function Filters() {
 
                 </li>
             </ul>
-            <strong>Apply Filters</strong>
+            <strong className="heading-of-filters">Apply Filters</strong>
             <ul className="sort-radio-buttons">
                 <li>
                     <input type="checkbox" onClick={(event) => dispatch({ type: "REMOVE_OUT_OF_STOCK", payload: event.target.checked })} /><label>Remove out of stock</label>
@@ -26,7 +26,7 @@ export function Filters() {
 
                 </li>
             </ul>
-            <button onClick={() => dispatch({ type: 'REMOVE_ALL_CONDITIONS' })}>Clear all Filters</button>
+            <button className="reset-button" onClick={() => dispatch({ type: 'REMOVE_ALL_CONDITIONS' })}>Clear all Filters</button>
         </div>
     )
 }
