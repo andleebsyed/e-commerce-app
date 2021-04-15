@@ -27,8 +27,7 @@ body{
   
     .products-main{
         display: flex;
-        align-items: center;
-        justify-items: center;
+        flex-wrap: wrap;
     }
 
 }
