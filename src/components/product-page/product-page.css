@@ -1,6 +1,13 @@
 body{
     --products-bg-color : #475841;
 }
+.products-outer{
+    display: grid;
+    grid-template-columns: 20rem auto ;
+    grid-template-rows: 8rem auto;
+    grid-template-areas: "sidebar products-main"
+    "sidebar products-main"
+}
 .image-resize{
     height: 250px;
     width: 250px;
@@ -9,7 +16,6 @@ body{
 .products-main{
     display: flex;
     flex-wrap: wrap;
-    /* background-color: var(--products-bg-color); */
 }
 
 .card-badge{

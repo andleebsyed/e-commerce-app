@@ -3,12 +3,17 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {EcomProvider} from './components/ecom-context/ecom-context'
+import { EcomProvider } from './components/ecom-context/ecom-context'
+import { BrowserRouter as Router } from 'react-router-dom';
+
 ReactDOM.render(
   <React.StrictMode>
+    <Router>
       <EcomProvider>
         <App />
       </EcomProvider>
+    </Router>
+
   </React.StrictMode>,
   document.getElementById('root')
 );

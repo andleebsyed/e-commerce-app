@@ -15,10 +15,12 @@ export function Header() {
                 <div>
                     <ul className="navbar left-navbar-links">
                         <li>
-                            <a onClick={() => dispatch({ type: 'products' })} className="list-item" href="#"><strong>Home</strong></a>
+                            {/* onClick={() => dispatch({ type: 'products' })} */}
+                            <a className="list-item" href="/"><strong>Home</strong></a>
                         </li>
                         <li>
-                            <a onClick={() => dispatch({ type: 'products' })} className="list-item" href="#"><strong>Products</strong></a>
+                            {/* onClick={() => dispatch({ type: 'products' })} */}
+                            <a className="list-item" href="/products"><strong>Products</strong></a>
                         </li>
                     </ul>
                 </div>
@@ -32,7 +34,8 @@ export function Header() {
                 <div className="navbar right-navbar-links">
 
                     <div className="individual-icons">
-                        <a onClick={() => dispatch({ type: 'wishlist' })} className="" href="#">
+                        {/* onClick={() => dispatch({ type: 'wishlist' })} */}
+                        <a className="" href="/wishlist">
                             <div class="badge-container">
                                 <i class="material-icons">favorite_border</i>
                                 <div class="badge-common badge-one">{wishlist.length}</div>
@@ -52,8 +55,8 @@ export function Header() {
                     </div>
 
                     <div className="individual-icons last-icon">
-
-                        <a onClick={() => dispatch({ type: 'cart' })} className="" href="#">
+                        {/* onClick={() => dispatch({ type: 'cart' })} */}
+                        <a className="" href="/cart">
                             <div class="badge-container">
                                 <i class="material-icons"> add_shopping_cart </i>
                                 <div class="badge-common badge-one">{cart.length}</div>

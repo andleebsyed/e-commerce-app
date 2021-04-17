@@ -12,19 +12,6 @@ function ecomReducer(state, { type, payload }) {
     const { route, wishlist, cart, data } = state
 
     switch (type) {
-
-        // first part for routing
-
-        case 'home':
-            return { ...state, route: { ...route, value: 'home' } }
-        case 'products':
-            return { ...state, route: { value: 'products' } }
-        case 'cart':
-            return { ...state, route: { ...route, value: 'cart' } }
-        case 'wishlist':
-            return { ...state, route: { ...route, value: 'wishlist' } }
-
-        // second part to handle cart and wishlist
         case 'ADD_TO_WISHLIST':
             return { ...state, wishlist: [...wishlist, payload] }
         case 'ADD_TO_CART':
