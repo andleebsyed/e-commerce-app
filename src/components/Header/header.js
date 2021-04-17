@@ -1,30 +1,25 @@
 import './header.css'
 import { useEcom } from '../ecom-context/ecom-context'
 import { useState } from 'react';
+import { Link } from 'react-router-dom'
 export function Header() {
     const { state, dispatch } = useEcom();
     const { wishlist, cart, data } = state;
-
     // state for searching of an item
     const [comingProd, setComingProd] = useState('');
-
     return (
         <div className="header-main">
-
             <nav className="navbar-main">
                 <div>
                     <ul className="navbar left-navbar-links">
-                        <li>
-                            {/* onClick={() => dispatch({ type: 'products' })} */}
-                            <a className="list-item" href="/"><strong>Home</strong></a>
+                        <li className="list-item">
+                            <Link to='/'><strong className="list-item">Home</strong></Link>
                         </li>
-                        <li>
-                            {/* onClick={() => dispatch({ type: 'products' })} */}
-                            <a className="list-item" href="/products"><strong>Products</strong></a>
+                        <li className="list-item">
+                            <Link to='/products'><strong className="list-item">Products</strong></Link>
                         </li>
                     </ul>
                 </div>
-
                 <div className="search-bar">
                     <input type="text" id="search-box" className="search-box" placeholder="Type here to Search" onChange={(event) => setComingProd(event.target.value)} />
                     <button className="search-box-button" onClick={() => dispatch({ type: 'SEARCH_FOR_ITEM', payload: comingProd })} >
@@ -32,41 +27,24 @@ export function Header() {
                     </button>
                 </div>
                 <div className="navbar right-navbar-links">
-
                     <div className="individual-icons">
-                        {/* onClick={() => dispatch({ type: 'wishlist' })} */}
-                        <a className="" href="/wishlist">
-                            <div class="badge-container">
-                                <i class="material-icons">favorite_border</i>
-                                <div class="badge-common badge-one">{wishlist.length}</div>
-                            </div>
-                        </a>
-
+                        <div class="badge-container">
+                            <Link to='/wishlist'><i class="material-icons">favorite_border</i></Link>
+                            <div class="badge-common badge-one">{wishlist.length}</div>
+                        </div>
                     </div>
-
-
-                    <div className="individual-icons">
-                        <a href="#">
-                            <div class="badge-container ">
-                                <i class="material-icons "> account_circle </i>
-                            </div>
-
-                        </a>
+                    <div class="individual-icons">
+                        <div class="badge-container ">
+                            <Link to='/wishlist'><i class="material-icons "> account_circle </i></Link>
+                        </div>
                     </div>
-
-                    <div className="individual-icons last-icon">
-                        {/* onClick={() => dispatch({ type: 'cart' })} */}
-                        <a className="" href="/cart">
-                            <div class="badge-container">
-                                <i class="material-icons"> add_shopping_cart </i>
-                                <div class="badge-common badge-one">{cart.length}</div>
-                            </div>
-
-                        </a>
+                    <div class="individual-icons last-icon">
+                        <div class="badge-container">
+                            <Link to='/cart'><i class="material-icons"> add_shopping_cart </i></Link>
+                            <div class="badge-common badge-one">{cart.length}</div>
+                        </div>
                     </div>
-
                 </div>
-
             </nav>
         </div>
     )
