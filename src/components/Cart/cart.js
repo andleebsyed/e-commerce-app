@@ -1,12 +1,13 @@
 import { Checkout } from '../Checkout/checkout'
 import { useEcom } from '../ecom-context/ecom-context'
 import './cart.css'
+import { EmptyCart } from '../EmptyCart/EmptyCart'
 export function Cart() {
     const { state, dispatch } = useEcom()
     const { cart } = state
     if (cart.length === 0) {
         return (
-            <h1>Cart is Empty</h1>
+            <EmptyCart />
         )
     }
     else {
