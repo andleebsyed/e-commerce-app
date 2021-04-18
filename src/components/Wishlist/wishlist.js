@@ -3,13 +3,15 @@ import '../product-page/product-page.css'
 import './wishlist-main.css'
 import '../ProductCard/card'
 import '../ProductCard/card.css'
+import { EmptyWishlist } from '../EmptyWishlist/EmptyWishlist'
 export function Wishlist() {
     const { state, dispatch } = useEcom()
     const { wishlist } = state
 
     if (wishlist.length === 0) {
         return (
-            <h1>Wishlist is Empty</h1>
+            <EmptyWishlist />
+            // <h1>Wishlist is Empty</h1>
         )
     }
     else {
