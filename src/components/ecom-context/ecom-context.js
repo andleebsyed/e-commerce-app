@@ -29,10 +29,8 @@ function ecomReducer(state, { type, payload }) {
                 return { ...state, cart: cart.filter((product) => product.id !== payload.id) }
             }
             return { ...state, cart: cart.map(product => product.id === payload.id ? { ...product, quantity: product.quantity - 1 } : { ...product }) }
-        case 'SORT_LOW_TO_HIGH':
-            return { ...state, data: data.sort((a, b) => a.price - b.price) }
-        case 'SORT_HIGH_TO_LOW':
-            return { ...state, data: data.sort((a, b) => b.price - a.price) }
+        case 'SORT':
+            if (payload.target.value === 'low_to_high') { return { ...state, data: data.sort((a, b) => a.price - b.price) } } else { return { ...state, data: data.sort((a, b) => b.price - a.price) } }
         case 'REMOVE_OUT_OF_STOCK':
             if (payload === true) return { ...state, data: data.filter(product => product.inStock === true) }; else return { ...state, data: orgData }
         case "SHOW_FAST_DELIVERY_ONLY":
