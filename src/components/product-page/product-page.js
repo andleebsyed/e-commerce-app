@@ -9,7 +9,6 @@ export function Products() {
     return (
         <div>
             <div className="inline-components">
-                <Sort />
                 <Filters />
             </div>
 
