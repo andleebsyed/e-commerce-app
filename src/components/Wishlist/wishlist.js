@@ -17,7 +17,7 @@ export function Wishlist() {
     else {
         return (
             <div className="container-div">
-                <h1>Wishlist</h1>
+                <h1 className="wishlist-heading">Wishlist</h1>
                 <div className="wishlist-main">
                     {/* <>Wishlist</h1> */}
                     {wishlist.map(product =>

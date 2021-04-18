@@ -19,3 +19,9 @@
 .quantity-count{
     margin : 0.3rem;
 }
+
+.cart-heading{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

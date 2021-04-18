@@ -49,12 +49,16 @@ body{
 }
 .left-navbar-links {
     display: flex;
+    position: relative;
+    right : 2rem;
 }
 
  .right-navbar-links {
      margin-top: 1rem;
      display: flex;
      justify-content: space-between;
+     position: relative;
+     /* right: 3rem; */
 }
 
 .individual-icons{
@@ -78,14 +82,29 @@ body{
 
         display: flex;
         position: relative;
-        right : 3rem;
+        right : 2.2rem;
     }
     .right-navbar-links{
         position: relative;
-        right: 2.3rem;
+        right: 16.5rem;
     }
   
     .last-icon{
         margin-right: 0.1rem;
+    }
+    .search-bar{
+        visibility: hidden;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+
+    .right-navbar-links{
+        position: relative;
+        right: 19rem;
+    }
+    .left-navbar-links{
+        position: relative;
+        right : 2rem;
     }
 }

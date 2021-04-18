@@ -1,5 +1,6 @@
 body{
     --products-bg-color : #475841;
+    --box-bordor-color : black;
 }
 .products-outer{
     display: grid;
@@ -16,6 +17,8 @@ body{
 .products-main{
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
 }
 
 .card-badge{
@@ -29,6 +32,24 @@ body{
     margin: 0;
 }
 
+.filter-check-boxes{
+    list-style: none;
+    border-left: none;
+
+}
+.filter-box{
+    margin-top: 1rem;
+    border : 1px solid var(--box-bordor-color);
+}
+.filters-div{
+    /* position: relative; */
+    /* top : 0; */
+    margin-bottom: 3rem;
+    /* visibility: hidden; */
+}
+.inline-components{
+    display: flex;
+}
 @media only screen and (max-width: 600px) {
   
     .products-main{
