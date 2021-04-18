@@ -12,12 +12,12 @@ export function Header() {
             <nav className="navbar-main">
                 <div>
                     <ul className="navbar left-navbar-links">
-                        <li className="list-item">
-                            <Link to='/'><strong className="list-item">Home</strong></Link>
-                        </li>
-                        <li className="list-item">
-                            <Link to='/products'><strong className="list-item">Products</strong></Link>
-                        </li>
+                        {/* <li className="single-link"> */}
+                        <Link className="single-link" to='/'>Home</Link>
+                        {/* </li> */}
+                        {/* <li className="single-link"> */}
+                        <Link className="single-link" to='/products'>Products</Link>
+                        {/* </li> */}
                     </ul>
                 </div>
                 <div className="search-bar">

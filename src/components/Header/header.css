@@ -9,28 +9,24 @@ body{
 
 .navbar{
     list-style: none;
+    display: flex;
+    justify-content: space-evenly;
     
 }
 
 .search-bar{
     position: relative;
-    /* border: 1px solid var(--search-box-color); */
-
 }
 
 .search-box{
     margin-top : 1rem;
     height : 1.8rem;
     width: 20rem;
-    /* color : var(--search-box-color); */
     outline: none;
     border: none;
-    /* border-top-left-radius: 0.2rem; */
-    /* border-bottom-left-radius: 0.2rem; */
     background: var(--search-box-color);
-    /* border: 1px solid var(--search-box-color); */
-
 }
+
 .search-box-button{
     position: absolute;
     outline: 0;
@@ -39,8 +35,6 @@ body{
     background: transparent;
     outline : none;
     border: none;
-    /* background: var(--search-box-color); */
-    /* border: 1px solid var(--search-box-color); */
     height: 2.1rem;
     margin-top: 1rem;
 }
@@ -50,19 +44,11 @@ body{
 }
 .navbar-main{
     display: flex;
-   
     justify-content: space-between;
 
 }
 .left-navbar-links {
-   
     display: flex;
-    /* justify-content: flex-start; */
-    margin-left: auto;
-    /* justify-content: space-between; */
-
-
-
 }
 
  .right-navbar-links {
@@ -74,17 +60,18 @@ body{
 .individual-icons{
     margin-right : 2rem;
 }
-.list-item{
+
+.single-link{
     text-decoration: none;
+    margin-right : 1rem;
+    font-weight: bold;
 }
+
 .list-item :hover{
     background-color: transparent;
     color : blueviolet;
 }
-.badge-container{
-    /* display: flex; */
-    /* justify-content: space-be; */
-}
+
 @media only screen and (max-width: 600px) {
     
     .left-navbar-links{
