@@ -1,0 +1,16 @@
+.sort-filter-container{
+    display: flex;
+    height: 3.85rem;
+}
+.sort-box{
+    margin-top: 1rem;
+    margin-left : 1rem;
+    width : 11rem;
+    border: 1px solid var(--box-bordor-color);
+    /* padding-bottom: 5rem; */
+}
+.drop-down-box{
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
