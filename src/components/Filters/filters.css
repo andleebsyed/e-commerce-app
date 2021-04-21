@@ -68,6 +68,17 @@
     position: relative;
     bottom: 1.5rem;
 }
+
+@media only screen and (min-width: 600px) {
+ .filter-container{
+     max-width: 400px;
+    margin-top: .5rem;
+    display: flex;
+    position: relative;
+    left : 1rem;
+}
+}
+
 @media only screen and (max-width: 600px) {
   .sort-radio-buttons {
     list-style: none;
