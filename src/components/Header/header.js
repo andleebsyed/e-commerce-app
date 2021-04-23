@@ -2,9 +2,12 @@ import './header.css'
 import { useEcom } from '../ecom-context/ecom-context'
 import { useState } from 'react';
 import { Link } from 'react-router-dom'
+import { useDatabase } from '../DatabaseCalls/DatabaseCalls';
 export function Header() {
     const { state, dispatch } = useEcom();
-    const { wishlist, cart, data } = state;
+    const { wishlist, cart } = useDatabase()
+    const { data } = state;
+    console.log("y is wishlist not defined here ", wishlist)
     // state for searching of an item
     const [comingProd, setComingProd] = useState('');
     return (

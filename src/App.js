@@ -4,7 +4,9 @@ import { Header } from './components/Header/header'
 import { Wishlist } from './components/Wishlist/wishlist'
 import { Cart } from './components/Cart/cart'
 import { Route, Routes } from 'react-router-dom'
+// import { useState, useEffect } from 'react'
 
+import axios from 'axios'
 
 function App() {
   return (

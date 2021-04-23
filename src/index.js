@@ -4,16 +4,19 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { EcomProvider } from './components/ecom-context/ecom-context'
+import { DatabaseProvider } from './components/DatabaseCalls/DatabaseCalls'
 import { BrowserRouter as Router } from 'react-router-dom';
 
 ReactDOM.render(
   <React.StrictMode>
+    <DatabaseProvider>
+      <EcomProvider>
+        <Router>
+          <App />
+        </Router>
+      </EcomProvider>
+    </DatabaseProvider>
 
-    <EcomProvider>
-      <Router>
-        <App />
-      </Router>
-    </EcomProvider>
 
 
   </React.StrictMode>,

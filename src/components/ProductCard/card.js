@@ -1,8 +1,9 @@
 import './card.css'
 import { useEcom } from '../ecom-context/ecom-context'
+import { useDatabase } from '../DatabaseCalls/DatabaseCalls'
 export function Card({ product }) {
     const { state, dispatch } = useEcom()
-    const { wishlist, cart } = state
+    const { wishlist, cart } = useDatabase()
     const clicked = {
         currentClass: "button button-secondary",
         currentText: "✅Added To Cart",
@@ -14,14 +15,16 @@ export function Card({ product }) {
         visibility: false
     }
     let productInWishlistStatus = [];
-    wishlist.length === 0 ? productInWishlistStatus = [] : productInWishlistStatus = wishlist.filter(item => item.id === product.id)
+    wishlist.length === 0 ? productInWishlistStatus = [] : productInWishlistStatus = wishlist.filter(item => item._id === product._id)
 
-    let ifProductInCart = cart.filter(item => item.id === product.id)
+    let ifProductInCart = cart.filter(item => item.id === product._id)
 
     return (
         <div>
             <div class="ecom-card">
-                <img class="card-image" src={product.image} />
+                <img class="card-image" src={`data:image/png;base64,${new Buffer(product.img.data.data, "binary").toString(
+                    "base64"
+                )}`} />
 
 
                 {productInWishlistStatus.length === 0 ?
@@ -39,7 +42,7 @@ export function Card({ product }) {
                 }
 
                 <div class="card-info">
-                    <strong>{product.productName}</strong>
+                    <strong>{product.name}</strong>
                     <p>{product.description}</p>
                     <strong>Rs {product.price}</strong>
                 </div>
