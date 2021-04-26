@@ -6,10 +6,12 @@ const DatabaseContext = createContext()
 
 
 export function DatabaseProvider({ children }) {
+
     const { dispatch } = useEcom()
-    const [cart, setCart] = useState([])
+    // const [cart, setCart] = useState([])
     const [wishlist, setWishlist] = useState([])
     const [data, setData] = useState([])
+
     // fetch products
     useEffect(() => {
         async function MyProducts() {
@@ -23,11 +25,9 @@ export function DatabaseProvider({ children }) {
     useEffect(() => {
 
         async function MyCart() {
-
-            // console.log("DatabaseCalls.js cart ", cart)
             const response = await axios.get('https://rest-api.andydev7.repl.co/cart')
             dispatch({ type: 'INITIAL_CART', payload: response.data.myCart })
-            // setCart(response.data.myCart)
+
 
         }
         MyCart()
@@ -42,15 +42,10 @@ export function DatabaseProvider({ children }) {
         }
 
         MyWishlist()
-        // const interval = setInterval(() => {
-        //     MyWishlist()
-        // }, 3000)
-        // return () => clearInterval(interval)
 
     }, [])
-    // console.log("DatabaseCalls.js cart ", cart)
     return (
-        <DatabaseContext.Provider value={{ data, wishlist, cart, setCart }}>
+        <DatabaseContext.Provider value={{ data, wishlist }}>
             {children}
         </DatabaseContext.Provider>
     )
