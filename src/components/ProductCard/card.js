@@ -17,7 +17,7 @@ export function Card({ product }) {
     let productInWishlistStatus = [];
     wishlist.length === 0 ? productInWishlistStatus = [] : productInWishlistStatus = wishlist.filter(item => item._id === product._id)
 
-    let ifProductInCart = cart.filter(item => item.id === product._id)
+    let ifProductInCart = cart.filter(item => item._id === product._id)
 
     return (
         <div>

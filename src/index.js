@@ -9,17 +9,16 @@ import { BrowserRouter as Router } from 'react-router-dom';
 
 ReactDOM.render(
   <React.StrictMode>
-    <DatabaseProvider>
-      <EcomProvider>
+    <EcomProvider>
+      <DatabaseProvider>
+
         <Router>
           <App />
         </Router>
-      </EcomProvider>
-    </DatabaseProvider>
 
-
-
-  </React.StrictMode>,
+      </DatabaseProvider>
+    </EcomProvider>
+  </React.StrictMode >,
   document.getElementById('root')
 );
 

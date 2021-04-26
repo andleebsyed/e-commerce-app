@@ -6,7 +6,7 @@ export const data = [...Array(15)].map(item =>
         productName: faker.commerce.productName(),
         description: faker.lorem.words(),
         price: faker.commerce.price(),
-        image: faker.image.fashion(),
+        image: faker.random.image(),
         inStock: faker.datatype.boolean(),
         fastDelivery: faker.datatype.boolean(),
     })

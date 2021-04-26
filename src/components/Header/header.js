@@ -7,7 +7,7 @@ export function Header() {
     const { state, dispatch } = useEcom();
     const { wishlist, cart } = useDatabase()
     const { data } = state;
-    console.log("y is wishlist not defined here ", wishlist)
+    // console.log("y is wishlist not defined here ", wishlist)
     // state for searching of an item
     const [comingProd, setComingProd] = useState('');
     return (

@@ -8,12 +8,8 @@ import { useDatabase } from '../DatabaseCalls/DatabaseCalls'
 export function Cart() {
     const { state, dispatch } = useEcom()
     const { cart } = useDatabase()
-    // const [cart, setCart] = useState([])
-    // useEffect(() => {
-    //     axios.get("https://rest-api.andydev7.repl.co/cart").then((res) => {
-    //         setCart(res.data.myCart);
-    //     });
-    // }, []);
+    // const { cart } = state
+
     if (cart.length === 0) {
         return (
             <EmptyCart />

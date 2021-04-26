@@ -4,9 +4,10 @@ import './wishlist-main.css'
 import '../ProductCard/card'
 import '../ProductCard/card.css'
 import { EmptyWishlist } from '../EmptyWishlist/EmptyWishlist'
+import { useDatabase } from '../DatabaseCalls/DatabaseCalls'
 export function Wishlist() {
     const { state, dispatch } = useEcom()
-    const { wishlist } = state
+    const { wishlist } = useDatabase()
 
     if (wishlist.length === 0) {
         return (
@@ -22,7 +23,9 @@ export function Wishlist() {
                     {/* <>Wishlist</h1> */}
                     {wishlist.map(product =>
                         <div class="ecom-card">
-                            <img class="card-image" src={product.image} />
+                            <img class="card-image" src={`data:image/png;base64,${new Buffer(product.img.data.data, "binary").toString(
+                                "base64"
+                            )}`} />
 
 
                             <div class="card-info">

@@ -1,8 +1,10 @@
 import { useEcom } from "../ecom-context/ecom-context"
 import './checkout.css'
+import { useDatabase } from '../DatabaseCalls/DatabaseCalls'
+
 export function Checkout() {
     const { state } = useEcom()
-    const { cart } = state
+    const { cart } = useDatabase()
     const totalItems = cart.reduce((totalQunatity, product) => totalQunatity + product.quantity, 0)
     const totalPrice = cart.reduce((totalPrice, product) => totalPrice + product.price * product.quantity, 0)
     return (
