@@ -1,14 +1,11 @@
 import { Checkout } from '../Checkout/checkout'
 import { useEcom } from '../ecom-context/ecom-context'
 import './cart.css'
-import { useState, useEffect } from 'react'
-import axios from 'axios'
 import { EmptyCart } from '../EmptyCart/EmptyCart'
-import { useDatabase } from '../DatabaseCalls/DatabaseCalls'
+import { RemoveFromCart, MoveToWishlist } from '../utils/Operations'
 export function Cart() {
     const { state, dispatch } = useEcom()
-    const { cart } = useDatabase()
-    // const { cart } = state
+    const { cart } = state
 
     if (cart.length === 0) {
         return (
@@ -43,8 +40,8 @@ export function Cart() {
                                     <button onClick={() => dispatch({ type: 'INCREASE_QUANTITY', payload: product })}>+</button>
                                 </div>
                                 <div className="cart-buttons">
-                                    <button class="button button-success" id={product._id} onClick={() => dispatch({ type: 'MOVE_TO_WISHLIST', payload: product })}>Move To Wishlist</button>
-                                    <button class="button button-warning" id={product._id} onClick={() => dispatch({ type: 'REMOVE_FROM_CART', payload: product })}>Remove From Cart</button>
+                                    <button class="button button-success" id={product._id} onClick={() => MoveToWishlist(product, dispatch)}>Move To Wishlist</button>
+                                    <button class="button button-warning" id={product._id} onClick={() => RemoveFromCart(product, dispatch)}>Remove From Cart</button>
                                 </div>
                             </div>
 
