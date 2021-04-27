@@ -7,9 +7,9 @@ const DatabaseContext = createContext()
 
 export function DatabaseProvider({ children }) {
 
-    const { dispatch } = useEcom()
+    // const { dispatch } = useEcom()
     // const [cart, setCart] = useState([])
-    const [wishlist, setWishlist] = useState([])
+    // const [wishlist, setWishlist] = useState([])
     const [data, setData] = useState([])
 
     // fetch products
@@ -22,30 +22,34 @@ export function DatabaseProvider({ children }) {
     }, []);
 
     // fetch cart
-    useEffect(() => {
+    // useEffect(() => {
 
-        async function MyCart() {
-            const response = await axios.get('https://rest-api.andydev7.repl.co/cart')
-            dispatch({ type: 'INITIAL_CART', payload: response.data.myCart })
+    //     async function MyCart() {
+    //         const response = await axios.get('https://rest-api.andydev7.repl.co/cart')
+    //         dispatch({ type: 'INITIAL_CART', payload: response.data.myCart })
+    //         // console.log("data coming from api type ", typeof (response.data.myCart))
+    //         // setCart(response.data.myCart)
 
 
-        }
-        MyCart()
-    }, [])
+    //     }
+    //     MyCart()
+    // }, [])
 
     // fetch wishlist
-    useEffect(() => {
-        async function MyWishlist() {
-            const response = await axios.get('https://rest-api.andydev7.repl.co/wishlist')
-            setWishlist(response.data.myWishlist)
-            // console.log("i am wishlist from context", wishlist)
-        }
+    // useEffect(() => {
+    //     async function MyWishlist() {
+    //         const response = await axios.get('https://rest-api.andydev7.repl.co/wishlist')
+    //         // setWishlist(response.data.myWishlist)
+    //         dispatch({ type: 'INITIAL_WISHLIST', payload: response.data.MyWishlist })
+    //         // console.log("i am wishlist from context", wishlist)
+    //     }
 
-        MyWishlist()
+    //     MyWishlist()
 
-    }, [])
+    // }, [])
+    // console.log("cart in database ", cart)
     return (
-        <DatabaseContext.Provider value={{ data, wishlist }}>
+        <DatabaseContext.Provider value={{ data }}>
             {children}
         </DatabaseContext.Provider>
     )
