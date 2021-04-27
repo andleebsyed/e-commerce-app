@@ -7,7 +7,7 @@ import { EmptyWishlist } from '../EmptyWishlist/EmptyWishlist'
 import { useDatabase } from '../DatabaseCalls/DatabaseCalls'
 export function Wishlist() {
     const { state, dispatch } = useEcom()
-    const { wishlist } = useDatabase()
+    const { wishlist } = state
 
     if (wishlist.length === 0) {
         return (

@@ -5,22 +5,20 @@ import { Link } from 'react-router-dom'
 import { useDatabase } from '../DatabaseCalls/DatabaseCalls';
 export function Header() {
     const { state, dispatch } = useEcom();
-    const { wishlist, cart } = useDatabase()
-    const { data } = state;
-    // console.log("y is wishlist not defined here ", wishlist)
-    // state for searching of an item
+    // const { wishlist } = useDatabase()
+    const { wishlist, cart } = state;
+
     const [comingProd, setComingProd] = useState('');
     return (
         <div className="header-main">
             <nav className="navbar-main">
                 <div>
                     <ul className="navbar left-navbar-links">
-                        {/* <li className="single-link"> */}
+
                         <Link className="single-link" to='/'>Home</Link>
-                        {/* </li> */}
-                        {/* <li className="single-link"> */}
+
                         <Link className="single-link" to='/products'>Products</Link>
-                        {/* </li> */}
+
                     </ul>
                 </div>
                 <div className="search-bar">
