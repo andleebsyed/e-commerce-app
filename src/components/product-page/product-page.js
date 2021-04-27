@@ -7,7 +7,6 @@ import { Filters } from '../Filters/filters'
 import axios from 'axios'
 import { useDatabase } from '../DatabaseCalls/DatabaseCalls'
 export function Products() {
-    // const { state } = useEcom()
     const { data } = useDatabase()
 
 
