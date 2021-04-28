@@ -2,10 +2,12 @@ import { Checkout } from '../Checkout/checkout'
 import { useEcom } from '../ecom-context/ecom-context'
 import './cart.css'
 import { EmptyCart } from '../EmptyCart/EmptyCart'
-import { RemoveFromCart, MoveToWishlist } from '../utils/Operations'
+import { RemoveFromCart, MoveToWishlist, ChangeQuantity } from '../utils/Operations'
+import { useState } from 'react'
 export function Cart() {
     const { state, dispatch } = useEcom()
     const { cart } = state
+    // const [paramCase, setParamCase] = useState('')
 
     if (cart.length === 0) {
         return (
@@ -35,9 +37,12 @@ export function Cart() {
                                     <strong>Rs {product.price}</strong>
                                 </div>
                                 <div class="quantity-manager">
-                                    <button onClick={() => dispatch({ type: 'DECREASE_QUANTITY', payload: product })}>-</button>
+                                    <button onClick={() => {
+                                        const paramCase = 'dec'
+                                        ChangeQuantity(product, dispatch, paramCase)
+                                    }}>-</button>
                                     <span class="quantity-count">{product.quantity}</span>
-                                    <button onClick={() => dispatch({ type: 'INCREASE_QUANTITY', payload: product })}>+</button>
+                                    <button onClick={() => ChangeQuantity(product, dispatch, 'inc')}>+</button>
                                 </div>
                                 <div className="cart-buttons">
                                     <button class="button button-success" id={product._id} onClick={() => MoveToWishlist(product, dispatch)}>Move To Wishlist</button>

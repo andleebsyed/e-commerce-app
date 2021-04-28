@@ -1,11 +1,13 @@
 import axios from 'axios'
-import { useEcom } from '../ecom-context/ecom-context'
+// import { useEcom } from '../ecom-context/ecom-context'
 
 export async function AddToCart(product, dispatch) {
     try {
-        const response = await axios.post('https://rest-api.andydev7.repl.co/cart', product)
+        const id = product._id
+        const responseWishlist = await axios.delete(`https://rest-api.andydev7.repl.co/wishlist/${id}`)
+        const responseCart = await axios.post('https://rest-api.andydev7.repl.co/cart', product)
 
-        if (response.status === 200) {
+        if (responseCart.status === 200) {
             dispatch({ type: 'ADD_TO_CART', payload: product })
         }
     }
@@ -18,6 +20,8 @@ export async function AddToCart(product, dispatch) {
 
 export async function AddToWishlist(product, dispatch) {
     try {
+        const id = product._id
+        const responseCart = await axios.delete(`https://rest-api.andydev7.repl.co/cart/${id}`)
         const response = await axios.post('https://rest-api.andydev7.repl.co/wishlist', product)
 
         if (response.status === 200) {
@@ -61,4 +65,48 @@ export async function MoveToWishlist(product, dispatch) {
         console.log("error occured while moving ", error.message)
     }
 
+}
+
+
+export async function RemoveFromWishlist(product, dispatch) {
+    try {
+        const id = product._id
+        const response = await axios.delete(`https://rest-api.andydev7.repl.co/wishlist/${id}`)
+        if (response.status === 200) {
+            dispatch({ type: 'REMOVE_FROM_WISHLIST', payload: product })
+        }
+    }
+    catch (error) {
+        console.log("error occured : ", error.message)
+    }
+}
+
+export async function ChangeQuantity(product, dispatch, paramCase) {
+
+    console.log("wooah we got param halfway ", paramCase)
+    if (paramCase === 'dec') {
+        console.log("we won")
+    }
+    try {
+        if (paramCase === 'inc') {
+            const response = await axios.put(`https://rest-api.andydev7.repl.co/cart/?case=inc`, product)
+            if (response.status === 200) {
+                dispatch({ type: 'INCREASE_QUANTITY', payload: product })
+            }
+        }
+        else {
+            if (product.quantity === 1) {
+                const resposneOnEmptyCase = await axios.delete(`https://rest-api.andydev7.repl.co/cart/${product._id}`)
+                dispatch({ type: 'DECREASE_QUANTITY', payload: product })
+            }
+            const response = await axios.put(`https://rest-api.andydev7.repl.co/cart/?case=dec`, product)
+            if (response.status === 200) {
+                dispatch({ type: 'DECREASE_QUANTITY', payload: product })
+            }
+        }
+
+    }
+    catch (error) {
+        console.log("error occured : ", error.message)
+    }
 }

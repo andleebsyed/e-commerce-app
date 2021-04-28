@@ -7,7 +7,9 @@ import { Filters } from '../Filters/filters'
 import axios from 'axios'
 import { useDatabase } from '../DatabaseCalls/DatabaseCalls'
 export function Products() {
-    const { data } = useDatabase()
+    const { state } = useEcom()
+    const { data } = state
+    console.log("data ", data)
 
 
     return (

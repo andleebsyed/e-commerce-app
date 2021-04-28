@@ -5,14 +5,14 @@ import '../ProductCard/card'
 import '../ProductCard/card.css'
 import { EmptyWishlist } from '../EmptyWishlist/EmptyWishlist'
 import { useDatabase } from '../DatabaseCalls/DatabaseCalls'
+import { AddToCart, RemoveFromWishlist } from '../utils/Operations'
 export function Wishlist() {
     const { state, dispatch } = useEcom()
     const { wishlist } = state
-
     if (wishlist.length === 0) {
         return (
             <EmptyWishlist />
-            // <h1>Wishlist is Empty</h1>
+
         )
     }
     else {
@@ -20,7 +20,6 @@ export function Wishlist() {
             <div className="container-div">
                 <h1 className="wishlist-heading">Wishlist</h1>
                 <div className="wishlist-main">
-                    {/* <>Wishlist</h1> */}
                     {wishlist.map(product =>
                         <div class="ecom-card">
                             <img class="card-image" src={`data:image/png;base64,${new Buffer(product.img.data.data, "binary").toString(
@@ -35,8 +34,8 @@ export function Wishlist() {
                             </div>
 
                             <div className="buttons-wishlist">
-                                <button class="button button-success" id={product.id} onClick={() => dispatch({ type: 'ADD_TO_CART', payload: product })}>Add To Cart</button>
-                                <button class="button button-warning" id={product.id} onClick={() => dispatch({ type: 'REMOVE_FROM_WISHLIST', payload: product })}>Remove From Wishlist</button>
+                                <button class="button button-success" id={product.id} onClick={() => AddToCart(product, dispatch)}>Add To Cart</button>
+                                <button class="button button-warning" id={product.id} onClick={() => RemoveFromWishlist(product, dispatch)}>Remove From Wishlist</button>
                             </div>
                         </div>
                     )}

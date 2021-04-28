@@ -2,7 +2,7 @@
 import { useContext, createContext, useReducer, useState, useEffect } from 'react'
 import axios from 'axios'
 import { useDatabase } from '../DatabaseCalls/DatabaseCalls';
-// const orgData = data;
+
 
 // creating context
 const EcomContext = createContext()
@@ -10,69 +10,47 @@ const EcomContext = createContext()
 
 // reducer function
 function ecomReducer(state, { type, payload }) {
-    const { wishlist, cart } = state
-    console.log("cart after ist render ", cart)
-    // const orgData = data;
-    console.log("state initially in switch ", state)
-    switch (type) {
+    const { wishlist, cart, data, orgData } = state
+    // const orgData = data
 
+    switch (type) {
+        case 'INITIAL_PRODUCTS':
+            return { ...state, data: [...payload], orgData: [...payload] }
         case 'INITIAL_CART':
             return { ...state, cart: [...payload] }
         case 'INITIAL_WISHLIST':
             return { ...state, wishlist: [...payload] }
-
         case 'ADD_TO_WISHLIST':
-            return { ...state, wishlist: [...wishlist, payload] }
+            return { ...state, cart: cart.filter(item => item._id !== payload._id), wishlist: [...wishlist, payload] }
         case 'ADD_TO_CART':
-
-            return { ...state, cart: [...cart, payload] }
-        // console.log("new item being added is ", payload)
-        // const temp = { ...state, cart: [...cart, payload] }
-        //  console.log("state after update is   ", temp)
-        // try {
-        //     console.log("cart before adding new item ", cart)
-        //     const response = await axios.post('https://rest-api.andydev7.repl.co/cart', payload)
-
-        //     if (response.status === 200) {
-        //         console.log("new item being added is ", payload)
-        //         const temp = { ...state, cart: [...cart, payload] }
-        //         console.log("state after update is   ", temp)
-
-        //         // return { ...state, wishlist: wishlist.filter((item) => item._id !== payload._id), cart: [...cart, { ...payload, quantity: 1 }] }
-        //     }
-
-        // }
-        // catch (error) {
-        //     console.log("err message is ", error.message)
-        // }
-        // return { ...state, wishlist: wishlist.filter((item) => item.id !== payload.id), cart: [...cart, { ...payload, quantity: 1 }] }
+            return { ...state, wishlist: wishlist.filter((item) => item._id !== payload._id), cart: [...cart, { ...payload, quantity: 1 }] }
         case 'REMOVE_FROM_CART':
             return { ...state, cart: cart.filter(product => product._id !== payload._id) }
         case 'MOVE_TO_WISHLIST':
             return { ...state, wishlist: [...wishlist, payload], cart: cart.filter(product => product._id !== payload._id) }
-        // case 'REMOVE_FROM_WISHLIST':
-        //     return { ...state, wishlist: wishlist.filter(product => product.id !== payload.id) }
-        // case 'INCREASE_QUANTITY':
-        //     return { ...state, cart: cart.map(product => product.id === payload.id ? { ...product, quantity: product.quantity + 1 } : { ...product }) }
-        // case 'DECREASE_QUANTITY':
-        //     if (payload.quantity < 2) {
-        //         return { ...state, cart: cart.filter((product) => product.id !== payload.id) }
-        //     }
-        //     return { ...state, cart: cart.map(product => product.id === payload.id ? { ...product, quantity: product.quantity - 1 } : { ...product }) }
-        // case 'SORT':
-        //     if (payload.target.value === 'low_to_high') { return { ...state, data: data.sort((a, b) => a.price - b.price) } } else { return { ...state, data: data.sort((a, b) => b.price - a.price) } }
-        // case 'REMOVE_OUT_OF_STOCK':
-        //     if (payload === true) return { ...state, data: data.filter(product => product.inStock === true) }; else return { ...state, data: orgData }
-        // case "SHOW_FAST_DELIVERY_ONLY":
-        //     if (payload === true) return { ...state, data: data.filter(product => product.fastDelivery === true) }; else return { ...state, data: orgData }
+        case 'REMOVE_FROM_WISHLIST':
+            return { ...state, wishlist: wishlist.filter(product => product._id !== payload._id) }
+        case 'INCREASE_QUANTITY':
+            return { ...state, cart: cart.map(product => product._id === payload._id ? { ...product, quantity: product.quantity + 1 } : { ...product }) }
+        case 'DECREASE_QUANTITY':
+            if (payload.quantity < 2) {
+                return { ...state, cart: cart.filter((product) => product._id !== payload._id) }
+            }
+            return { ...state, cart: cart.map(product => product._id === payload._id ? { ...product, quantity: product.quantity - 1 } : { ...product }) }
+        case 'SORT':
+            if (payload.target.value === 'low_to_high') { return { ...state, data: data.sort((a, b) => a.price - b.price) } } else { return { ...state, data: data.sort((a, b) => b.price - a.price) } }
+        case 'REMOVE_OUT_OF_STOCK':
+            if (payload === true) return { ...state, data: data.filter(product => product.inStock === true) }; else return { ...state, data: orgData }
+        case "SHOW_FAST_DELIVERY_ONLY":
+            if (payload === true) return { ...state, data: data.filter(product => product.fastDelivery === true) }; else return { ...state, data: orgData }
         // case 'SEARCH_FOR_ITEM':
         //     return {
         //         ...state, data: data.filter(product =>
         //             product.productName.toLowerCase().includes(payload.toLowerCase())
         //         )
         //     }
-        // case 'REMOVE_ALL_CONDITIONS':
-        //     return { ...state, data: orgData }
+        case 'REMOVE_ALL_CONDITIONS':
+            return { ...state, data: orgData }
         default:
             return state
 
@@ -80,10 +58,18 @@ function ecomReducer(state, { type, payload }) {
 }
 
 export function EcomProvider({ children }) {
-
-    const [state, dispatch] = useReducer(ecomReducer, { cart: [], wishlist: [] })
+    const { data } = useDatabase()
+    const [state, dispatch] = useReducer(ecomReducer, { cart: [], wishlist: [], data: [], orgData: [] })
     console.log("state status ", state)
 
+    // fetch products
+    useEffect(() => {
+        async function MyProducts() {
+            const response = await axios.get("https://rest-api.andydev7.repl.co/products")
+            dispatch({ type: 'INITIAL_PRODUCTS', payload: response.data.myData })
+        }
+        MyProducts()
+    }, []);
 
     useEffect(() => {
 
@@ -109,7 +95,7 @@ export function EcomProvider({ children }) {
 
 
     return (
-        <EcomContext.Provider value={{ state, dispatch }}>
+        <EcomContext.Provider value={{ state, dispatch, data }}>
             {children}
         </EcomContext.Provider>
     )

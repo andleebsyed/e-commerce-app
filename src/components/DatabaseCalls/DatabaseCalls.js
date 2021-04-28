@@ -13,13 +13,13 @@ export function DatabaseProvider({ children }) {
     const [data, setData] = useState([])
 
     // fetch products
-    useEffect(() => {
-        async function MyProducts() {
-            const response = await axios.get("https://rest-api.andydev7.repl.co/products")
-            setData(response.data.myData);
-        }
-        MyProducts()
-    }, []);
+    // useEffect(() => {
+    //     async function MyProducts() {
+    //         const response = await axios.get("https://rest-api.andydev7.repl.co/products")
+    //         setData(response.data.myData);
+    //     }
+    //     MyProducts()
+    // }, []);
 
     // fetch cart
     // useEffect(() => {
