@@ -59,14 +59,35 @@ function ecomReducer(state, { type, payload }) {
 
 export function EcomProvider({ children }) {
     const { data } = useDatabase()
+    const [loader, setLoader] = useState(false)
     const [state, dispatch] = useReducer(ecomReducer, { cart: [], wishlist: [], data: [], orgData: [] })
     console.log("state status ", state)
 
+    // for the almighty loader
+    // useEffect(() => {
+    //     let visibilityStatus;
+    //     if (loader === true) {
+    //         visibilityStatus = 'visible'
+    //     }
+    //     else {
+    //         visibilityStatus = 'hidden'
+    //     }
+    //     console.log("hey see i ran")
+    //     return (
+    //         <div style={{ visibility: visibilityStatus }} >Loading.......</div>
+    //     )
+    //     // }
+    //     // else{
+    //     //     return
+    //     // }
+    // }, [loader])
     // fetch products
     useEffect(() => {
         async function MyProducts() {
+            setLoader(true)
             const response = await axios.get("https://rest-api.andydev7.repl.co/products")
             dispatch({ type: 'INITIAL_PRODUCTS', payload: response.data.myData })
+            setLoader(false)
         }
         MyProducts()
     }, []);
@@ -95,7 +116,7 @@ export function EcomProvider({ children }) {
 
 
     return (
-        <EcomContext.Provider value={{ state, dispatch, data }}>
+        <EcomContext.Provider value={{ state, dispatch, data, loader }}>
             {children}
         </EcomContext.Provider>
     )
