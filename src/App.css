@@ -11,6 +11,7 @@ body{
   ;
 }
 
+
 @media only screen and (max-width: 600px) {
 .App {
   text-align: center;
@@ -34,8 +35,6 @@ body{
 
 .app-header{
   grid-area: header;
-  /* background-color: var(--header-bg-color); */
-  /* box-shadow: 5px 1px 2px grey; */
 }
 
 .products{
