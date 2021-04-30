@@ -44,15 +44,12 @@ body{
 .filters-div{
     margin-bottom: 3rem;
 }
-.inline-components{
-    /* border: 1px solid black; */
-}
 @media only screen and (max-width: 600px) {
   
     .products-main{
         display: flex;
         flex-wrap: wrap;
-        position: relative;
+        /* position: relative; */
     }
 
 }
