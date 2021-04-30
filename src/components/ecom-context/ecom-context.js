@@ -63,24 +63,7 @@ export function EcomProvider({ children }) {
     const [state, dispatch] = useReducer(ecomReducer, { cart: [], wishlist: [], data: [], orgData: [] })
     console.log("state status ", state)
 
-    // for the almighty loader
-    // useEffect(() => {
-    //     let visibilityStatus;
-    //     if (loader === true) {
-    //         visibilityStatus = 'visible'
-    //     }
-    //     else {
-    //         visibilityStatus = 'hidden'
-    //     }
-    //     console.log("hey see i ran")
-    //     return (
-    //         <div style={{ visibility: visibilityStatus }} >Loading.......</div>
-    //     )
-    //     // }
-    //     // else{
-    //     //     return
-    //     // }
-    // }, [loader])
+
     // fetch products
     useEffect(() => {
         async function MyProducts() {
@@ -116,7 +99,7 @@ export function EcomProvider({ children }) {
 
 
     return (
-        <EcomContext.Provider value={{ state, dispatch, data, loader }}>
+        <EcomContext.Provider value={{ state, dispatch, data, loader, setLoader }}>
             {children}
         </EcomContext.Provider>
     )

@@ -4,8 +4,9 @@ import './cart.css'
 import { EmptyCart } from '../EmptyCart/EmptyCart'
 import { RemoveFromCart, MoveToWishlist, ChangeQuantity } from '../utils/Operations'
 import { useState } from 'react'
+import { Loader } from '../Loader/Loader'
 export function Cart() {
-    const { state, dispatch } = useEcom()
+    const { state, dispatch, loader, setLoader } = useEcom()
     const { cart } = state
     // const [paramCase, setParamCase] = useState('')
 
@@ -17,9 +18,10 @@ export function Cart() {
     else {
         console.log("cart in cart component is ", cart)
         return (
-            <div>
+            <div className="cart-outer">
 
                 <h1 className="cart-heading">Cart</h1>
+                <Loader loader={loader} />
                 <div className="cart-main">
 
                     {cart.map(
@@ -39,14 +41,14 @@ export function Cart() {
                                 <div class="quantity-manager">
                                     <button onClick={() => {
                                         const paramCase = 'dec'
-                                        ChangeQuantity(product, dispatch, paramCase)
+                                        ChangeQuantity(product, dispatch, paramCase, loader, setLoader)
                                     }}>-</button>
                                     <span class="quantity-count">{product.quantity}</span>
-                                    <button onClick={() => ChangeQuantity(product, dispatch, 'inc')}>+</button>
+                                    <button onClick={() => ChangeQuantity(product, dispatch, 'inc', loader, setLoader)}>+</button>
                                 </div>
                                 <div className="cart-buttons">
-                                    <button class="button button-success" id={product._id} onClick={() => MoveToWishlist(product, dispatch)}>Move To Wishlist</button>
-                                    <button class="button button-warning" id={product._id} onClick={() => RemoveFromCart(product, dispatch)}>Remove From Cart</button>
+                                    <button class="button button-success" id={product._id} onClick={() => MoveToWishlist(product, dispatch, loader, setLoader)}>Move To Wishlist</button>
+                                    <button class="button button-warning" id={product._id} onClick={() => RemoveFromCart(product, dispatch, loader, setLoader)}>Remove From Cart</button>
                                 </div>
                             </div>
 
