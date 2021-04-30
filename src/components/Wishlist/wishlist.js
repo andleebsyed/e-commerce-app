@@ -6,8 +6,9 @@ import '../ProductCard/card.css'
 import { EmptyWishlist } from '../EmptyWishlist/EmptyWishlist'
 import { useDatabase } from '../DatabaseCalls/DatabaseCalls'
 import { AddToCart, RemoveFromWishlist } from '../utils/Operations'
+import { Loader } from '../Loader/Loader'
 export function Wishlist() {
-    const { state, dispatch } = useEcom()
+    const { state, dispatch, loader, setLoader } = useEcom()
     const { wishlist } = state
     if (wishlist.length === 0) {
         return (
@@ -19,6 +20,7 @@ export function Wishlist() {
         return (
             <div className="container-div">
                 <h1 className="wishlist-heading">Wishlist</h1>
+                <Loader loader={loader} />
                 <div className="wishlist-main">
                     {wishlist.map(product =>
                         <div class="ecom-card">
@@ -34,8 +36,8 @@ export function Wishlist() {
                             </div>
 
                             <div className="buttons-wishlist">
-                                <button class="button button-success" id={product.id} onClick={() => AddToCart(product, dispatch)}>Add To Cart</button>
-                                <button class="button button-warning" id={product.id} onClick={() => RemoveFromWishlist(product, dispatch)}>Remove From Wishlist</button>
+                                <button class="button button-success" id={product.id} onClick={() => AddToCart(product, dispatch, loader, setLoader)}>Add To Cart</button>
+                                <button class="button button-warning" id={product.id} onClick={() => RemoveFromWishlist(product, dispatch, loader, setLoader)}>Remove From Wishlist</button>
                             </div>
                         </div>
                     )}
