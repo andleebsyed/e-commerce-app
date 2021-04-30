@@ -3,18 +3,18 @@
     flex-direction: column;
     width: 210px;
     overflow: hidden;
-    transition: all 300ms ease-out;
+    /* transition: all 300ms ease-out; */
     margin : 0.5rem;
 }
 .card-image{
     width:  210px ;
     height : 210px;
 }
-.ecom-card:hover {
+/* .ecom-card:hover {
     cursor: pointer;
     transform: scale(1.02);
 
-}
+} */
 
 .card-info {
     margin-left: 0.3rem;
