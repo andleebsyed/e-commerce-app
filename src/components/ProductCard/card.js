@@ -5,7 +5,6 @@ import { AddToCart } from '../utils/Operations'
 import { AddToWishlist, RemoveFromWishlist } from '../utils/Operations'
 export function Card({ product }) {
     const { state, dispatch, loader, setLoader } = useEcom()
-    // const { wishlist } = useDatabase()
     const { cart, wishlist } = state
     const clicked = {
         currentClass: "button button-secondary",
@@ -58,9 +57,6 @@ export function Card({ product }) {
                     {ifProductInCart.length > 0 ? clicked.currentText : unclicked.currentText}
                 </button>
             </div>
-            {/* < div id="open-wishlist-modal" class="added-modal" >
-                <h1>added to wishlist</h1>
-            </div > */}
         </div>
     )
 }

@@ -11,37 +11,6 @@ body{
   ;
 }
 
-/* .main-div{
-  position: relative;
-} */
-@media only screen and (max-width: 600px) {}
-/* .App {
-  text-align: center;
-  display: grid;
-
-  grid-template-columns: auto;
-  grid-template-rows: 8rem auto;
-  grid-template-areas: "header header"
-    "products products"
-  ;
-} */
-
-/* .products {
-  grid-area: products;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-}
-
-}
-
-.app-header{
-  grid-area: header;
-}
-
-.products{
-  grid-area: products;
-} */
 
 .App-logo {
   height: 40vmin;

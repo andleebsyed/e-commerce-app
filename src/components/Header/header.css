@@ -36,7 +36,8 @@ body{
     outline : none;
     border: none;
     height: 2.1rem;
-    margin-top: 1rem;
+    margin-top: 1.3rem;
+    /* margin-left: .1rem; */
 }
 
 .search-box-button:hover{
@@ -58,7 +59,6 @@ body{
      display: flex;
      justify-content: space-between;
      position: relative;
-     /* right: 3rem; */
 }
 
 .individual-icons{

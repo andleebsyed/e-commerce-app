@@ -8,8 +8,6 @@ import { Loader } from '../Loader/Loader'
 export function Cart() {
     const { state, dispatch, loader, setLoader } = useEcom()
     const { cart } = state
-    // const [paramCase, setParamCase] = useState('')
-
     if (cart.length === 0) {
         return (
             <EmptyCart />

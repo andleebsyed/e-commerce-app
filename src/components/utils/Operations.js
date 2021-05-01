@@ -1,9 +1,6 @@
 import axios from 'axios'
-import { useEcom } from '../ecom-context/ecom-context'
-// import { useEcom } from '../ecom-context/ecom-context'
 
 export async function AddToCart(product, dispatch, loader, setLoader) {
-    // const { loader, setLoader } = useEcom()
     try {
         setLoader(true)
         const id = product._id

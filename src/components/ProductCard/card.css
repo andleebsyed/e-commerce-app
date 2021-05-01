@@ -1,21 +1,18 @@
+body{
+    --fill-color : red;
+}
+
 .ecom-card {
     display: flex;
     flex-direction: column;
     width: 210px;
     overflow: hidden;
-    /* transition: all 300ms ease-out; */
     margin : 0.5rem;
 }
 .card-image{
     width:  210px ;
     height : 210px;
 }
-/* .ecom-card:hover {
-    cursor: pointer;
-    transform: scale(1.02);
-
-} */
-
 .card-info {
     margin-left: 0.3rem;
     text-align: left
@@ -46,5 +43,5 @@
 }
 
 .basic-button svg {
-    fill: red;
+    fill: var(--fill-color);
 }

@@ -62,20 +62,27 @@ body{
     margin-left: .8rem;
     max-width: 30rem;
 }
-
-.text-holder p:nth-child(3){
-    margin-top: 17rem;
-}
-
-.text-holder p:nth-child(4){
-    margin-top: 21rem;
-    max-width: 30rem;
-}
 @media only screen and (min-width : 650px){
     .text-holder p:nth-child(4){
     margin-top: 21rem;
     max-width: 22rem;
 }
+
+  .text-holder p:nth-child(2){
+    margin-top: 10rem;
+}
+ .text-holder p:nth-child(3){
+    margin-top: 14rem;
+}
+
+ .text-holder p:nth-child(4){
+    margin-top: 18rem;
+}
+
+.button-adjustment{
+    top: 22rem;
+}
+
 }
 
 @media only screen and (max-width : 600px){

@@ -1,18 +1,13 @@
 
 import { useContext, createContext, useReducer, useState, useEffect } from 'react'
 import axios from 'axios'
-import { useDatabase } from '../DatabaseCalls/DatabaseCalls';
-
 
 // creating context
 const EcomContext = createContext()
 
-
 // reducer function
 function ecomReducer(state, { type, payload }) {
-    const { wishlist, cart, data, orgData } = state
-    // const orgData = data
-
+    const { wishlist, cart, data, orgData, filteredProducts } = state
     switch (type) {
         case 'INITIAL_PRODUCTS':
             return { ...state, data: [...payload], orgData: [...payload] }
@@ -40,15 +35,18 @@ function ecomReducer(state, { type, payload }) {
         case 'SORT':
             if (payload.target.value === 'low_to_high') { return { ...state, data: data.sort((a, b) => a.price - b.price) } } else { return { ...state, data: data.sort((a, b) => b.price - a.price) } }
         case 'REMOVE_OUT_OF_STOCK':
-            if (payload === true) return { ...state, data: data.filter(product => product.inStock === true) }; else return { ...state, data: orgData }
+            if (payload === true) return { ...state, data: data.filter(product => product.inStock === true), searchStatus: false }; else return { ...state, data: orgData }
         case "SHOW_FAST_DELIVERY_ONLY":
-            if (payload === true) return { ...state, data: data.filter(product => product.fastDelivery === true) }; else return { ...state, data: orgData }
-        // case 'SEARCH_FOR_ITEM':
-        //     return {
-        //         ...state, data: data.filter(product =>
-        //             product.productName.toLowerCase().includes(payload.toLowerCase())
-        //         )
-        //     }
+            if (payload === true) return { ...state, data: data.filter(product => product.fastDelivery === true), searchStatus: false }; else return { ...state, data: orgData }
+        case 'SEARCH_FOR_ITEM':
+            console.log("length of payload ", payload.length)
+            console.log("")
+            return {
+                ...state, filteredProducts: orgData.filter(product =>
+                    product.name.toLowerCase().includes(payload.toLowerCase())
+                ), searchStatus: true
+            }
+
         case 'REMOVE_ALL_CONDITIONS':
             return { ...state, data: orgData }
         default:
@@ -58,9 +56,8 @@ function ecomReducer(state, { type, payload }) {
 }
 
 export function EcomProvider({ children }) {
-    const { data } = useDatabase()
     const [loader, setLoader] = useState(false)
-    const [state, dispatch] = useReducer(ecomReducer, { cart: [], wishlist: [], data: [], orgData: [] })
+    const [state, dispatch] = useReducer(ecomReducer, { cart: [], wishlist: [], data: [], orgData: [], filteredProducts: [] })
     console.log("state status ", state)
 
 
@@ -99,7 +96,7 @@ export function EcomProvider({ children }) {
 
 
     return (
-        <EcomContext.Provider value={{ state, dispatch, data, loader, setLoader }}>
+        <EcomContext.Provider value={{ state, dispatch, loader, setLoader }}>
             {children}
         </EcomContext.Provider>
     )

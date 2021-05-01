@@ -1,7 +1,5 @@
 import { useEcom } from "../ecom-context/ecom-context"
 import './checkout.css'
-// import { useDatabase } from '../DatabaseCalls/DatabaseCalls'
-
 export function Checkout() {
     const { state } = useEcom()
     const { cart } = state

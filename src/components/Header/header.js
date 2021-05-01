@@ -2,10 +2,8 @@ import './header.css'
 import { useEcom } from '../ecom-context/ecom-context'
 import { useState } from 'react';
 import { Link } from 'react-router-dom'
-import { useDatabase } from '../DatabaseCalls/DatabaseCalls';
 export function Header() {
     const { state, dispatch } = useEcom();
-    // const { wishlist } = useDatabase()
     const { wishlist, cart } = state;
 
     const [comingProd, setComingProd] = useState('');
@@ -22,10 +20,10 @@ export function Header() {
                     </ul>
                 </div>
                 <div className="search-bar">
-                    <input type="text" id="search-box" className="search-box" placeholder="Type here to Search" onChange={(event) => setComingProd(event.target.value)} />
-                    <button className="search-box-button" onClick={() => dispatch({ type: 'SEARCH_FOR_ITEM', payload: comingProd })} >
+                    <input type="text" id="search-box" className="search-box" placeholder="Search" onChange={(event) => setComingProd(event.target.value)} />
+                    <Link to='/search' className="search-box-button" onClick={() => dispatch({ type: 'SEARCH_FOR_ITEM', payload: comingProd })} >
                         <i class="material-icons">search</i>
-                    </button>
+                    </Link>
                 </div>
                 <div className="navbar right-navbar-links">
                     <div className="individual-icons">
