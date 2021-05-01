@@ -1,6 +1,5 @@
 import './card.css'
 import { useEcom } from '../ecom-context/ecom-context'
-import { useDatabase } from '../DatabaseCalls/DatabaseCalls'
 import { AddToCart } from '../utils/Operations'
 import { AddToWishlist, RemoveFromWishlist } from '../utils/Operations'
 export function Card({ product }) {

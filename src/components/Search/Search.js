@@ -1,10 +1,10 @@
 import { useEcom } from "../ecom-context/ecom-context"
 import { Link } from 'react-router-dom'
-import { Filters } from '../Filters/filters'
+// import { Filters } from '../Filters/filters'
 import { Card } from '../ProductCard/card'
 import { Loader } from '../Loader/Loader'
 export function Search() {
-    const { state, dispatch, loader, setLoader } = useEcom()
+    const { state, dispatch, loader } = useEcom()
     const { filteredProducts } = state
     if (filteredProducts.length === 0) {
         return (
