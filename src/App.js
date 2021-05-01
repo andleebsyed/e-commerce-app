@@ -22,7 +22,7 @@ function App() {
         <Route path="/wishlist" element={<div className="wishlist"><Wishlist /></div>} />
 
         <Route path="/products" element={<div className="products"><Products /></div>} />
-        <Route path="/search" element={<div className="products"><Search /></div>} />
+        <Route path="/search" element={<div className="searched-products"><Search /></div>} />
 
         <Route path="/cart" element={<div className="cart"><Cart /></div>} />
       </Routes>

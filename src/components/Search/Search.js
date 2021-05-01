@@ -16,10 +16,10 @@ export function Search() {
     }
     return (
         <div className="outer">
-            <div className="inline-components">
-            </div>
+            {/* <div className="inline-components">
+            </div> */}
             <Loader loader={loader} />
-            <div className="products-main">
+            <div className="products-main search-main-container-div">
                 {filteredProducts.map(product =>
                     <Card product={product} />
                 )}

@@ -1,10 +1,11 @@
 body{
     margin: 0;
-    --shadow-color : grey;
+    --shadow-color : #34D399;
     --search-box-color : #f5f5f6 ;
+    --navbar-items-color : #047857 ;
 }
 .header-main{
-    box-shadow: 5px 1px 2px var(--shadow-color);
+    box-shadow: 5px 1px 10px var(--shadow-color);
 }
 
 .navbar{
@@ -68,12 +69,22 @@ body{
 .single-link{
     text-decoration: none;
     margin-right : 1rem;
-    font-weight: bold;
+    color : black;
+
 }
 
 .list-item :hover{
     background-color: transparent;
     color : blueviolet;
+}
+
+.right-icons{
+    color : black;
+}
+
+.selected{
+    color : var(--navbar-items-color);
+    font-weight: bold;
 }
 
 @media only screen and (max-width: 600px) {
