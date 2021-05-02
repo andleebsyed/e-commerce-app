@@ -14,6 +14,7 @@ body{
     list-style: none;
     display: flex;
     justify-content: space-evenly;
+    /* margin-right: 3rem; */
     
 }
 
@@ -50,6 +51,9 @@ body{
 .navbar-main{
     display: flex;
     justify-content: space-between;
+    /* width: 2%;
+     */
+     overflow: hidden;
 
 }
 .left-navbar-links {
