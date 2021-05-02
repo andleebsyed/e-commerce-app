@@ -8,13 +8,11 @@ import { BrowserRouter as Router } from 'react-router-dom';
 
 ReactDOM.render(
   <React.StrictMode>
-    {/* <DatabaseProvider> */}
     <EcomProvider>
       <Router>
         <App />
       </Router>
     </EcomProvider>
-    {/* </DatabaseProvider> */}
   </React.StrictMode >,
   document.getElementById('root')
 );

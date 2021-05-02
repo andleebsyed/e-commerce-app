@@ -38,11 +38,12 @@ body{
     border: none;
     height: 2.1rem;
     margin-top: 1.3rem;
-    /* margin-left: .1rem; */
+    color : black;
 }
 
 .search-box-button:hover{
     cursor: pointer;
+  
 }
 .navbar-main{
     display: flex;
