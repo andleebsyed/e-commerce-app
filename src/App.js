@@ -11,7 +11,8 @@ import { Search } from './components/Search/Search'
 import { Product } from './components/Product/Product'
 
 function App() {
-  const { loader } = useEcom()
+  const { loader, state } = useEcom()
+  const { cart } = state
   return (
     <div className="main-div">
 
@@ -25,7 +26,7 @@ function App() {
         <Route path="/products" element={<div className="products"><Products /></div>} />
         <Route path="/cart" element={<div className="cart"><Cart /></div>} />
         <Route path="/search" element={<div className="searched-products"><Search /></div>} />
-        <Route path="/products/:id" element={<div className="single-product"><Product /></div>} />
+        <Route path="/products/:id" element={<div className="single-product"><Product cart={cart} /></div>} />
       </Routes>
     </div>
   );
