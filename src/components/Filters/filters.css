@@ -24,6 +24,7 @@
 
 .reset-button{
     margin-left : 5rem;
+   
 }
 
 .filter-button{
@@ -33,7 +34,7 @@
     background: transparent;
     border-left: none;
     cursor: pointer;
-}
+    outline: none;}
 
 .sort-radio-buttons{
     display: flex;
