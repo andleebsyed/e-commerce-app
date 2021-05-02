@@ -8,6 +8,7 @@ import { useEcom } from './components/ecom-context/ecom-context';
 import { Loader } from './components/Loader/Loader';
 import { Homepage } from './components/Homepage/Homepage'
 import { Search } from './components/Search/Search'
+import { Product } from './components/Product/Product'
 
 function App() {
   const { loader } = useEcom()
@@ -22,9 +23,9 @@ function App() {
         <Route path="/wishlist" element={<div className="wishlist"><Wishlist /></div>} />
 
         <Route path="/products" element={<div className="products"><Products /></div>} />
-        <Route path="/search" element={<div className="searched-products"><Search /></div>} />
-
         <Route path="/cart" element={<div className="cart"><Cart /></div>} />
+        <Route path="/search" element={<div className="searched-products"><Search /></div>} />
+        <Route path="/products/:id" element={<div className="single-product"><Product /></div>} />
       </Routes>
     </div>
   );
