@@ -34,14 +34,18 @@ body{
     cursor: pointer;
     outline: none;
     border: none;
+    height : 2rem;
+    width: 2rem;
+    border-radius: 50%;
     background: none;
-    background-color: transparent;
+    background-color: #E5E7EB;
     position: relative;
-    bottom: 13.1rem;
-    left : 5.8rem;
+    bottom: 12.5rem;
+    left : 10.5rem;
     font-size: large;
 }
 
 .basic-button svg {
     fill: var(--fill-color);
+    top : 2rem;
 }
