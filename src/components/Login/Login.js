@@ -53,6 +53,7 @@ export function Login() {
         return (
             <form className="form" onSubmit={handleSubmit(onSubmit)}>
                 <div className="login-main">
+                    <h1>Login</h1>
                     <p style={{ display: failure, color: 'red' }}>Username or password is incorrect</p>
                     <label for="username"><b>Username</b></label>
                     <input className="input-field" type="text" placeholder="Enter Username" name="username" required {...register("username", {
