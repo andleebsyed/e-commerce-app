@@ -34,7 +34,7 @@ export function Header() {
                     </div>
                     <div class="individual-icons">
                         <div class="badge-container ">
-                            <Link to='#' className="right-icons"><i class="material-icons "> account_circle </i></Link>
+                            <NavLink to='/account' className="right-icons" activeClassName="selected"><i class="material-icons "> account_circle </i></NavLink>
                         </div>
                     </div>
                     <div class="individual-icons last-icon">

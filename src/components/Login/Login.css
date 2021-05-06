@@ -1,0 +1,40 @@
+.form{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top : 10rem;
+}
+.login-main{
+    border: 1px solid black;
+    border-radius: .3rem;
+    width: 20rem;
+    height: 14rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.input-field{
+    height: 15px;
+}
+
+.button-div{
+  height: 20rem;
+  display: flex;
+  justify-content: space-between;
+  font-size: 5rem;
+}
+
+.button-custom{
+    height : 3rem;
+    width: 8rem;
+}
+
+.welcome-text{
+    display: flex;
+    /* align-items: initial; */
+    justify-content: flex-start;
+    /* position: relative; */
+    /* right : 50rem; */
+    font-size: xx-large;
+}

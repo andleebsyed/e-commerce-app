@@ -5,14 +5,18 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { EcomProvider } from './components/ecom-context/ecom-context'
 import { BrowserRouter as Router } from 'react-router-dom';
+import { LoginProvider } from './components/Login/Login';
 
 ReactDOM.render(
   <React.StrictMode>
-    <EcomProvider>
-      <Router>
-        <App />
-      </Router>
-    </EcomProvider>
+    <LoginProvider>
+      <EcomProvider>
+        <Router>
+          <App />
+        </Router>
+      </EcomProvider>
+    </LoginProvider>
+
   </React.StrictMode >,
   document.getElementById('root')
 );
