@@ -1,5 +1,6 @@
 import './Login.css'
 import { useState, createContext, useContext, useEffect } from "react"
+import { Link } from 'react-router-dom'
 import { useForm } from "react-hook-form";
 const LoginContext = createContext()
 export function Login() {
@@ -9,6 +10,7 @@ export function Login() {
     const { register, handleSubmit } = useForm()
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+    const [innetText, setInnerText] = useState(false)
     const [failure, setFailure] = useState('none')
 
     useEffect(() => {
@@ -19,18 +21,24 @@ export function Login() {
         }
     }, [user]);
     const onSubmit = ({ username, password }) => {
-        console.log("username ", username)
-        console.log("password ", password)
+
+        let unBox = document.querySelector('.username');
+        let pwBox = document.querySelector('.password');
         const data = { username, password }
         if (username === testuname && password === testpw) {
             // set the state of the user
             setUser(data)
             // store the user in localStorage
             localStorage.setItem('user', JSON.stringify(data))
-            // setAccess(true)
         }
         else {
+            // unBox.innerText = ''
+            // pwBox.innetText = ''
             setFailure('block')
+
+
+
+
         }
     }
 
@@ -53,18 +61,17 @@ export function Login() {
         return (
             <form className="form" onSubmit={handleSubmit(onSubmit)}>
                 <div className="login-main">
-                    <h1>Login</h1>
-                    <p style={{ display: failure, color: 'red' }}>Username or password is incorrect</p>
-                    <label for="username"><b>Username</b></label>
-                    <input className="input-field" type="text" placeholder="Enter Username" name="username" required {...register("username", {
+                    <h1 className="login-heading">Login</h1>
+                    <p className="error-message" style={{ display: failure, color: 'red' }}>Username or password is incorrect</p>
+                    <input className="input-field username" type="text" placeholder="Enter Username" name="username" required {...register("username", {
                         required: "Required",
                     })} />
-
-                    <label for="password"><b>Password</b></label>
-                    <input type="password" placeholder="Enter Password" name="password" required {...register("password", {
+                    <input className="input-field password" type="password" placeholder="Enter Password" name="password" required {...register("password", {
                         required: "Required",
                     })} />
-                    <input type="submit" style={{ margin: '1rem' }} />
+                    <input type="submit" className="button button-outline login-button" value="Login" />
+                    <Link to='#' className="password-reset">Forgot Password?</Link>
+                    <p>Don't have an account? <Link className="signup-link" to='/signup'>Sign up</Link></p>
                 </div>
             </form>
         )
@@ -73,7 +80,6 @@ export function Login() {
 
 
 export function LoginProvider({ children }) {
-    // const [allowaccess, setAccess] = useState(false)
     const [user, setUser] = useState()
     return (
         <LoginContext.Provider value={{ user, setUser }}>
