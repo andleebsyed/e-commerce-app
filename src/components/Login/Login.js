@@ -42,40 +42,40 @@ export function Login() {
         }
     }
 
-    function handleLogout() {
-        setUser();
-        setUsername("");
-        setPassword("");
-        localStorage.clear();
-    }
-    if (user) {
-        return (
-            <div className="button-div">
-                <p className="welcome-text">Welcome {user.username}</p>
-                <button className="button button-primary button-custom" onClick={handleLogout}>Logout</button>
-            </div >
+    // function handleLogout() {
+    //     setUser();
+    //     setUsername("");
+    //     setPassword("");
+    //     localStorage.clear();
+    // }
+    // if (user) {
+    //     return (
+    //         <div className="button-div">
+    //             <p className="welcome-text">Welcome {user.username}</p>
+    //             <button className="button button-primary button-custom" onClick={handleLogout}>Logout</button>
+    //         </div >
 
-        )
-    }
-    else {
-        return (
-            <form className="form" onSubmit={handleSubmit(onSubmit)}>
-                <div className="login-main">
-                    <h1 className="login-heading">Login</h1>
-                    <p className="error-message" style={{ display: failure, color: 'red' }}>Username or password is incorrect</p>
-                    <input className="input-field username" type="text" placeholder="Enter Username" name="username" required {...register("username", {
-                        required: "Required",
-                    })} />
-                    <input className="input-field password" type="password" placeholder="Enter Password" name="password" required {...register("password", {
-                        required: "Required",
-                    })} />
-                    <input type="submit" className="button button-outline login-button" value="Login" />
-                    <Link to='#' className="password-reset">Forgot Password?</Link>
-                    <p>Don't have an account? <Link className="signup-link" to='/signup'>Sign up</Link></p>
-                </div>
-            </form>
-        )
-    }
+    //     )
+    // }
+    // else {
+    return (
+        <form className="form" onSubmit={handleSubmit(onSubmit)}>
+            <div className="login-main">
+                <h1 className="login-heading">Login</h1>
+                <p className="error-message" style={{ display: failure, color: 'red' }}>Username or password is incorrect</p>
+                <input className="input-field username" type="text" placeholder="Enter Username" name="username" required {...register("username", {
+                    required: "Required",
+                })} />
+                <input className="input-field password" type="password" placeholder="Enter Password" name="password" required {...register("password", {
+                    required: "Required",
+                })} />
+                <input type="submit" className="button button-outline login-button" value="Login" />
+                <Link to='#' className="password-reset">Forgot Password?</Link>
+                <p>Don't have an account? <Link className="signup-link" to='/signup'>Sign up</Link></p>
+            </div>
+        </form>
+    )
+    // }
 }
 
 
