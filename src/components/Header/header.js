@@ -2,9 +2,13 @@ import './header.css'
 import { useEcom } from '../ecom-context/ecom-context'
 import { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom'
+import { useLogin } from '../Login/Login';
 export function Header() {
     const { state, dispatch } = useEcom();
     const { wishlist, cart } = state;
+    const { user } = useLogin()
+    const unLogged = 0;
+    console.log("user is ", user)
 
     const [comingProd, setComingProd] = useState('');
     return (
@@ -29,7 +33,7 @@ export function Header() {
                     <div className="individual-icons">
                         <div class="badge-container">
                             <NavLink to='/wishlist' className="right-icons" activeClassName="selected"><i class="material-icons ">favorite_border</i></NavLink>
-                            <div class="badge-common badge-one">{wishlist.length}</div>
+                            <div class="badge-common badge-one">{user ? wishlist.length : 0}</div>
                         </div>
                     </div>
                     <div class="individual-icons">
@@ -40,7 +44,7 @@ export function Header() {
                     <div class="individual-icons last-icon">
                         <div class="badge-container">
                             <NavLink to='/cart' className="right-icons" activeClassName="selected"><i class="material-icons"> add_shopping_cart </i></NavLink>
-                            <div class="badge-common badge-one">{cart.length}</div>
+                            <div class="badge-common badge-one">{user ? cart.length : 0}</div>
                         </div>
                     </div>
                 </div>
