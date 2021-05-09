@@ -28,7 +28,7 @@ function App() {
   // custom route to redirect user to account if logged  in 
   function LoginRoute({ props, element }) {
     if (user) {
-      return <Navigate to="/account" replace={true} />
+      return <Navigate to="/products" replace={true} />
     }
     else {
       return <Route {...props} element={<Login />} />
@@ -44,8 +44,11 @@ function App() {
 
       <Routes>
         <Route path="/" element={<div className="homepage"><Homepage /></div>} />
+        <Route path="/products" element={<div className="products"><Products /></div>} />}
+
         <PrivateRoute path="/wishlist" element={<div className="wishlist"><Wishlist /></div>} />
-        <PrivateRoute path="/products" element={<div className="products"><Products /></div>} />}
+        {/* <PrivateRoute path="/products" element={<div className="products"><Products /></div>} />} */}
+
         <PrivateRoute path="/cart" element={<div className="cart"><Cart /></div>} />
         <PrivateRoute path="/search" element={<div className="searched-products"><Search /></div>} />
         <PrivateRoute path="/products/:id" element={<div className="single-product"><Product cart={cart} /></div>} />

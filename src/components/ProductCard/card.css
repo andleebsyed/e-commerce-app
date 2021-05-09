@@ -49,3 +49,12 @@ body{
     fill: var(--fill-color);
     top : 2rem;
 }
+
+
+.cart-link{
+    /* text-decoration: none;
+    text-align: center; */
+    width: 90%;
+    margin-right: 1rem;
+    margin-left: 1rem;
+}
