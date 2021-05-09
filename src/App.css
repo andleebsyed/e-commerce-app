@@ -1,5 +1,6 @@
 body{
   --header-bg-color : #a0acad;
+  --header-shadow-color : #61dafb;
 }
 .App {
   text-align: center;
@@ -36,7 +37,7 @@ body{
 }
 
 .App-link {
-  color: #61dafb;
+  color: var(--header-shadow-color) ;
 }
 
 @keyframes App-logo-spin {
