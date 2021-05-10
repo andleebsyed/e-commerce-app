@@ -4,7 +4,6 @@ import './wishlist-main.css'
 import '../ProductCard/card'
 import '../ProductCard/card.css'
 import { EmptyWishlist } from '../EmptyWishlist/EmptyWishlist'
-import { useDatabase } from '../DatabaseCalls/DatabaseCalls'
 import { AddToCart, RemoveFromWishlist } from '../utils/Operations'
 import { Loader } from '../Loader/Loader'
 export function Wishlist() {
