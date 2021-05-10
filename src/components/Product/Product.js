@@ -37,7 +37,7 @@ export function Product({ cart }) {
                 </div>
 
                 :
-                // /products/${product._id}
+
                 <div className="product-buttons">
                     <Link to={{
                         pathname: `/login`
@@ -60,13 +60,6 @@ export function Product({ cart }) {
                     </Link>
                 </div>
             }
-            {/* // <button className={ifProductInCart.length > 0 ? clicked.currentClass : unclicked.currentClass}
-                //     disabled={ifProductInCart.length > 0 ? clicked.visibility : unclicked.visibility}
-                //     onClick={() => AddToCart(product, dispatch, loader, setLoader)}>
-                //     {ifProductInCart.length > 0 ? clicked.currentText : unclicked.currentText}</button>
-                // <button className="button button-primary buy-button">Buy Now</button> */}
-            {/* </div> */}
-
             <div className="description-div">
                 <h3 className="description-heading">Description</h3>
                 <p class="description-para">

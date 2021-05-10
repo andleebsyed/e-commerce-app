@@ -76,10 +76,6 @@ export function Card({ product }) {
                         onClick={() => AddToCart(product, dispatch, loader, setLoader)}>
                         {ifProductInCart.length > 0 ? clicked.currentText : unclicked.currentText}
                     </button> :
-
-                    // <Link to='/login' className="button button-success cart-link">
-                    //     Add to Cart
-                    // </Link>
                     <Link to='/login'>
                         <button className="button button-success cart-link">
                             Add to Cart

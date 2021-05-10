@@ -3,7 +3,7 @@ import { Products } from './components/product-page/product-page'
 import { Header } from './components/Header/header'
 import { Wishlist } from './components/Wishlist/wishlist'
 import { Cart } from './components/Cart/cart'
-import { Route, Routes, Navigate, useNavigate } from 'react-router-dom'
+import { Route, Routes, Navigate } from 'react-router-dom'
 import { useEcom } from './components/ecom-context/ecom-context';
 import { Loader } from './components/Loader/Loader';
 import { Homepage } from './components/Homepage/Homepage'
@@ -17,8 +17,6 @@ function App() {
   const { loader, state } = useEcom()
   const { cart } = state
   const { user } = useLogin()
-
-  const navigate = useNavigate()
   // Auth route
   function PrivateRoute({ isLoggedIn, element, ...props }) {
     return (
