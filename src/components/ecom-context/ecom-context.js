@@ -10,7 +10,7 @@ function ecomReducer(state, { type, payload }) {
     const { wishlist, cart, data, orgData, filteredProducts } = state
     switch (type) {
         case 'INITIAL_PRODUCTS':
-            return { ...state, data: [...payload], orgData: [...payload] }
+            return { ...state, data: [...payload], orgData: [...payload], filteredProducts: [] }
         case 'INITIAL_CART':
             return { ...state, cart: [...payload] }
         case 'INITIAL_WISHLIST':
@@ -39,8 +39,6 @@ function ecomReducer(state, { type, payload }) {
         case "SHOW_FAST_DELIVERY_ONLY":
             if (payload === true) return { ...state, data: data.filter(product => product.fastDelivery === true), searchStatus: false }; else return { ...state, data: orgData }
         case 'SEARCH_FOR_ITEM':
-            console.log("length of payload ", payload.length)
-            console.log("")
             return {
                 ...state, filteredProducts: orgData.filter(product =>
                     product.name.toLowerCase().includes(payload.toLowerCase())
