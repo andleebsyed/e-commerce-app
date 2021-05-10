@@ -37,16 +37,6 @@ function App() {
     }
   }
 
-  // function ProductRoute({ props, element }) {
-  //   if (user) {
-  //     return <Navigate to="/product/:id" replace={true} />
-  //   }
-  //   else {
-  //     return <Route {...props} element={<Login />} />
-
-  //   }
-  // }
-
   return (
     <div className="main-div">
 
