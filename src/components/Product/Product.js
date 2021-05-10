@@ -2,10 +2,12 @@ import './Product.css'
 import { Link, useLocation } from 'react-router-dom'
 import { useEcom } from '../ecom-context/ecom-context'
 import { AddToCart } from '../utils/Operations'
+import { useLogin } from '../Login/Login'
 export function Product({ cart }) {
     const { state } = useLocation()
     const { product } = state
     const { dispatch, loader, setLoader } = useEcom()
+    const { user } = useLogin()
     const clicked = {
         currentClass: "button button-secondary buy-button",
         currentText: "✅Added To Cart",
@@ -23,13 +25,47 @@ export function Product({ cart }) {
             <img className="individual-image" src={`data:image/png;base64,${new Buffer(product.img.data.data, "binary").toString(
                 "base64"
             )}`} />
-            <div className="product-buttons">
-                <button className={ifProductInCart.length > 0 ? clicked.currentClass : unclicked.currentClass}
-                    disabled={ifProductInCart.length > 0 ? clicked.visibility : unclicked.visibility}
-                    onClick={() => AddToCart(product, dispatch, loader, setLoader)}>
-                    {ifProductInCart.length > 0 ? clicked.currentText : unclicked.currentText}</button>
-                <button className="button button-primary buy-button">Buy Now</button>
-            </div>
+
+            {user ?
+                <div className="product-buttons">
+                    <button className={ifProductInCart.length > 0 ? clicked.currentClass : unclicked.currentClass}
+                        disabled={ifProductInCart.length > 0 ? clicked.visibility : unclicked.visibility}
+                        onClick={() => AddToCart(product, dispatch, loader, setLoader)}>
+                        {ifProductInCart.length > 0 ? clicked.currentText : unclicked.currentText}</button>
+
+                    <button className="button button-primary buy-button">Buy Now</button>
+                </div>
+
+                :
+                // /products/${product._id}
+                <div className="product-buttons">
+                    <Link to={{
+                        pathname: `/login`
+                    }}
+                        state={{ product: product }}
+                    >
+                        <button className="button button-success buy-button">
+                            Add to Cart
+                        </button>
+
+                    </Link>
+
+                    <Link to={{
+                        pathname: `/login`
+                    }}
+                        state={{ product: product }}
+                    >
+                        <button className="button button-primary buy-button">Buy Now</button>
+
+                    </Link>
+                </div>
+            }
+            {/* // <button className={ifProductInCart.length > 0 ? clicked.currentClass : unclicked.currentClass}
+                //     disabled={ifProductInCart.length > 0 ? clicked.visibility : unclicked.visibility}
+                //     onClick={() => AddToCart(product, dispatch, loader, setLoader)}>
+                //     {ifProductInCart.length > 0 ? clicked.currentText : unclicked.currentText}</button>
+                // <button className="button button-primary buy-button">Buy Now</button> */}
+            {/* </div> */}
 
             <div className="description-div">
                 <h3 className="description-heading">Description</h3>

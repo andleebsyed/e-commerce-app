@@ -3,7 +3,7 @@ import { Products } from './components/product-page/product-page'
 import { Header } from './components/Header/header'
 import { Wishlist } from './components/Wishlist/wishlist'
 import { Cart } from './components/Cart/cart'
-import { Route, Routes, Navigate } from 'react-router-dom'
+import { Route, Routes, Navigate, useNavigate } from 'react-router-dom'
 import { useEcom } from './components/ecom-context/ecom-context';
 import { Loader } from './components/Loader/Loader';
 import { Homepage } from './components/Homepage/Homepage'
@@ -18,6 +18,7 @@ function App() {
   const { cart } = state
   const { user } = useLogin()
 
+  const navigate = useNavigate()
   // Auth route
   function PrivateRoute({ isLoggedIn, element, ...props }) {
     return (
@@ -36,6 +37,16 @@ function App() {
     }
   }
 
+  // function ProductRoute({ props, element }) {
+  //   if (user) {
+  //     return <Navigate to="/product/:id" replace={true} />
+  //   }
+  //   else {
+  //     return <Route {...props} element={<Login />} />
+
+  //   }
+  // }
+
   return (
     <div className="main-div">
 
@@ -47,11 +58,9 @@ function App() {
         <Route path="/products" element={<div className="products"><Products /></div>} />}
 
         <PrivateRoute path="/wishlist" element={<div className="wishlist"><Wishlist /></div>} />
-        {/* <PrivateRoute path="/products" element={<div className="products"><Products /></div>} />} */}
-
         <PrivateRoute path="/cart" element={<div className="cart"><Cart /></div>} />
-        <PrivateRoute path="/search" element={<div className="searched-products"><Search /></div>} />
-        <PrivateRoute path="/products/:id" element={<div className="single-product"><Product cart={cart} /></div>} />
+        <Route path="/search" element={<div className="searched-products"><Search /></div>} />
+        <Route path="/products/:id" element={<div className="single-product"><Product cart={cart} /></div>} />
         <Route path="/account" element={<div className="homepage"><Account /></div>} />
         <Route path="/signup" element={<div className="homepage"><Signup /></div>} />
         <LoginRoute path="/login" element={<div className="homepage"><Login /></div>} />
