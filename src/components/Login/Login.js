@@ -3,6 +3,7 @@ import { useState, createContext, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserSignIn } from "../../services/users";
 import { useAuth } from "../../contexts/AuthContext";
+import { useEcom } from "../ecom-context/ecom-context";
 // import { useForm } from "react-hook-form";
 const LoginContext = createContext();
 export function Login() {
@@ -41,11 +42,10 @@ export function Login() {
   const [userDetails, setUserDetails] = useState(null);
   const [displayError, setDisplayError] = useState("none");
   const [loginButtonText, setLoginButtonText] = useState("Login");
-  console.log({ loginButtonText });
+  const { dispatch } = useEcom();
   const navigate = useNavigate();
   async function handleLogin(e) {
     e.preventDefault();
-    console.log({ userDetails });
     setLoginButtonText("Logging you in...");
     const response = await UserSignIn(userDetails);
     setLoginButtonText("Login");
@@ -57,6 +57,7 @@ export function Login() {
         type: "AUTHORIZE_USER",
         payload: response,
       });
+      dispatch({ type: "INITIAL_DATA", payload: response });
       navigate("/products");
     }
   }
