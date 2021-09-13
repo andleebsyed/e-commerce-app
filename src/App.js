@@ -15,18 +15,19 @@ import { Account } from "./components/Account/Account";
 import { useAuth } from "./contexts/AuthContext";
 import { useEffect } from "react";
 import {
+  FetchAccount,
   setupAuthExceptionHandler,
   setUpAuthHeaderForServiceCalls,
 } from "./services/users";
 
 function App() {
-  const { loader, state } = useEcom();
-  const { cart } = state;
+  const { loader, state, dispatch } = useEcom();
+  const { cart, wishlist } = state;
   // const { user } = useLogin();
   const { authState, dispatchAuth } = useAuth();
-  const { authorized } = authState;
+  const { authorized, authSetup } = authState;
   const navigate = useNavigate();
-  // console.log({ loader });
+  console.log({ wishlist });
   // Auth route
   useEffect(() => {
     setupAuthExceptionHandler(dispatchAuth, navigate);
@@ -36,7 +37,17 @@ function App() {
   function PrivateRoute({ isLoggedIn, element, ...props }) {
     return <Route {...props} element={authorized ? element : <Login />} />;
   }
-
+  useEffect(() => {
+    async function Run() {
+      const response = await FetchAccount();
+      console.log({ response }, "user account");
+      dispatch({ type: "INITIAL_DATA", payload: response });
+    }
+    if (cart === null && authSetup && localStorage.getItem("token")) {
+      console.log("account fetch fired fired");
+      Run();
+    }
+  }, [dispatch, cart, authSetup]);
   // custom route to redirect user to account if logged  in
   function LoginRoute({ props, element }) {
     if (authorized) {
