@@ -14,7 +14,7 @@ export async function UserSignUp(userDetails) {
         return (isSignUpSuccessfull = {
           status: true,
           token: response.data.token,
-          userId: response.data._id,
+          userId: response.data.userId,
         });
       } else if (response.data.status === false) {
         //  11000 is returned when we send data which is already there for common field

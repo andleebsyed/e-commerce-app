@@ -54,13 +54,12 @@ export function Signup() {
         setExistingOne(response.existingField);
         setDisplayError("block");
       } else if (response.status === true) {
-        console.log("Signed up successfully");
         setDisplayError("none");
         dispatchAuth({
           type: "AUTHORIZE_USER",
+          payload: response,
         });
-        localStorage.setItem("token", response.token);
-        localStorage.setItem("userId", response.userId);
+
         navigate("/");
       }
     }
