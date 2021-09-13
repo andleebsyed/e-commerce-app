@@ -9,7 +9,7 @@ import { Loader } from "../Loader/Loader";
 export function Wishlist() {
   const { state, dispatch, loader, setLoader } = useEcom();
   const { wishlist } = state;
-  if (wishlist.length === 0) {
+  if (wishlist?.length === 0) {
     return <EmptyWishlist />;
   } else {
     return (
