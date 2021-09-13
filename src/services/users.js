@@ -59,15 +59,7 @@ export async function UserSignUp(userDetails) {
 export async function UserSignIn(userDetails) {
   try {
     const response = await axios.post(BASE_URL + "/user/login", userDetails);
-    if (response.status === 200) {
-      const userResponseFromServer = {
-        allowUser: response.data.allowUser,
-        messageToShowOnView: response.data.message,
-        token: response.data.token,
-        userId: response.data.userId,
-      };
-      return userResponseFromServer;
-    }
+    return response.data;
   } catch (error) {
     console.log("error ocurred ", error.message);
   }
