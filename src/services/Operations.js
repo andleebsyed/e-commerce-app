@@ -84,10 +84,12 @@ export async function MoveToWishlist(product, dispatch, loader, setLoader) {
 export async function RemoveFromWishlist(product, dispatch, loader, setLoader) {
   try {
     setLoader(true);
-    const id = product._id;
+    const productId = product._id;
     const response = await axios.delete(
-      `https://rest-api.andydev7.repl.co/wishlist/${id}`
+      BASE_URL + `/wishlist/${productId}`
+      //   `https://rest-api.andydev7.repl.co/wishlist/${id}`
     );
+    console.log({ response }, "on removing from wishlist");
     if (response.status === 200) {
       setLoader(false);
       dispatch({ type: "REMOVE_FROM_WISHLIST", payload: product });
@@ -104,9 +106,7 @@ export async function ChangeQuantity(
   loader,
   setLoader
 ) {
-  console.log("wooah we got param halfway ", paramCase);
   if (paramCase === "dec") {
-    console.log("we won");
   }
   try {
     if (paramCase === "inc") {
