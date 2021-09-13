@@ -20,6 +20,7 @@ export function Wishlist() {
           {wishlist.map((product) => (
             <div class="ecom-card">
               <img
+                alt="product pic"
                 class="card-image"
                 src={`data:image/png;base64,${new Buffer(
                   product.img.data.data,

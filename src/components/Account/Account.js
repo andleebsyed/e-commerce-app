@@ -5,7 +5,7 @@ import { PasswordReset } from "../PasswordReset/PasswordReset";
 import { useAuth } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import { BASE_URL } from "../../services/api";
+// import { BASE_URL } from "../../services/api";
 import { FetchAccount } from "../../services/users";
 // import { useEffect } from "react";
 export function Account() {

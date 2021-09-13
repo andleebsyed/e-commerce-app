@@ -12,15 +12,16 @@ export function Filters() {
         <div className="sort-container">
           <div className="sort-box">
             <small>
-              <i class="material-icons">sort</i> Sort by :{" "}
+              <i className="material-icons">sort</i> Sort by :{" "}
             </small>
             <select
-              class="drop-down-box"
+              className="drop-down-box"
               name="cars"
               id="cars"
+              defaultValue="relevant"
               onChange={(event) => dispatch({ type: "SORT", payload: event })}
             >
-              <option value="" disabled selected hidden>
+              <option value="relevant" disabled hidden>
                 Relevance
               </option>
               <option value="low_to_high">Low to High</option>
@@ -36,7 +37,7 @@ export function Filters() {
             }
           >
             {" "}
-            <i class="material-icons">add</i>Filters
+            <i className="material-icons">add</i>Filters
           </button>
         </div>
       </div>

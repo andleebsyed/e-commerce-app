@@ -9,7 +9,7 @@ import { Loader } from "./components/Loader/Loader";
 import { Homepage } from "./components/Homepage/Homepage";
 import { Search } from "./components/Search/Search";
 import { Product } from "./components/Product/Product";
-import { Login, useLogin } from "./components/Login/Login";
+import { Login } from "./components/Login/Login";
 import { Signup } from "./components/Signup/Signup";
 import { Account } from "./components/Account/Account";
 import { useAuth } from "./contexts/AuthContext";

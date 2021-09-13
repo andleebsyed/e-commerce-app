@@ -23,6 +23,7 @@ export function Product({ cart }) {
     <div className="single-product-outer">
       <p className="product-name">{product.name}</p>
       <img
+        alt="product pic"
         className="individual-image"
         src={`data:image/png;base64,${new Buffer(
           product.img.data.data,

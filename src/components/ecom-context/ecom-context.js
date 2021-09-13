@@ -125,7 +125,6 @@ export function EcomProvider({ children }) {
     filteredProducts: [],
   });
 
-  // fetch products
   useEffect(() => {
     async function MyProducts() {
       setLoader(true);
@@ -150,15 +149,8 @@ export function EcomProvider({ children }) {
 
   useEffect(() => {
     async function MyWishlist() {
-      console.log("when is wishlist being fired");
       const response = await axios.get(
         "https://rest-api.andydev7.repl.co/wishlist"
-      );
-      console.log(
-        "wishlist coming from db ",
-        response.data.myWishlist,
-        " and its type is ",
-        typeof response.data.myWishlist
       );
       dispatch({ type: "INITIAL_WISHLIST", payload: response.data.myWishlist });
     }
