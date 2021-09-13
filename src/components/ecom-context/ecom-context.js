@@ -7,10 +7,8 @@ import {
 } from "react";
 import axios from "axios";
 
-// creating context
 const EcomContext = createContext();
 
-// reducer function
 function ecomReducer(state, { type, payload }) {
   const { wishlist, cart, data, orgData, filteredProducts } = state;
   switch (type) {
@@ -21,15 +19,20 @@ function ecomReducer(state, { type, payload }) {
         orgData: [...payload],
         filteredProducts: [],
       };
-    case "INITIAL_CART":
-      return { ...state, cart: [...payload] };
-    case "INITIAL_WISHLIST":
-      return { ...state, wishlist: [...payload] };
-    case "ADD_TO_WISHLIST":
+    case "INITIAL_DATA":
       return {
         ...state,
-        cart: cart.filter((item) => item._id !== payload._id),
-        wishlist: [...wishlist, payload],
+        cart: payload.account.cart,
+        wishlist: payload.account.wishlist,
+      };
+    case "ADD_TO_WISHLIST":
+      const product = state.data.find(
+        (singleProduct) => singleProduct._id === payload.productId
+      );
+      return {
+        ...state,
+        cart: cart.filter((item) => item._id !== payload.productId),
+        wishlist: [...wishlist, product],
       };
     case "ADD_TO_CART":
       return {
@@ -118,8 +121,8 @@ function ecomReducer(state, { type, payload }) {
 export function EcomProvider({ children }) {
   const [loader, setLoader] = useState(false);
   const [state, dispatch] = useReducer(ecomReducer, {
-    cart: [],
-    wishlist: [],
+    cart: null,
+    wishlist: null,
     data: [],
     orgData: [],
     filteredProducts: [],
@@ -137,26 +140,26 @@ export function EcomProvider({ children }) {
     MyProducts();
   }, []);
 
-  useEffect(() => {
-    async function MyCart() {
-      const response = await axios.get(
-        "https://rest-api.andydev7.repl.co/cart"
-      );
-      dispatch({ type: "INITIAL_CART", payload: response.data.myCart });
-    }
-    MyCart();
-  }, []);
+  //   useEffect(() => {
+  //     async function MyCart() {
+  //       const response = await axios.get(
+  //         "https://rest-api.andydev7.repl.co/cart"
+  //       );
+  //       dispatch({ type: "INITIAL_CART", payload: response.data.myCart });
+  //     }
+  //     MyCart();
+  //   }, []);
 
-  useEffect(() => {
-    async function MyWishlist() {
-      const response = await axios.get(
-        "https://rest-api.andydev7.repl.co/wishlist"
-      );
-      dispatch({ type: "INITIAL_WISHLIST", payload: response.data.myWishlist });
-    }
+  //   useEffect(() => {
+  //     async function MyWishlist() {
+  //       const response = await axios.get(
+  //         "https://rest-api.andydev7.repl.co/wishlist"
+  //       );
+  //       dispatch({ type: "INITIAL_WISHLIST", payload: response.data.myWishlist });
+  //     }
 
-    MyWishlist();
-  }, []);
+  //     MyWishlist();
+  //   }, []);
 
   return (
     <EcomContext.Provider value={{ state, dispatch, loader, setLoader }}>
