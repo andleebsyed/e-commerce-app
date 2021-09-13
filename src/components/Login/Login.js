@@ -1,62 +1,73 @@
 import "./Login.css";
-import { useState, createContext, useContext, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { useForm } from "react-hook-form";
+import { useState, createContext, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { UserSignIn } from "../../services/users";
+import { useAuth } from "../../contexts/AuthContext";
+// import { useForm } from "react-hook-form";
 const LoginContext = createContext();
 export function Login() {
-  const { user, setUser } = useLogin();
-  let testuname = "test";
-  let testpw = "test123";
-  const { register, handleSubmit } = useForm();
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [innetText, setInnerText] = useState(false);
-  const [failure, setFailure] = useState("none");
+  //   const { user, setUser } = useLogin();
+  //   let testuname = "test";
+  //   let testpw = "test123";
+  //   const { register, handleSubmit } = useForm();
+  //   const [username, setUsername] = useState("");
+  //   const [password, setPassword] = useState("");
+  //   const [innetText, setInnerText] = useState(false);
+  //   const [failure, setFailure] = useState("none");
 
-  useEffect(() => {
-    const loggedInUser = localStorage.getItem("user");
-    if (loggedInUser) {
-      const foundUser = JSON.parse(loggedInUser);
-      setUser(foundUser);
+  //   useEffect(() => {
+  //     const loggedInUser = localStorage.getItem("user");
+  //     if (loggedInUser) {
+  //       const foundUser = JSON.parse(loggedInUser);
+  //       setUser(foundUser);
+  //     }
+  //   }, [user]);
+  //   const onSubmit = ({ username, password }) => {
+  //     let unBox = document.querySelector(".username");
+  //     let pwBox = document.querySelector(".password");
+  //     const data = { username, password };
+  //     if (username === testuname && password === testpw) {
+  //       // set the state of the user
+  //       setUser(data);
+  //       // store the user in localStorage
+  //       localStorage.setItem("user", JSON.stringify(data));
+  //     } else {
+  //       // unBox.innerText = ''
+  //       // pwBox.innetText = ''
+  //       setFailure("block");
+  //     }
+  //   };
+  const { dispatchAuth } = useAuth();
+  const [userDetails, setUserDetails] = useState(null);
+  const [displayError, setDisplayError] = useState("none");
+  const [loginButtonText, setLoginButtonText] = useState("Login");
+  console.log({ loginButtonText });
+  const navigate = useNavigate();
+  async function handleLogin(e) {
+    e.preventDefault();
+    console.log({ userDetails });
+    setLoginButtonText("Logging you in...");
+    const response = await UserSignIn(userDetails);
+    setLoginButtonText("Login");
+    if (response.allowUser === false) {
+      setDisplayError("block");
+    } else if (response.allowUser === true) {
+      setDisplayError("none");
+      dispatchAuth({
+        type: "AUTHORIZE_USER",
+        payload: response,
+      });
+      navigate("/products");
     }
-  }, [user]);
-  const onSubmit = ({ username, password }) => {
-    let unBox = document.querySelector(".username");
-    let pwBox = document.querySelector(".password");
-    const data = { username, password };
-    if (username === testuname && password === testpw) {
-      // set the state of the user
-      setUser(data);
-      // store the user in localStorage
-      localStorage.setItem("user", JSON.stringify(data));
-    } else {
-      // unBox.innerText = ''
-      // pwBox.innetText = ''
-      setFailure("block");
-    }
-  };
-
-  // function handleLogout() {
-  //     setUser();
-  //     setUsername("");
-  //     setPassword("");
-  //     localStorage.clear();
-  // }
-  // if (user) {
-  //     return (
-  //         <div className="button-div">
-  //             <p className="welcome-text">Welcome {user.username}</p>
-  //             <button className="button button-primary button-custom" onClick={handleLogout}>Logout</button>
-  //         </div >
-
-  //     )
-  // }
-  // else {
+  }
   return (
-    <form className="form" onSubmit={handleSubmit(onSubmit)}>
+    <form className="form" onSubmit={(e) => handleLogin(e)}>
       <div className="login-main">
         <h1 className="login-heading">Login</h1>
-        <p className="error-message" style={{ display: failure, color: "red" }}>
+        <p
+          className="error-message"
+          style={{ display: displayError, color: "red" }}
+        >
           Username or password is incorrect
         </p>
         <input
@@ -65,9 +76,9 @@ export function Login() {
           placeholder="Enter Username"
           name="username"
           required
-          {...register("username", {
-            required: "Required",
-          })}
+          onChange={(e) =>
+            setUserDetails({ ...userDetails, username: e.target.value })
+          }
         />
         <input
           className="input-field password"
@@ -75,18 +86,18 @@ export function Login() {
           placeholder="Enter Password"
           name="password"
           required
-          {...register("password", {
-            required: "Required",
-          })}
+          onChange={(e) =>
+            setUserDetails({ ...userDetails, password: e.target.value })
+          }
         />
         <input
           type="submit"
           className="button button-outline login-button"
-          value="Login"
+          value={loginButtonText}
         />
-        <Link to="#" className="password-reset">
+        {/* <Link to="#" className="password-reset">
           Forgot Password?
-        </Link>
+        </Link> */}
         <p>
           Don't have an account?{" "}
           <Link className="signup-link" to="/signup">

@@ -60,7 +60,7 @@ export function Signup() {
           payload: response,
         });
 
-        navigate("/");
+        navigate("/products");
       }
     }
   }
