@@ -5,9 +5,12 @@ import { AddToWishlist, RemoveFromWishlist } from "../../services/Operations";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useLogin } from "../Login/Login";
+import { useAuth } from "../../contexts/AuthContext";
 export function Card({ product }) {
   const { state, dispatch, loader, setLoader } = useEcom();
   const { cart, wishlist } = state;
+  const { authState } = useAuth();
+  const { authorized } = authState;
   const { user } = useLogin();
   const clicked = {
     currentClass: "button button-secondary",
@@ -21,13 +24,13 @@ export function Card({ product }) {
   };
 
   let productInWishlistStatus = [];
-  wishlist.length === 0
+  wishlist?.length === 0
     ? (productInWishlistStatus = [])
-    : (productInWishlistStatus = wishlist.filter(
+    : (productInWishlistStatus = wishlist?.filter(
         (item) => item._id === product._id
       ));
 
-  let ifProductInCart = cart.filter((item) => item._id === product._id);
+  let ifProductInCart = cart?.filter((item) => item._id === product._id);
   const [showItem, setShowItem] = useState(false);
   return (
     <div>
@@ -51,8 +54,8 @@ export function Card({ product }) {
           />
         </Link>
 
-        {user ? (
-          productInWishlistStatus.length === 0 ? (
+        {authorized ? (
+          productInWishlistStatus?.length === 0 ? (
             <button
               onClick={() =>
                 AddToWishlist(product, dispatch, loader, setLoader)
