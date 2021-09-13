@@ -1,6 +1,30 @@
 import axios from "axios";
 import { BASE_URL } from "./api";
 
+export function setUpAuthHeaderForServiceCalls(token) {
+  if (token) {
+    return (axios.defaults.headers.common["Authorization"] = token);
+  } else {
+    delete axios.defaults.headers.common["Authorization"];
+  }
+}
+
+export function setupAuthExceptionHandler(dispatchAuth, navigate) {
+  const UNAUTHORIZED = 401;
+  axios.interceptors.response.use(
+    (response) => response,
+    (error) => {
+      if (error?.response?.status === UNAUTHORIZED) {
+        localStorage.removeItem("userId");
+        localStorage.removeItem("token");
+        dispatchAuth({ type: "LOGOUT_USER" });
+        navigate("/login");
+      }
+      return Promise.reject(error);
+    }
+  );
+}
+
 export async function UserSignUp(userDetails) {
   //   const signUpDataFromView = {
   //     userDetails: userDetails,
@@ -44,6 +68,15 @@ export async function UserSignIn(userDetails) {
       };
       return userResponseFromServer;
     }
+  } catch (error) {
+    console.log("error ocurred ", error.message);
+  }
+}
+
+export async function FetchAccount() {
+  try {
+    const response = await axios.post(BASE_URL + "/user/account");
+    return response.data;
   } catch (error) {
     console.log("error ocurred ", error.message);
   }

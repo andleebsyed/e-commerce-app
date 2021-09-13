@@ -3,7 +3,7 @@ import { Products } from "./components/product-page/product-page";
 import { Header } from "./components/Header/header";
 import { Wishlist } from "./components/Wishlist/wishlist";
 import { Cart } from "./components/Cart/cart";
-import { Route, Routes, Navigate } from "react-router-dom";
+import { Route, Routes, Navigate, useNavigate } from "react-router-dom";
 import { useEcom } from "./components/ecom-context/ecom-context";
 import { Loader } from "./components/Loader/Loader";
 import { Homepage } from "./components/Homepage/Homepage";
@@ -13,15 +13,26 @@ import { Login, useLogin } from "./components/Login/Login";
 import { Signup } from "./components/Signup/Signup";
 import { Account } from "./components/Account/Account";
 import { useAuth } from "./contexts/AuthContext";
+import { useEffect } from "react";
+import {
+  setupAuthExceptionHandler,
+  setUpAuthHeaderForServiceCalls,
+} from "./services/users";
 
 function App() {
   const { loader, state } = useEcom();
   const { cart } = state;
   // const { user } = useLogin();
-  const { authState } = useAuth();
+  const { authState, dispatchAuth } = useAuth();
   const { authorized } = authState;
-  console.log({ loader });
+  const navigate = useNavigate();
+  // console.log({ loader });
   // Auth route
+  useEffect(() => {
+    setupAuthExceptionHandler(dispatchAuth, navigate);
+    setUpAuthHeaderForServiceCalls(localStorage.getItem("token"));
+    dispatchAuth({ type: "AUTH_SETUP" });
+  }, [dispatchAuth, navigate]);
   function PrivateRoute({ isLoggedIn, element, ...props }) {
     return <Route {...props} element={authorized ? element : <Login />} />;
   }
