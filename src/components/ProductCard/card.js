@@ -101,15 +101,15 @@ export function Card({ product }) {
           <strong>Rs {product.price}</strong>
         </div>
 
-        {user ? (
+        {authorized && ifProductInCart ? (
           <button
             className={
-              ifProductInCart.length > 0
+              ifProductInCart?.length > 0
                 ? clicked.currentClass
                 : unclicked.currentClass
             }
             disabled={
-              ifProductInCart.length > 0
+              ifProductInCart?.length > 0
                 ? clicked.visibility
                 : unclicked.visibility
             }

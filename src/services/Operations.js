@@ -4,18 +4,21 @@ import { BASE_URL } from "./api";
 export async function AddToCart(product, dispatch, loader, setLoader) {
   try {
     setLoader(true);
-    const id = product._id;
+    const productId = product._id;
     const responseWishlist = await axios.delete(
-      `https://rest-api.andydev7.repl.co/wishlist/${id}`
+      BASE_URL + `/wishlist/${productId}`
+      //   `https://rest-api.andydev7.repl.co/wishlist/${id}`
     );
     const responseCart = await axios.post(
-      "https://rest-api.andydev7.repl.co/cart",
-      product
+      BASE_URL + "/cart",
+      { productId }
+      //   "https://rest-api.andydev7.repl.co/cart",
+      //   productId
     );
-
+    console.log({ responseCart }, " what happened to cart");
+    setLoader(false);
     if (responseCart.status === 200) {
-      setLoader(false);
-      dispatch({ type: "ADD_TO_CART", payload: product });
+      dispatch({ type: "ADD_TO_CART", payload: { productId } });
     }
   } catch (error) {
     console.log("err message is ", error.message);
