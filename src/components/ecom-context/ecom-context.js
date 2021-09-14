@@ -47,13 +47,16 @@ function ecomReducer(state, { type, payload }) {
     case "REMOVE_FROM_CART":
       return {
         ...state,
-        cart: cart.filter((product) => product._id !== payload._id),
+        cart: cart.filter((product) => product._id !== payload.productId),
       };
     case "MOVE_TO_WISHLIST":
+      const toMoveProduct = state.data.find(
+        (singleProduct) => singleProduct._id === payload.productId
+      );
       return {
         ...state,
-        wishlist: [...wishlist, payload],
-        cart: cart.filter((product) => product._id !== payload._id),
+        wishlist: [...wishlist, toMoveProduct],
+        cart: cart.filter((product) => product._id !== payload.productId),
       };
     case "REMOVE_FROM_WISHLIST":
       return {

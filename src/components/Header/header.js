@@ -3,6 +3,7 @@ import { useEcom } from "../ecom-context/ecom-context";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useLogin } from "../Login/Login";
+import { useAuth } from "../../contexts/AuthContext";
 export function Header() {
   const { state, dispatch } = useEcom();
   const { wishlist, cart } = state;
@@ -15,7 +16,8 @@ export function Header() {
 
   // if input box has something in it do search otherwise don't
   comingProd.length > 0 ? (isAllowed = true) : (isAllowed = false);
-
+  const { authState } = useAuth();
+  const { authorized } = authState;
   return (
     <div className="header-main">
       <nav className="navbar-main">
@@ -92,7 +94,7 @@ export function Header() {
                 <i className="material-icons ">favorite_border</i>
               </NavLink>
               <div className="badge-common badge-one">
-                {user ? wishlist.length : 0}
+                {authorized ? wishlist?.length : 0}
               </div>
             </div>
           </div>
@@ -117,7 +119,7 @@ export function Header() {
                 <i className="material-icons"> add_shopping_cart </i>
               </NavLink>
               <div className="badge-common badge-one">
-                {user ? cart.length : 0}
+                {authorized ? cart?.length : 0}
               </div>
             </div>
           </div>

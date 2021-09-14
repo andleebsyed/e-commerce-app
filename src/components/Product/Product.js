@@ -3,10 +3,13 @@ import { Link, useLocation } from "react-router-dom";
 import { useEcom } from "../ecom-context/ecom-context";
 import { AddToCart } from "../../services/Operations";
 import { useLogin } from "../Login/Login";
+import { useAuth } from "../../contexts/AuthContext";
 export function Product({ cart }) {
   const { state } = useLocation();
   const { product } = state;
   const { dispatch, loader, setLoader } = useEcom();
+  const { authState } = useAuth();
+  const { authorized } = authState;
   const { user } = useLogin();
   const clicked = {
     currentClass: "button button-secondary buy-button",
@@ -31,7 +34,7 @@ export function Product({ cart }) {
         ).toString("base64")}`}
       />
 
-      {user ? (
+      {authorized && ifProductInCart ? (
         <div className="product-buttons">
           <button
             className={

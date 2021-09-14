@@ -11,7 +11,6 @@ export function Card({ product }) {
   const { cart, wishlist } = state;
   const { authState } = useAuth();
   const { authorized } = authState;
-  const { user } = useLogin();
   const clicked = {
     currentClass: "button button-secondary",
     currentText: "✅Added To Cart",
@@ -24,13 +23,19 @@ export function Card({ product }) {
   };
 
   let productInWishlistStatus = [];
-  wishlist?.length === 0
-    ? (productInWishlistStatus = [])
-    : (productInWishlistStatus = wishlist?.filter(
-        (item) => item._id === product._id
-      ));
+  let ifProductInCart = [];
+  console.log({ wishlist }, "wishlist in carrd");
+  console.log({ product }, " product in card");
+  if (wishlist !== null) {
+    wishlist.length === 0
+      ? (productInWishlistStatus = [])
+      : (productInWishlistStatus = wishlist.filter(
+          (item) => item?._id === product?._id
+        ));
 
-  let ifProductInCart = cart?.filter((item) => item._id === product._id);
+    ifProductInCart = cart?.filter((item) => item?._id === product?._id);
+  }
+
   const [showItem, setShowItem] = useState(false);
   return (
     <div>

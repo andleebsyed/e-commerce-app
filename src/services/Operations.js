@@ -49,13 +49,15 @@ export async function AddToWishlist(product, dispatch, loader, setLoader) {
 export async function RemoveFromCart(product, dispatch, loader, setLoader) {
   try {
     setLoader(true);
-    const id = product._id;
+    const productId = product._id;
     const response = await axios.delete(
-      `https://rest-api.andydev7.repl.co/cart/${id}`
+      BASE_URL + `/cart/${productId}`
+      //   `https://rest-api.andydev7.repl.co/cart/${id}`
     );
+    console.log("on deleting item from caart ", response);
     if (response.status === 200) {
       setLoader(false);
-      dispatch({ type: "REMOVE_FROM_CART", payload: product });
+      dispatch({ type: "REMOVE_FROM_CART", payload: { productId } });
     }
   } catch (error) {
     setLoader(false);
@@ -66,18 +68,20 @@ export async function RemoveFromCart(product, dispatch, loader, setLoader) {
 export async function MoveToWishlist(product, dispatch, loader, setLoader) {
   try {
     setLoader(true);
-    const id = product._id;
+    const productId = product._id;
     const responseAdd = await axios.post(
-      "https://rest-api.andydev7.repl.co/wishlist",
-      product
+      BASE_URL + "/wishlist",
+      //   "https://rest-api.andydev7.repl.co/wishlist",
+      productId
     );
     const responseRemove = await axios.delete(
-      `https://rest-api.andydev7.repl.co/cart/${id}`
+      BASE_URL + `/cart/${productId}`
+      //   `https://rest-api.andydev7.repl.co/cart/${productId}`
     );
 
     if (responseAdd.status === 200 && responseRemove.status === 200) {
       setLoader(false);
-      dispatch({ type: "MOVE_TO_WISHLIST", payload: product });
+      dispatch({ type: "MOVE_TO_WISHLIST", payload: { productId } });
     }
   } catch (error) {
     console.log("error occured while moving ", error.message);

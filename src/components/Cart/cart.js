@@ -12,7 +12,7 @@ import { Loader } from "../Loader/Loader";
 export function Cart() {
   const { state, dispatch, loader, setLoader } = useEcom();
   const { cart } = state;
-  if (cart.length === 0) {
+  if (cart?.length === 0) {
     return <EmptyCart />;
   } else {
     console.log("cart in cart component is ", cart);
@@ -24,6 +24,7 @@ export function Cart() {
           {cart.map((product) => (
             <div class="ecom-card">
               <img
+                alt="product pic"
                 class="card-image"
                 src={`data:image/png;base64,${new Buffer(
                   product.img.data.data,
