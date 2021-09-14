@@ -22,12 +22,10 @@ import {
 
 function App() {
   const { loader, state, dispatch } = useEcom();
-  const { cart, wishlist } = state;
-  // const { user } = useLogin();
+  const { cart } = state;
   const { authState, dispatchAuth } = useAuth();
   const { authorized, authSetup } = authState;
   const navigate = useNavigate();
-  console.log({ wishlist });
   // Auth route
   useEffect(() => {
     setupAuthExceptionHandler(dispatchAuth, navigate);
@@ -40,11 +38,9 @@ function App() {
   useEffect(() => {
     async function Run() {
       const response = await FetchAccount();
-      console.log({ response }, "user account");
       dispatch({ type: "INITIAL_DATA", payload: response });
     }
     if (cart === null && authSetup && localStorage.getItem("token")) {
-      console.log("account fetch fired fired");
       Run();
     }
   }, [dispatch, cart, authSetup]);

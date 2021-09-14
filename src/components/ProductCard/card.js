@@ -4,7 +4,6 @@ import { AddToCart } from "../../services/Operations";
 import { AddToWishlist, RemoveFromWishlist } from "../../services/Operations";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useLogin } from "../Login/Login";
 import { useAuth } from "../../contexts/AuthContext";
 export function Card({ product }) {
   const { state, dispatch, loader, setLoader } = useEcom();
@@ -24,8 +23,6 @@ export function Card({ product }) {
 
   let productInWishlistStatus = [];
   let ifProductInCart = [];
-  console.log({ wishlist }, "wishlist in carrd");
-  console.log({ product }, " product in card");
   if (wishlist !== null) {
     wishlist.length === 0
       ? (productInWishlistStatus = [])

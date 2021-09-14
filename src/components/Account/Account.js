@@ -13,7 +13,6 @@ export function Account() {
   const { authState, dispatchAuth } = useAuth();
   const { authorized, account, authSetup } = authState;
   const navigate = useNavigate();
-  console.log({ account });
   function handleLogout() {
     dispatchAuth({ type: "LOGOUT_USER" });
     navigate("/");

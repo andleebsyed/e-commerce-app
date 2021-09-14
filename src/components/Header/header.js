@@ -2,13 +2,10 @@ import "./header.css";
 import { useEcom } from "../ecom-context/ecom-context";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { useLogin } from "../Login/Login";
 import { useAuth } from "../../contexts/AuthContext";
 export function Header() {
   const { state, dispatch } = useEcom();
   const { wishlist, cart } = state;
-  const { user } = useLogin();
-  //   const unLogged = 0;
 
   let isAllowed = false;
 
@@ -53,7 +50,7 @@ export function Header() {
               onChange={(event) => setComingProd(event.target.value)}
             />
             <NavLink
-              disable={isAllowed}
+              disable={isAllowed.toString()}
               to="/search"
               className="search-box-button"
               activeClassName="selected"

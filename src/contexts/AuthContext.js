@@ -14,7 +14,6 @@ function authReducer(state, { type, payload }) {
       localStorage.clear();
       return { ...state, authorized: false };
     case "FETCH_ACCOUNT":
-      console.log({ payload }, " in reducer");
       return { ...state, account: payload.account };
     default:
       return state;

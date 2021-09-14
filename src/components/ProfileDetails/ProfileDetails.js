@@ -5,7 +5,7 @@ export function ProfileDetails() {
       <div className="profile-details width-adjust">
         <p className="label">Account</p>
         <div className="holder">
-          <label className="labels-acc" for="username">
+          <label className="labels-acc" htmlFor="username">
             Username
           </label>
           <input
@@ -17,7 +17,7 @@ export function ProfileDetails() {
           />
         </div>
         <div className="holder">
-          <label className="labels-acc" for="email">
+          <label className="labels-acc" htmlFor="email">
             Email
           </label>
           <input

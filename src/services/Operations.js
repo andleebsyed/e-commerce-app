@@ -5,17 +5,8 @@ export async function AddToCart(product, dispatch, loader, setLoader) {
   try {
     setLoader(true);
     const productId = product._id;
-    const responseWishlist = await axios.delete(
-      BASE_URL + `/wishlist/${productId}`
-      //   `https://rest-api.andydev7.repl.co/wishlist/${id}`
-    );
-    const responseCart = await axios.post(
-      BASE_URL + "/cart",
-      { productId }
-      //   "https://rest-api.andydev7.repl.co/cart",
-      //   productId
-    );
-    console.log({ responseCart }, " what happened to cart");
+    await axios.delete(BASE_URL + `/wishlist/${productId}`);
+    const responseCart = await axios.post(BASE_URL + "/cart", { productId });
     setLoader(false);
     if (responseCart.status === 200) {
       dispatch({ type: "ADD_TO_CART", payload: { productId } });
@@ -29,11 +20,8 @@ export async function AddToWishlist(product, dispatch, loader, setLoader) {
   try {
     setLoader(true);
     const productId = product._id;
-    console.log({ productId }, "will go to server");
-    const responseCart = await axios.delete(BASE_URL + `/cart/${productId}`);
+    await axios.delete(BASE_URL + `/cart/${productId}`);
     const response = await axios.post(BASE_URL + "/wishlist", { productId });
-    console.log({ responseCart }, " of cart");
-    console.log({ response }, " of wishlist");
     setLoader(false);
     if (response.status === 200) {
       dispatch({
@@ -50,18 +38,14 @@ export async function RemoveFromCart(product, dispatch, loader, setLoader) {
   try {
     setLoader(true);
     const productId = product._id;
-    const response = await axios.delete(
-      BASE_URL + `/cart/${productId}`
-      //   `https://rest-api.andydev7.repl.co/cart/${id}`
-    );
-    console.log("on deleting item from caart ", response);
+    const response = await axios.delete(BASE_URL + `/cart/${productId}`);
     if (response.status === 200) {
       setLoader(false);
       dispatch({ type: "REMOVE_FROM_CART", payload: { productId } });
     }
   } catch (error) {
     setLoader(false);
-    console.log("coudn't delete item from collection cart ", error.message);
+    console.log("couldn't delete item from collection cart ", error.message);
   }
 }
 
@@ -69,16 +53,8 @@ export async function MoveToWishlist(product, dispatch, loader, setLoader) {
   try {
     setLoader(true);
     const productId = product._id;
-    const responseAdd = await axios.post(
-      BASE_URL + "/wishlist",
-      //   "https://rest-api.andydev7.repl.co/wishlist",
-      productId
-    );
-    const responseRemove = await axios.delete(
-      BASE_URL + `/cart/${productId}`
-      //   `https://rest-api.andydev7.repl.co/cart/${productId}`
-    );
-
+    const responseAdd = await axios.post(BASE_URL + "/wishlist", { productId });
+    const responseRemove = await axios.delete(BASE_URL + `/cart/${productId}`);
     if (responseAdd.status === 200 && responseRemove.status === 200) {
       setLoader(false);
       dispatch({ type: "MOVE_TO_WISHLIST", payload: { productId } });
@@ -92,11 +68,7 @@ export async function RemoveFromWishlist(product, dispatch, loader, setLoader) {
   try {
     setLoader(true);
     const productId = product._id;
-    const response = await axios.delete(
-      BASE_URL + `/wishlist/${productId}`
-      //   `https://rest-api.andydev7.repl.co/wishlist/${id}`
-    );
-    console.log({ response }, "on removing from wishlist");
+    const response = await axios.delete(BASE_URL + `/wishlist/${productId}`);
     if (response.status === 200) {
       setLoader(false);
       dispatch({ type: "REMOVE_FROM_WISHLIST", payload: product });
@@ -113,36 +85,33 @@ export async function ChangeQuantity(
   loader,
   setLoader
 ) {
-  if (paramCase === "dec") {
-  }
+  const productId = product._id;
+
   try {
+    if (paramCase === "dec" && product.quantity === 1) {
+      setLoader(true);
+      const resposneOnEmptyCase = await axios.delete(
+        BASE_URL + `/cart/${productId}`
+      );
+      console.log("quantity was 1 ", resposneOnEmptyCase);
+      setLoader(false);
+      dispatch({ type: "DECREASE_QUANTITY", payload: { productId } });
+    }
+    if (paramCase === "dec" && product.quantity !== 1) {
+      setLoader(true);
+      const response = await axios.put(BASE_URL + `/cart/?case=dec`, productId);
+      console.log("decrement case ", response);
+      setLoader(false);
+      dispatch({ type: "DECREASE_QUANTITY", payload: { productId } });
+    }
+
     if (paramCase === "inc") {
       setLoader(true);
-      const response = await axios.put(
-        `https://rest-api.andydev7.repl.co/cart/?case=inc`,
-        product
-      );
+      const response = await axios.put(BASE_URL + "/cart/?case=inc", productId);
+      console.log("im crement case ", response);
       if (response.status === 200) {
         setLoader(false);
         dispatch({ type: "INCREASE_QUANTITY", payload: product });
-      }
-    } else {
-      if (product.quantity === 1) {
-        setLoader(true);
-        const resposneOnEmptyCase = await axios.delete(
-          `https://rest-api.andydev7.repl.co/cart/${product._id}`
-        );
-        setLoader(false);
-        dispatch({ type: "DECREASE_QUANTITY", payload: product });
-      }
-      setLoader(true);
-      const response = await axios.put(
-        `https://rest-api.andydev7.repl.co/cart/?case=dec`,
-        product
-      );
-      if (response.status === 200) {
-        setLoader(false);
-        dispatch({ type: "DECREASE_QUANTITY", payload: product });
       }
     }
   } catch (error) {

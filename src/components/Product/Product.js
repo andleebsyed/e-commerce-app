@@ -2,7 +2,6 @@ import "./Product.css";
 import { Link, useLocation } from "react-router-dom";
 import { useEcom } from "../ecom-context/ecom-context";
 import { AddToCart } from "../../services/Operations";
-import { useLogin } from "../Login/Login";
 import { useAuth } from "../../contexts/AuthContext";
 export function Product({ cart }) {
   const { state } = useLocation();
@@ -10,7 +9,6 @@ export function Product({ cart }) {
   const { dispatch, loader, setLoader } = useEcom();
   const { authState } = useAuth();
   const { authorized } = authState;
-  const { user } = useLogin();
   const clicked = {
     currentClass: "button button-secondary buy-button",
     currentText: "✅Added To Cart",
@@ -21,8 +19,10 @@ export function Product({ cart }) {
     currentText: "Add To Cart",
     visibility: false,
   };
-  let ifProductInCart = cart.filter((item) => item._id === product._id);
-  return (
+  let ifProductInCart = cart?.filter((item) => item._id === product._id);
+  return cart === null ? (
+    <div>loading...</div>
+  ) : (
     <div className="single-product-outer">
       <p className="product-name">{product.name}</p>
       <img
@@ -83,7 +83,7 @@ export function Product({ cart }) {
       )}
       <div className="description-div">
         <h3 className="description-heading">Description</h3>
-        <p class="description-para">
+        <p className="description-para">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. In nec
           viverra dui. Nullam feugiat diam sed felis placerat cursus. Proin
           rutrum convallis finibus. Donec sed quam ut lectus varius tincidunt
