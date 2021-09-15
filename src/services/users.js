@@ -101,3 +101,17 @@ export async function RemoveAddress(addressId) {
     console.log("error ocurred ", error.message);
   }
 }
+
+export async function OrderServerCall(amount) {
+  try {
+    const response = await axios.post(BASE_URL + "/order", { amount });
+    if (response.data.status) {
+      return response.data.options;
+    } else {
+      console.log(response);
+      return;
+    }
+  } catch (error) {
+    console.log("error ocurred ", error.message);
+  }
+}
