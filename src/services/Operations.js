@@ -118,3 +118,17 @@ export async function ChangeQuantity(
     console.log("error occured : ", error.message);
   }
 }
+
+export async function EmptyCart() {
+  try {
+    const response = await axios.post(BASE_URL + "/cart/emptycart");
+    console.log({ response });
+    if (response.data.status) {
+      return response.data.status;
+    } else {
+      console.log("something went wrong ", { response });
+    }
+  } catch (error) {
+    console.log("error occurred ", error.message);
+  }
+}

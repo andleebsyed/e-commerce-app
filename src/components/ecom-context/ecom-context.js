@@ -120,6 +120,8 @@ function ecomReducer(state, { type, payload }) {
       };
     case "ADDRESS_ADDED":
       return { ...state, addresses: payload.addresses };
+    case "EMPTY_CART":
+      return { ...state, cart: [] };
     case "REMOVE_ALL_CONDITIONS":
       return { ...state, data: orgData };
     default:
