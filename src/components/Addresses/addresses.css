@@ -6,7 +6,44 @@
 .address-main {
   width: 60%;
 }
-
+.address-modal-outer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  /* background-color: #d1d5db; */
+  /* opacity: 0.3; */
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.address-modal-main {
+  background-color: #ffffff;
+  width: 100%;
+  /* border: 1px solid var(--primary-color); */
+  border-radius: 5px;
+  padding: 1rem;
+  margin: 1rem;
+  max-width: 441px;
+}
+.address-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.address-column {
+  outline: none;
+  border-radius: 0.2rem;
+  border: 1px solid #d1d5db;
+  height: 1.9rem;
+  width: 100%;
+  margin-top: 2rem;
+}
+.address-button {
+  width: 100%;
+}
 @media only screen and (max-width: 600px) {
   .address-main {
     width: 100%;
