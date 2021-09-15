@@ -86,7 +86,7 @@ export function Addresses() {
   ) : (
     <div className="address-main">
       <div className="address-heading">
-        <p>Select Address</p>
+        <p style={{ fontWeight: "bold" }}>Select Address</p>
         <button
           className="button button-primary"
           onClick={() => setModalStatus(true)}

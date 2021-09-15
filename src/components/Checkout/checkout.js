@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Addresses } from "../Addresses/Addresses";
 import { useEcom } from "../ecom-context/ecom-context";
 import "./checkout.css";
@@ -30,6 +31,25 @@ export function Checkout() {
       <div className="checkout-container">
         <div className="checkout-contents">
           <h1>Checkout</h1>
+          <div style={{ display: "flex" }}>
+            {cart.map((item) => (
+              <Link
+                to={{
+                  pathname: `/products/${item._id}`,
+                }}
+                state={{ product: item }}
+              >
+                <img
+                  alt="product pic"
+                  className="checkout-image"
+                  src={`data:image/png;base64,${new Buffer(
+                    item.img.data.data,
+                    "binary"
+                  ).toString("base64")}`}
+                />
+              </Link>
+            ))}
+          </div>
           <p>Total Items : {totalItems} </p>
           <p>Total Price : {totalPrice}</p>
           <button className="button button-primary pay-button">
