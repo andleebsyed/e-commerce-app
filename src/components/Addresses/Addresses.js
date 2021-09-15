@@ -1,7 +1,7 @@
 import "./addresses.css";
 import { useEcom } from "../ecom-context/ecom-context";
 import { useState } from "react";
-import { AddAddress } from "../../services/users";
+import { AddAddress, RemoveAddress } from "../../services/users";
 export function Addresses() {
   const { dispatch } = useEcom();
   const { state } = useEcom();
@@ -10,6 +10,13 @@ export function Addresses() {
   const [modalStatus, setModalStatus] = useState(false);
   const [saveAddressButtonText, setSaveAddressButtonText] =
     useState("Save Address");
+  const [removeButtonText, setRemoveButtonText] = useState("Remove");
+  async function removeAddressHandler(addressId) {
+    setRemoveButtonText("Removing...");
+    const addresses = await RemoveAddress(addressId);
+    dispatch({ type: "ADDRESS_ADDED", payload: { addresses } });
+    setRemoveButtonText("Remove");
+  }
   const AddAddressModal = () => {
     const [address, setAddress] = useState(null);
     async function saveAddressHandler(e) {
@@ -22,6 +29,7 @@ export function Addresses() {
       setSaveAddressButtonText("Save Address");
       setModalStatus(false);
     }
+
     return (
       <div className="address-modal-outer">
         <div className="address-modal-main">
@@ -101,7 +109,7 @@ export function Addresses() {
       ) : (
         <div>
           {addresses.map((address) => (
-            <div className="address-outer">
+            <div className="address-outer" key={address._id}>
               <div key={address._id} className="address">
                 <input
                   type="radio"
@@ -119,8 +127,9 @@ export function Addresses() {
               <button
                 className="button button-danger"
                 style={{ marginLeft: "auto" }}
+                onClick={() => removeAddressHandler(address._id)}
               >
-                Remove
+                {removeButtonText}
               </button>
             </div>
           ))}
