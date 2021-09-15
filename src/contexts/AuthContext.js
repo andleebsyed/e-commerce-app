@@ -1,4 +1,5 @@
 import { createContext, useContext, useReducer } from "react";
+import { setUpAuthHeaderForServiceCalls } from "../services/users";
 
 const AuthContext = createContext();
 function authReducer(state, { type, payload }) {
@@ -9,6 +10,8 @@ function authReducer(state, { type, payload }) {
       console.log({ payload });
       localStorage.setItem("token", payload.token);
       localStorage.setItem("userId", payload.userId);
+      setUpAuthHeaderForServiceCalls(payload.token);
+
       return { ...state, authorized: true };
     case "LOGOUT_USER":
       localStorage.clear();
