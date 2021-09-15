@@ -1,20 +1,16 @@
 import "./addresses.css";
 import { useEcom } from "../ecom-context/ecom-context";
 import { useState } from "react";
-import { AddAddress, RemoveAddress } from "../../services/users";
+import { RemoveAddress } from "../../services/users";
 import { AddAddressModal } from "../AddAddress/AddAddress";
 export function Addresses() {
   const { dispatch } = useEcom();
   const { state } = useEcom();
   const { addresses } = state;
-  console.log({ addresses }, " user's addresses", addresses.length);
   const [modalStatus, setModalStatus] = useState(false);
-  const [removeButtonText, setRemoveButtonText] = useState("Remove");
   async function removeAddressHandler(addressId) {
-    // setRemoveButtonText("Removing...");
     const addresses = await RemoveAddress(addressId);
     dispatch({ type: "ADDRESS_ADDED", payload: { addresses } });
-    // setRemoveButtonText("Remove");
   }
 
   return addresses === null ? (
@@ -57,7 +53,7 @@ export function Addresses() {
                 style={{ marginLeft: "auto" }}
                 onClick={() => removeAddressHandler(address._id)}
               >
-                {removeButtonText}
+                Remove
               </button>
             </div>
           ))}

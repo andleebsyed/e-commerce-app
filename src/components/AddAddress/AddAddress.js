@@ -17,8 +17,8 @@ export const AddAddressModal = ({ setModalStatus }) => {
   }
 
   return (
-    <div className="address-modal-outer">
-      <div className="address-modal-main">
+    <div className="modal-outer">
+      <div className="modal-main">
         <button
           style={{ marginLeft: "auto" }}
           onClick={() => setModalStatus(false)}

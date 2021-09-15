@@ -6,7 +6,7 @@
 .address-main {
   width: 60%;
 }
-.address-modal-outer {
+.modal-outer {
   position: fixed;
   top: 0;
   left: 0;
@@ -19,7 +19,7 @@
   align-items: center;
   justify-content: center;
 }
-.address-modal-main {
+.modal-main {
   background-color: #ffffff;
   width: 100%;
   /* border: 1px solid var(--primary-color); */
