@@ -2,8 +2,6 @@ import "./addresses.css";
 import { useEcom } from "../ecom-context/ecom-context";
 import { useState } from "react";
 import { AddAddress } from "../../services/users";
-import { address } from "faker";
-
 export function Addresses() {
   const { dispatch } = useEcom();
   const { state } = useEcom();
@@ -103,11 +101,27 @@ export function Addresses() {
       ) : (
         <div>
           {addresses.map((address) => (
-            <div key={address._id} className="address">
-              <p>{address.name}</p>
-              <p>{address.address}</p>
-              <p>{address.pincode}</p>
-              <p>{address.city}</p>
+            <div className="address-outer">
+              <div key={address._id} className="address">
+                <input
+                  type="radio"
+                  name="selectedAddress"
+                  style={{ alignSelf: "center", marginRight: "1rem" }}
+                />
+                <div>
+                  <p style={{ fontWeight: "bold" }}>{address.name}</p>
+                  <p>{address.address}</p>
+                  <p>
+                    {address.city} - {address.pincode}
+                  </p>
+                </div>
+              </div>
+              <button
+                className="button button-danger"
+                style={{ marginLeft: "auto" }}
+              >
+                Remove
+              </button>
             </div>
           ))}
         </div>

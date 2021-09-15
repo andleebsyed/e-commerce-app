@@ -27,6 +27,8 @@
   padding: 1rem;
   margin: 1rem;
   max-width: 441px;
+  display: flex;
+  flex-direction: column;
 }
 .address-form {
   display: flex;
@@ -43,6 +45,17 @@
 }
 .address-button {
   width: 100%;
+}
+
+.address {
+  padding: 1rem;
+  display: flex;
+}
+.address-outer {
+  border: 1px solid var(--primary-color);
+  margin: 1rem;
+  display: flex;
+  flex-direction: column;
 }
 @media only screen and (max-width: 600px) {
   .address-main {
