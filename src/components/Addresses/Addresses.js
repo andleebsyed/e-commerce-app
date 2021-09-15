@@ -1,14 +1,29 @@
 import "./addresses.css";
 import { useEcom } from "../ecom-context/ecom-context";
 import { useState } from "react";
+import { AddAddress } from "../../services/users";
+import { address } from "faker";
 
 export function Addresses() {
+  const { dispatch } = useEcom();
   const { state } = useEcom();
   const { addresses } = state;
+  console.log({ addresses }, " user's addresses", addresses.length);
   const [modalStatus, setModalStatus] = useState(false);
   const [saveAddressButtonText, setSaveAddressButtonText] =
     useState("Save Address");
   const AddAddressModal = () => {
+    const [address, setAddress] = useState(null);
+    async function saveAddressHandler(e) {
+      console.log("coming here or not");
+      e.preventDefault();
+      console.log({ address });
+      setSaveAddressButtonText("Saving...");
+      const addresses = await AddAddress(address);
+      dispatch({ type: "ADDRESS_ADDED", payload: { addresses } });
+      setSaveAddressButtonText("Save Address");
+      setModalStatus(false);
+    }
     return (
       <div className="address-modal-outer">
         <div className="address-modal-main">
@@ -18,13 +33,17 @@ export function Addresses() {
           >
             X
           </button>
-          <form className="address-form">
+          <form
+            className="address-form"
+            onSubmit={(e) => saveAddressHandler(e)}
+          >
             <input
               className="address-column"
               type="text"
               name="name"
               required
               placeholder="Name"
+              onChange={(e) => setAddress({ ...address, name: e.target.value })}
             />
             <input
               className="address-column"
@@ -32,6 +51,9 @@ export function Addresses() {
               name="address"
               required
               placeholder="Address"
+              onChange={(e) =>
+                setAddress({ ...address, address: e.target.value })
+              }
             />
             <input
               className="address-column"
@@ -39,6 +61,9 @@ export function Addresses() {
               name="pincode"
               required
               placeholder="Pincode"
+              onChange={(e) =>
+                setAddress({ ...address, pincode: e.target.value })
+              }
             />
             <input
               className="address-column"
@@ -46,6 +71,7 @@ export function Addresses() {
               name="city"
               required
               placeholder="City"
+              onChange={(e) => setAddress({ ...address, city: e.target.value })}
             />
             <input
               type="submit"
@@ -75,7 +101,16 @@ export function Addresses() {
           <p>you have no saved addresses</p>
         </div>
       ) : (
-        <div>These are my addressses</div>
+        <div>
+          {addresses.map((address) => (
+            <div key={address._id} className="address">
+              <p>{address.name}</p>
+              <p>{address.address}</p>
+              <p>{address.pincode}</p>
+              <p>{address.city}</p>
+            </div>
+          ))}
+        </div>
       )}
       {modalStatus && <AddAddressModal />}
     </div>
