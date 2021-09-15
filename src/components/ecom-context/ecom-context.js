@@ -11,7 +11,7 @@ import { BASE_URL } from "../../services/api";
 const EcomContext = createContext();
 
 function ecomReducer(state, { type, payload }) {
-  const { wishlist, cart, data, orgData, filteredProducts } = state;
+  const { wishlist, cart, data, orgData } = state;
   switch (type) {
     case "INITIAL_PRODUCTS":
       return {
