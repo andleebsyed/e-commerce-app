@@ -110,6 +110,7 @@ export function Checkout() {
               <div className="checkout-product">
                 {cart.map((item) => (
                   <Link
+                    key={item._id}
                     to={{
                       pathname: `/products/${item._id}`,
                     }}

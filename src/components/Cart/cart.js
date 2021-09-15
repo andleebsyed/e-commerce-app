@@ -1,4 +1,3 @@
-import { Checkout } from "../Checkout/checkout";
 import { useEcom } from "../ecom-context/ecom-context";
 import "./cart.css";
 import { EmptyCart } from "../EmptyCart/EmptyCart";

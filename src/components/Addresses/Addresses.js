@@ -36,7 +36,9 @@ export function Addresses() {
             <div className="address-outer" key={address._id}>
               <div key={address._id} className="address">
                 <input
-                  checked={addresses[0]._id === address._id ? true : false}
+                  defaultChecked={
+                    addresses[0]._id === address._id ? true : false
+                  }
                   type="radio"
                   name="selectedAddress"
                   style={{ alignSelf: "center", marginRight: "1rem" }}
