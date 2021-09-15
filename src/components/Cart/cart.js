@@ -8,6 +8,7 @@ import {
   ChangeQuantity,
 } from "../../services/Operations";
 import { Loader } from "../Loader/Loader";
+import { Link } from "react-router-dom";
 export function Cart() {
   const { state, dispatch, loader, setLoader } = useEcom();
   const { cart } = state;
@@ -83,7 +84,11 @@ export function Cart() {
           </div>
         ))}
       </div>
-      <Checkout />
+      <div className="checkout-container">
+        <Link to="/checkout" className="checkout-link button button-primary">
+          Place Order
+        </Link>
+      </div>
     </div>
   );
 }

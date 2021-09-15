@@ -19,6 +19,7 @@ import {
   setupAuthExceptionHandler,
   setUpAuthHeaderForServiceCalls,
 } from "./services/users";
+import { Checkout } from "./components/Checkout/checkout";
 
 function App() {
   const { loader, state, dispatch } = useEcom();
@@ -134,6 +135,7 @@ function App() {
             </div>
           }
         />
+        <Route path="/checkout" element={<Checkout />} />
       </Routes>
     </div>
   );
