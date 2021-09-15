@@ -118,7 +118,8 @@ function ecomReducer(state, { type, payload }) {
         ),
         searchStatus: true,
       };
-
+    case "ADDRESS_ADDED":
+      return { ...state, addresses: payload.addresses };
     case "REMOVE_ALL_CONDITIONS":
       return { ...state, data: orgData };
     default:
