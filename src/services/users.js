@@ -76,7 +76,23 @@ export async function FetchAccount() {
 
 export async function AddAddress(address) {
   try {
-    const response = await axios.post(BASE_URL + "/user/address", { address });
+    const response = await axios.post(BASE_URL + "/user/addaddress", {
+      address,
+    });
+    console.log({ response });
+    if (response.data.status) {
+      return response.data.addresses;
+    }
+  } catch (error) {
+    console.log("error ocurred ", error.message);
+  }
+}
+
+export async function RemoveAddress(addressId) {
+  try {
+    const response = await axios.post(BASE_URL + "/user/removeaddress", {
+      addressId,
+    });
     console.log({ response });
     if (response.data.status) {
       return response.data.addresses;
