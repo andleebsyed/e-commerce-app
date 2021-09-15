@@ -2,93 +2,21 @@ import "./addresses.css";
 import { useEcom } from "../ecom-context/ecom-context";
 import { useState } from "react";
 import { AddAddress, RemoveAddress } from "../../services/users";
+import { AddAddressModal } from "../AddAddress/AddAddress";
 export function Addresses() {
   const { dispatch } = useEcom();
   const { state } = useEcom();
   const { addresses } = state;
   console.log({ addresses }, " user's addresses", addresses.length);
   const [modalStatus, setModalStatus] = useState(false);
-  const [saveAddressButtonText, setSaveAddressButtonText] =
-    useState("Save Address");
   const [removeButtonText, setRemoveButtonText] = useState("Remove");
   async function removeAddressHandler(addressId) {
-    setRemoveButtonText("Removing...");
+    // setRemoveButtonText("Removing...");
     const addresses = await RemoveAddress(addressId);
     dispatch({ type: "ADDRESS_ADDED", payload: { addresses } });
-    setRemoveButtonText("Remove");
+    // setRemoveButtonText("Remove");
   }
-  const AddAddressModal = () => {
-    const [address, setAddress] = useState(null);
-    async function saveAddressHandler(e) {
-      console.log("coming here or not");
-      e.preventDefault();
-      console.log({ address });
-      setSaveAddressButtonText("Saving...");
-      const addresses = await AddAddress(address);
-      dispatch({ type: "ADDRESS_ADDED", payload: { addresses } });
-      setSaveAddressButtonText("Save Address");
-      setModalStatus(false);
-    }
 
-    return (
-      <div className="address-modal-outer">
-        <div className="address-modal-main">
-          <button
-            style={{ marginLeft: "auto" }}
-            onClick={() => setModalStatus(false)}
-          >
-            X
-          </button>
-          <form
-            className="address-form"
-            onSubmit={(e) => saveAddressHandler(e)}
-          >
-            <input
-              className="address-column"
-              type="text"
-              name="name"
-              required
-              placeholder="Name"
-              onChange={(e) => setAddress({ ...address, name: e.target.value })}
-            />
-            <input
-              className="address-column"
-              type="text"
-              name="address"
-              required
-              placeholder="Address"
-              onChange={(e) =>
-                setAddress({ ...address, address: e.target.value })
-              }
-            />
-            <input
-              className="address-column"
-              type="number"
-              name="pincode"
-              required
-              placeholder="Pincode"
-              onChange={(e) =>
-                setAddress({ ...address, pincode: e.target.value })
-              }
-            />
-            <input
-              className="address-column"
-              type="text"
-              name="city"
-              required
-              placeholder="City"
-              onChange={(e) => setAddress({ ...address, city: e.target.value })}
-            />
-            <input
-              type="submit"
-              value={saveAddressButtonText}
-              className="button button-primary address-button"
-            />
-          </form>
-        </div>
-      </div>
-    );
-  };
   return addresses === null ? (
     <div>loading...</div>
   ) : (
@@ -135,7 +63,7 @@ export function Addresses() {
           ))}
         </div>
       )}
-      {modalStatus && <AddAddressModal />}
+      {modalStatus && <AddAddressModal setModalStatus={setModalStatus} />}
     </div>
   );
 }
