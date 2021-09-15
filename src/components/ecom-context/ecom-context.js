@@ -6,6 +6,7 @@ import {
   useEffect,
 } from "react";
 import axios from "axios";
+import { BASE_URL } from "../../services/api";
 
 const EcomContext = createContext();
 
@@ -24,6 +25,7 @@ function ecomReducer(state, { type, payload }) {
         ...state,
         cart: payload.account.cart,
         wishlist: payload.account.wishlist,
+        addresses: payload.account.addresses,
       };
     case "ADD_TO_WISHLIST":
       const product = state.data.find(
@@ -132,40 +134,18 @@ export function EcomProvider({ children }) {
     data: [],
     orgData: [],
     filteredProducts: [],
+    addresses: null,
   });
 
   useEffect(() => {
     async function MyProducts() {
       setLoader(true);
-      const response = await axios.get(
-        "https://rest-api.andydev7.repl.co/products"
-      );
+      const response = await axios.get(BASE_URL + "/products");
       dispatch({ type: "INITIAL_PRODUCTS", payload: response.data.myData });
       setLoader(false);
     }
     MyProducts();
   }, []);
-
-  //   useEffect(() => {
-  //     async function MyCart() {
-  //       const response = await axios.get(
-  //         "https://rest-api.andydev7.repl.co/cart"
-  //       );
-  //       dispatch({ type: "INITIAL_CART", payload: response.data.myCart });
-  //     }
-  //     MyCart();
-  //   }, []);
-
-  //   useEffect(() => {
-  //     async function MyWishlist() {
-  //       const response = await axios.get(
-  //         "https://rest-api.andydev7.repl.co/wishlist"
-  //       );
-  //       dispatch({ type: "INITIAL_WISHLIST", payload: response.data.myWishlist });
-  //     }
-
-  //     MyWishlist();
-  //   }, []);
 
   return (
     <EcomContext.Provider value={{ state, dispatch, loader, setLoader }}>
