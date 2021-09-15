@@ -27,4 +27,9 @@
 
 .checkout-link {
   text-decoration: none;
+  padding: 1rem;
+  padding-left: 3rem;
+  padding-right: 3rem;
+  font-weight: bold;
+  /* width: 10rem; */
 }

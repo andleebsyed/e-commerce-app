@@ -84,8 +84,14 @@ export function Cart() {
           </div>
         ))}
       </div>
-      <div className="checkout-container">
-        <Link to="/checkout" className="checkout-link button button-primary">
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Link to="/checkout" className="checkout-link button button-success">
           Place Order
         </Link>
       </div>

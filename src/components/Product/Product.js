@@ -53,8 +53,6 @@ export function Product({ cart }) {
               ? clicked.currentText
               : unclicked.currentText}
           </button>
-
-          <button className="button button-primary buy-button">Buy Now</button>
         </div>
       ) : (
         <div className="product-buttons">
@@ -66,17 +64,6 @@ export function Product({ cart }) {
           >
             <button className="button button-success buy-button">
               Add to Cart
-            </button>
-          </Link>
-
-          <Link
-            to={{
-              pathname: `/login`,
-            }}
-            state={{ product: product }}
-          >
-            <button className="button button-primary buy-button">
-              Buy Now
             </button>
           </Link>
         </div>

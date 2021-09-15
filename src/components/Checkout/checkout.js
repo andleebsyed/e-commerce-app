@@ -53,7 +53,6 @@ export function Checkout() {
     }
     const { amount, currency, id } = await OrderServerCall(totalPrice);
     const options = {
-      // move it to .env later
       key: "rzp_test_BtdjeqV9ECO0Ea",
       amount: amount,
       currency: currency,
@@ -62,21 +61,17 @@ export function Checkout() {
       image: razorpay,
       order_id: id,
       handler: async function (response) {
-        // handleOrderSuccess(response)
         const status = await EmptyCart();
         if (status) {
           dispatch({ type: "EMPTY_CART" });
           setRazorpayResponse(response);
-          // alert(response.razorpay_payment_id);
-          // alert(response.razorpay_order_id);
-          // alert(response.razorpay_signature);
           setSuccessModal(true);
         }
       },
       prefill: {
         name: account.name,
         email: account.email,
-        contact: "123456789",
+        contact: "913456789213",
       },
     };
     const paymentObject = new window.Razorpay(options);
@@ -90,37 +85,74 @@ export function Checkout() {
       <Addresses />
       <div className="checkout-container">
         <div className="checkout-contents">
-          <h1>Checkout</h1>
-          <div style={{ display: "flex" }}>
-            {cart.map((item) => (
-              <Link
-                to={{
-                  pathname: `/products/${item._id}`,
-                }}
-                state={{ product: item }}
-              >
-                <img
-                  alt="product pic"
-                  className="checkout-image"
-                  src={`data:image/png;base64,${new Buffer(
-                    item.img.data.data,
-                    "binary"
-                  ).toString("base64")}`}
-                />
+          <h1 style={{ alignSelf: "center" }}>Checkout</h1>
+          {cart.length === 0 ? (
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
+              <p>Your Cart is empty</p>
+              <Link to="/products">
+                <button
+                  className="button button-primary"
+                  style={{ width: "100%", margin: "0px", padding: ".8rem" }}
+                >
+                  {" "}
+                  Fill It Up
+                </button>
               </Link>
-            ))}
-          </div>
-          <p>Total Items : {totalItems} </p>
-          <p>Total Price : {totalPrice}</p>
-          <p>
-            Discount: <span style={{ color: "#10B981" }}>20</span>
-          </p>
-          <button
-            className="button button-primary pay-button"
-            onClick={displayRazorpay}
-          >
-            Proceed To Pay
-          </button>
+            </div>
+          ) : (
+            <>
+              <div className="checkout-product">
+                {cart.map((item) => (
+                  <Link
+                    to={{
+                      pathname: `/products/${item._id}`,
+                    }}
+                    state={{ product: item }}
+                    style={{
+                      boxShadow: "0px 0px 3px 0px #6b7280",
+                      margin: ".5rem",
+                      display: "flex",
+                    }}
+                  >
+                    <img
+                      alt="product pic"
+                      className="checkout-image"
+                      src={`data:image/png;base64,${new Buffer(
+                        item.img.data.data,
+                        "binary"
+                      ).toString("base64")}`}
+                    />
+                    <p
+                      style={{
+                        marginLeft: "auto",
+                        marginRight: ".5rem",
+                        textDecoration: "none",
+                      }}
+                    >
+                      Rs. {item.price}
+                    </p>
+                  </Link>
+                ))}
+              </div>
+              <p>Total Items : {totalItems} </p>
+              <p>Total Price : {totalPrice}</p>
+              <p>
+                Discount: <span style={{ color: "#10B981" }}>20</span>
+              </p>
+              <button
+                className="button button-primary pay-button"
+                onClick={displayRazorpay}
+              >
+                Proceed To Pay
+              </button>
+            </>
+          )}
         </div>
       </div>
       {successModal && (
@@ -143,7 +175,7 @@ export function Checkout() {
                 navigate("/products");
               }}
             >
-              Back To Homepage
+              Back To Products
             </button>
           </div>
         </div>
