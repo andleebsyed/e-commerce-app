@@ -73,3 +73,15 @@ export async function FetchAccount() {
     console.log("error ocurred ", error.message);
   }
 }
+
+export async function AddAddress(address) {
+  try {
+    const response = await axios.post(BASE_URL + "/user/address", { address });
+    console.log({ response });
+    if (response.data.status) {
+      return response.data.addresses;
+    }
+  } catch (error) {
+    console.log("error ocurred ", error.message);
+  }
+}
