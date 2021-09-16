@@ -122,6 +122,19 @@ export async function UpdateProfile(accountDetails) {
       BASE_URL + "/user/updateprofile",
       accountDetails
     );
+    if (response.data.status) {
+      return response.data;
+    } else {
+      console.log(response, "status was not true");
+    }
+  } catch (error) {
+    return error.response.data.message;
+  }
+}
+
+export async function UpdatePassword(data) {
+  try {
+    const response = await axios.post(BASE_URL + "/user/updatepassword", data);
     console.log({ response });
     if (response.data.status) {
       return response.data;
@@ -131,4 +144,8 @@ export async function UpdateProfile(accountDetails) {
   } catch (error) {
     return error.response.data.message;
   }
+  // } catch (error) {
+  //   console.log({ error });
+  //   return error.response.data.message;
+  // }
 }

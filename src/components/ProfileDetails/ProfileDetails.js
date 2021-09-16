@@ -1,26 +1,23 @@
 import { useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
 import { UpdateProfile } from "../../services/users";
-import { useEcom } from "../ecom-context/ecom-context";
 import "./ProfileDetails.css";
 export function ProfileDetails() {
   const { authState, dispatchAuth } = useAuth();
   const { account } = authState;
-  const { dispatch } = useEcom();
   const [accountDetails, setAccountDetails] = useState({
     newName: account.name,
     newUsername: account.username,
     newEmail: account.email,
   });
   const [updateMessage, setUpdateMessage] = useState({
-    message: "a",
+    message: "",
     styleClass: "update-inital-render-class",
   });
   async function profileUpdateHandler(e) {
     e.preventDefault();
     const response = await UpdateProfile(accountDetails);
     if (response.status) {
-      // getUser(newUsername)
       setUpdateMessage((updateMessage) => {
         return {
           message: response.message,
@@ -38,13 +35,6 @@ export function ProfileDetails() {
       });
     }
   }
-  // if (response) {
-  //   dispatch({
-  //     type: "ACCOUNT_UPDATE",
-  //     payload: { UpdatedAccount: response },
-  //   });
-  // }
-
   return (
     <form onSubmit={(e) => profileUpdateHandler(e)}>
       <div className="profile-details width-adjust">
