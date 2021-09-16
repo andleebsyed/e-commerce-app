@@ -18,6 +18,8 @@ function authReducer(state, { type, payload }) {
       return { ...state, authorized: false };
     case "FETCH_ACCOUNT":
       return { ...state, account: payload.account };
+    case "ACCOUNT_UPDATE":
+      return { ...state, account: payload.updatedAccount };
     default:
       return state;
   }

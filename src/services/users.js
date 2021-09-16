@@ -115,3 +115,20 @@ export async function OrderServerCall(amount) {
     console.log("error ocurred ", error.message);
   }
 }
+
+export async function UpdateProfile(accountDetails) {
+  try {
+    const response = await axios.post(
+      BASE_URL + "/user/updateprofile",
+      accountDetails
+    );
+    console.log({ response });
+    if (response.data.status) {
+      return response.data;
+    } else {
+      console.log(response, "status was not true");
+    }
+  } catch (error) {
+    return error.response.data.message;
+  }
+}

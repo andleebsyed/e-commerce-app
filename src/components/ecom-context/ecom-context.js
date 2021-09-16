@@ -122,6 +122,9 @@ function ecomReducer(state, { type, payload }) {
       return { ...state, addresses: payload.addresses };
     case "EMPTY_CART":
       return { ...state, cart: [] };
+    // case "ACCOUNT_UPDATE":
+    //   console.log(payload.updatedAccount, "account update thing");
+    //   return { ...state, account: payload.updatedAccount };
     case "REMOVE_ALL_CONDITIONS":
       return { ...state, data: orgData };
     default:

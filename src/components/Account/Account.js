@@ -27,7 +27,9 @@ export function Account() {
     }
   }, [dispatchAuth, account, authSetup]);
   if (authorized) {
-    return (
+    return account === null ? (
+      <div>loading...</div>
+    ) : (
       <div className="outer-div">
         <div className="heading">
           <h1 className="welcome-text">{account?.name}</h1>
