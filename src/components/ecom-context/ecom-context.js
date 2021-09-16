@@ -37,9 +37,6 @@ function ecomReducer(state, { type, payload }) {
         wishlist: [...wishlist, product],
       };
     case "ADD_TO_CART":
-      const newToCart = state.data.find(
-        (product) => product._id === payload.productId
-      );
       return {
         ...state,
         wishlist: wishlist.filter((item) => item._id !== payload.productId),

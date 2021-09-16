@@ -156,7 +156,7 @@ export function Checkout() {
                     : displayRazorpay()
                 }
               >
-                Proceed To Pay
+                Proceed To Pay ({totalPrice - 20})
               </button>
             </>
           )}
