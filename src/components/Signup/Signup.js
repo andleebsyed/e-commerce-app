@@ -57,7 +57,7 @@ export function Signup() {
         setDisplayError("none");
         dispatchAuth({
           type: "AUTHORIZE_USER",
-          payload: response,
+          payload: { response, dispatchAuth, navigate },
         });
 
         navigate("/products");
@@ -66,7 +66,7 @@ export function Signup() {
   }
   return (
     <form className="form" onSubmit={(e) => handleSubmit(e)}>
-      <div className="login-main">
+      <div className="signup-main">
         <h1 className="login-heading">Sign Up</h1>
         <p
           className="error-message"
@@ -122,7 +122,10 @@ export function Signup() {
           name="password"
           required
           onChange={(e) =>
-            setUserDetails({ ...userDetails, confirmPassword: e.target.value })
+            setUserDetails({
+              ...userDetails,
+              confirmPassword: e.target.value,
+            })
           }
         />
 

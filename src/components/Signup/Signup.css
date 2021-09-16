@@ -1,76 +1,77 @@
-.body{
-    --main-color : #10B981;
+.body {
+  --main-color: #10b981;
 }
-.form{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top : 5rem;
+.form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem;
 }
-.login-main{
-    border: none;
-    box-shadow: 0px 0px 10px 0px grey;
-    width: 21rem;
-    height: 30rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.input-field{
-    outline: none;
-    border-radius: .2rem;
-    border: 1px solid #D1D5DB;
-    height: 1.9rem;
-    width: 14rem;
-    margin-top: 2rem;
+.signup-main {
+  border: none;
+  border: 1px solid #d1d5db;
+  width: 21rem;
+  height: 35rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.button-div{
+.input-field {
+  outline: none;
+  border-radius: 0.2rem;
+  border: 1px solid #d1d5db;
+  height: 36px;
+  width: 90%;
+  margin: 1rem;
+}
+
+.button-div {
   height: 20rem;
   display: flex;
   justify-content: space-between;
   font-size: 5rem;
 }
 
-.button-custom{
-    height : 3rem;
-    width: 8rem;
+.button-custom {
+  height: 3rem;
+  width: 8rem;
 }
 
-.welcome-text{
-    display: flex;
-    justify-content: flex-start;
-    font-size: xx-large;
+.welcome-text {
+  display: flex;
+  justify-content: flex-start;
+  font-size: xx-large;
 }
 
-.login-button{
-    background-color: white;
-    height : 3rem;
-    width: 12rem;
-    margin-top: 3rem;
-    border: 2px solid var(--main-color);
-    font-weight: bold;
+.login-button {
+  background-color: white;
+  height: 3rem;
+  width: 12rem;
+  /* margin-top: 3rem; */
+  border: 2px solid var(--main-color);
+  font-weight: bold;
 }
 
-.login-heading{
-color : var(--main-color);
-
+.login-heading {
+  margin: 0px;
+  padding: 2px;
+  color: var(--main-color);
 }
 
-.labels{
-    position: relative;
-    right : 5rem;
-    margin-bottom: .2rem;
+.labels {
+  position: relative;
+  right: 5rem;
+  margin-bottom: 0.2rem;
 }
 
-.error-message{
-    color : red;
-    font-weight: bold;
+.error-message {
+  color: red;
+  font-weight: bold;
 }
 
-.signup-link{
-    text-decoration: none;
-    color : var(--main-color) ;
+.signup-link {
+  text-decoration: none;
+  color: var(--main-color);
 }
