@@ -118,7 +118,7 @@ export function Signup() {
         <input
           className="input-field password"
           type="password"
-          placeholder="Password"
+          placeholder="Confirm password"
           name="password"
           required
           onChange={(e) =>
