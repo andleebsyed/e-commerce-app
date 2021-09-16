@@ -10,13 +10,11 @@ import razorpay from "../../assets/razorpay.svg";
 import "./checkout.css";
 export function Checkout() {
   const { state, dispatch } = useEcom();
-  const { cart } = state;
+  const { cart, addresses } = state;
   const { authState, dispatchAuth } = useAuth();
   const { account, authSetup } = authState;
-  console.log({ account });
   const [successModal, setSuccessModal] = useState(false);
   const [razorpayResposne, setRazorpayResponse] = useState(null);
-  console.log({ cart });
   const navigate = useNavigate();
   useEffect(() => {
     async function Run() {
@@ -35,10 +33,6 @@ export function Checkout() {
       totalPrice = 0;
     } else {
       totalItems = cart.length;
-      //   cart.reduce(
-      //   (totalQunatity, product) => totalQunatity + product.quantity,
-      //   0
-      // );
       totalPrice = cart.reduce(
         (totalPrice, product) =>
           totalPrice + product.product.price * product.quantity,
@@ -156,7 +150,11 @@ export function Checkout() {
               </p>
               <button
                 className="button button-primary pay-button"
-                onClick={displayRazorpay}
+                onClick={() =>
+                  addresses.length === 0
+                    ? alert("Select an address")
+                    : displayRazorpay()
+                }
               >
                 Proceed To Pay
               </button>
