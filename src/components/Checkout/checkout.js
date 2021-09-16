@@ -165,7 +165,7 @@ export function Checkout() {
       </div>
       {successModal && (
         <div className="modal-outer">
-          <div style={{ border: "1px solid #DC2626" }} className="modal-main">
+          <div className="modal-main">
             <p className="order-success-text">
               Order placed successfully with orderId
               <span style={{ color: "#000000", margin: ".2rem" }}>
