@@ -8,11 +8,12 @@ import {
 } from "../../services/Operations";
 import { Loader } from "../Loader/Loader";
 import { Link } from "react-router-dom";
+import { SpinLoader } from "../Loader/SpinnerLoader";
 export function Cart() {
   const { state, dispatch, loader, setLoader } = useEcom();
   const { cart } = state;
   return cart === null ? (
-    <div>Loading...</div>
+    <SpinLoader />
   ) : cart?.length === 0 ? (
     <EmptyCart />
   ) : (

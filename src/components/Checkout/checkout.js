@@ -8,6 +8,7 @@ import { Addresses } from "../Addresses/Addresses";
 import { useEcom } from "../ecom-context/ecom-context";
 import razorpay from "../../assets/razorpay.svg";
 import "./checkout.css";
+import { SpinLoader } from "../Loader/SpinnerLoader";
 export function Checkout() {
   const { state, dispatch } = useEcom();
   const { cart, addresses } = state;
@@ -77,7 +78,7 @@ export function Checkout() {
   }
 
   return cart === null ? (
-    <div>loading...</div>
+    <SpinLoader />
   ) : (
     <div className="checkout-main">
       <Addresses />

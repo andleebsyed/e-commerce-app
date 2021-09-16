@@ -6,6 +6,7 @@ import { useAuth } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { FetchAccount } from "../../services/users";
+import { SpinLoader } from "../Loader/SpinnerLoader";
 export function Account() {
   const { authState, dispatchAuth } = useAuth();
   const { authorized, account, authSetup } = authState;
@@ -27,7 +28,7 @@ export function Account() {
   }, [dispatchAuth, account, authSetup]);
   if (authorized) {
     return account === null ? (
-      <div>loading...</div>
+      <SpinLoader />
     ) : (
       <div className="outer-div">
         <div className="heading">

@@ -6,12 +6,13 @@ import "../ProductCard/card.css";
 import { EmptyWishlist } from "../EmptyWishlist/EmptyWishlist";
 import { AddToCart, RemoveFromWishlist } from "../../services/Operations";
 import { Loader } from "../Loader/Loader";
+import { SpinLoader } from "../Loader/SpinnerLoader";
 export function Wishlist() {
   const { state, dispatch, loader, setLoader } = useEcom();
   const { wishlist } = state;
   console.log({ wishlist });
   return wishlist === null ? (
-    <div>loading...</div>
+    <SpinLoader />
   ) : wishlist.length === 0 ? (
     <EmptyWishlist />
   ) : (
