@@ -19,7 +19,9 @@ export function Product({ cart }) {
     currentText: "Add To Cart",
     visibility: false,
   };
-  let ifProductInCart = cart?.filter((item) => item._id === product._id);
+  let ifProductInCart = cart?.filter(
+    (item) => item.product._id === product._id
+  );
   return cart === null ? (
     <div>loading...</div>
   ) : (
