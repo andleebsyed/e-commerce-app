@@ -15,6 +15,7 @@ export function setupAuthExceptionHandler(dispatchAuth, navigate) {
     (response) => response,
     (error) => {
       if (error?.response?.status === UNAUTHORIZED) {
+        console.log("401 handled");
         localStorage.removeItem("userId");
         localStorage.removeItem("token");
         dispatchAuth({ type: "LOGOUT_USER" });

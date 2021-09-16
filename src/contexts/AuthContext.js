@@ -1,5 +1,8 @@
 import { createContext, useContext, useReducer } from "react";
-import { setUpAuthHeaderForServiceCalls } from "../services/users";
+import {
+  setupAuthExceptionHandler,
+  setUpAuthHeaderForServiceCalls,
+} from "../services/users";
 
 const AuthContext = createContext();
 function authReducer(state, { type, payload }) {
@@ -7,15 +10,15 @@ function authReducer(state, { type, payload }) {
     case "AUTH_SETUP":
       return { ...state, authSetup: true };
     case "AUTHORIZE_USER":
-      console.log({ payload });
-      localStorage.setItem("token", payload.token);
-      localStorage.setItem("userId", payload.userId);
-      setUpAuthHeaderForServiceCalls(payload.token);
+      localStorage.setItem("token", payload.response.token);
+      localStorage.setItem("userId", payload.response.userId);
+      setUpAuthHeaderForServiceCalls(payload.response.token);
+      setupAuthExceptionHandler(payload.dispatchAuth, payload.navigate);
 
-      return { ...state, authorized: true };
+      return { ...state, authorized: true, authSetup: true };
     case "LOGOUT_USER":
       localStorage.clear();
-      return { ...state, authorized: false };
+      return { ...state, authorized: false, account: null, authSetup: false };
     case "FETCH_ACCOUNT":
       return { ...state, account: payload.account };
     case "ACCOUNT_UPDATE":

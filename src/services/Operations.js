@@ -18,10 +18,12 @@ export async function AddToCart(product, dispatch, loader, setLoader) {
 
 export async function AddToWishlist(product, dispatch, loader, setLoader) {
   try {
+    console.log("in api function");
     setLoader(true);
     const productId = product._id;
     await axios.delete(BASE_URL + `/cart/${productId}`);
     const response = await axios.post(BASE_URL + "/wishlist", { productId });
+    console.log({ response }, "response on adding to wishlist");
     setLoader(false);
     if (response.status === 200) {
       dispatch({

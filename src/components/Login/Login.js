@@ -55,7 +55,7 @@ export function Login() {
       setDisplayError("none");
       dispatchAuth({
         type: "AUTHORIZE_USER",
-        payload: response,
+        payload: { response, dispatchAuth, navigate },
       });
       dispatch({ type: "INITIAL_DATA", payload: response });
       navigate("/products");

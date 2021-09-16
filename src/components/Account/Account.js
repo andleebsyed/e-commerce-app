@@ -17,7 +17,9 @@ export function Account() {
   useEffect(() => {
     async function Run() {
       const response = await FetchAccount();
-      dispatchAuth({ type: "FETCH_ACCOUNT", payload: response });
+      if (response) {
+        dispatchAuth({ type: "FETCH_ACCOUNT", payload: response });
+      }
     }
     if (account === null && authSetup) {
       Run();
