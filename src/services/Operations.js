@@ -3,13 +3,18 @@ import { BASE_URL } from "./api";
 
 export async function AddToCart(product, dispatch, loader, setLoader) {
   try {
+    console.log({ product });
     setLoader(true);
     const productId = product._id;
     await axios.delete(BASE_URL + `/wishlist/${productId}`);
     const responseCart = await axios.post(BASE_URL + "/cart", { productId });
     setLoader(false);
     if (responseCart.status === 200) {
-      dispatch({ type: "ADD_TO_CART", payload: { productId } });
+      console.log(responseCart);
+      dispatch({
+        type: "ADD_TO_CART",
+        payload: { cartItems: responseCart.data.response.cart, productId },
+      });
     }
   } catch (error) {
     console.log("err message is ", error.message);
@@ -80,28 +85,32 @@ export async function RemoveFromWishlist(product, dispatch, loader, setLoader) {
   }
 }
 
-export async function ChangeQuantity(
-  product,
+export async function ChangeQuantity({
+  wholeProduct,
   dispatch,
   paramCase,
   loader,
-  setLoader
-) {
-  const productId = product._id;
+  setLoader,
+}) {
+  const { product, quantity, _id } = wholeProduct;
 
+  const productId = product._id;
+  const wholeProductId = _id;
   try {
-    if (paramCase === "dec" && product.quantity === 1) {
+    if (paramCase === "dec" && quantity === 1) {
       setLoader(true);
       const resposneOnEmptyCase = await axios.delete(
         BASE_URL + `/cart/${productId}`
       );
       console.log("quantity was 1 ", resposneOnEmptyCase);
       setLoader(false);
-      dispatch({ type: "DECREASE_QUANTITY", payload: { productId } });
+      dispatch({ type: "REMOVE_FROM_CART", payload: { productId } });
     }
-    if (paramCase === "dec" && product.quantity !== 1) {
+    if (paramCase === "dec" && quantity !== 1) {
       setLoader(true);
-      const response = await axios.put(BASE_URL + `/cart/?case=dec`, productId);
+      const response = await axios.put(BASE_URL + `/cart/?case=dec`, {
+        wholeProductId,
+      });
       console.log("decrement case ", response);
       setLoader(false);
       dispatch({ type: "DECREASE_QUANTITY", payload: { productId } });
@@ -109,11 +118,13 @@ export async function ChangeQuantity(
 
     if (paramCase === "inc") {
       setLoader(true);
-      const response = await axios.put(BASE_URL + "/cart/?case=inc", productId);
+      const response = await axios.put(BASE_URL + "/cart/?case=inc", {
+        wholeProductId,
+      });
       console.log("im crement case ", response);
-      if (response.status === 200) {
+      if (response.data.status) {
         setLoader(false);
-        dispatch({ type: "INCREASE_QUANTITY", payload: product });
+        dispatch({ type: "INCREASE_QUANTITY", payload: { productId } });
       }
     }
   } catch (error) {

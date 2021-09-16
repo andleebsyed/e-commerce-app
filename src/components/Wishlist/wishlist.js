@@ -9,6 +9,7 @@ import { Loader } from "../Loader/Loader";
 export function Wishlist() {
   const { state, dispatch, loader, setLoader } = useEcom();
   const { wishlist } = state;
+  console.log({ wishlist });
   return wishlist === null ? (
     <div>loading...</div>
   ) : wishlist.length === 0 ? (

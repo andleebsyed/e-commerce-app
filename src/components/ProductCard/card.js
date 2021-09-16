@@ -30,7 +30,9 @@ export function Card({ product }) {
           (item) => item?._id === product?._id
         ));
 
-    ifProductInCart = cart?.filter((item) => item?._id === product?._id);
+    ifProductInCart = cart?.filter(
+      (item) => item?.product._id === product?._id
+    );
   }
 
   const [showItem, setShowItem] = useState(false);

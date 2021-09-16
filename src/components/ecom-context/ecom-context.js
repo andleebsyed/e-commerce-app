@@ -33,7 +33,7 @@ function ecomReducer(state, { type, payload }) {
       );
       return {
         ...state,
-        cart: cart.filter((item) => item._id !== payload.productId),
+        cart: cart.filter((item) => item.product._id !== payload.productId),
         wishlist: [...wishlist, product],
       };
     case "ADD_TO_CART":
@@ -43,12 +43,14 @@ function ecomReducer(state, { type, payload }) {
       return {
         ...state,
         wishlist: wishlist.filter((item) => item._id !== payload.productId),
-        cart: [...cart, { ...newToCart, quantity: 1 }],
+        cart: payload.cartItems,
       };
     case "REMOVE_FROM_CART":
       return {
         ...state,
-        cart: cart.filter((product) => product._id !== payload.productId),
+        cart: cart.filter(
+          (product) => product.product._id !== payload.productId
+        ),
       };
     case "MOVE_TO_WISHLIST":
       const toMoveProduct = state.data.find(
@@ -57,7 +59,9 @@ function ecomReducer(state, { type, payload }) {
       return {
         ...state,
         wishlist: [...wishlist, toMoveProduct],
-        cart: cart.filter((product) => product._id !== payload.productId),
+        cart: cart.filter(
+          (product) => product.product._id !== payload.productId
+        ),
       };
     case "REMOVE_FROM_WISHLIST":
       return {
@@ -68,22 +72,22 @@ function ecomReducer(state, { type, payload }) {
       return {
         ...state,
         cart: cart.map((product) =>
-          product._id === payload._id
+          product.product._id === payload.productId
             ? { ...product, quantity: product.quantity + 1 }
             : { ...product }
         ),
       };
     case "DECREASE_QUANTITY":
-      if (payload.quantity < 2) {
-        return {
-          ...state,
-          cart: cart.filter((product) => product._id !== payload._id),
-        };
-      }
+      // if (payload.quantity < 2) {
+      //   return {
+      //     ...state,
+      //     cart: cart.filter((product) => product._id !== payload.productId),
+      //   };
+      // }
       return {
         ...state,
         cart: cart.map((product) =>
-          product._id === payload._id
+          product.product._id === payload.productId
             ? { ...product, quantity: product.quantity - 1 }
             : { ...product }
         ),

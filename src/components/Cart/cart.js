@@ -20,7 +20,7 @@ export function Cart() {
       <h1 className="cart-heading">Cart</h1>
       <Loader loader={loader} />
       <div className="cart-main">
-        {cart.map((product) => (
+        {cart.map(({ product, quantity, _id }) => (
           <div className="ecom-card" key={product._id}>
             <img
               alt="product pic"
@@ -40,21 +40,27 @@ export function Cart() {
               <button
                 onClick={() => {
                   const paramCase = "dec";
-                  ChangeQuantity(
-                    product,
+                  ChangeQuantity({
+                    wholeProduct: { product, quantity, _id },
                     dispatch,
                     paramCase,
                     loader,
-                    setLoader
-                  );
+                    setLoader,
+                  });
                 }}
               >
                 -
               </button>
-              <span className="quantity-count">{product.quantity}</span>
+              <span className="quantity-count">{quantity}</span>
               <button
                 onClick={() =>
-                  ChangeQuantity(product, dispatch, "inc", loader, setLoader)
+                  ChangeQuantity({
+                    wholeProduct: { product, quantity, _id },
+                    dispatch,
+                    paramCase: "inc",
+                    loader,
+                    setLoader,
+                  })
                 }
               >
                 +

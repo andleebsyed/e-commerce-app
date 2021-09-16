@@ -13,8 +13,10 @@ export function Checkout() {
   const { cart } = state;
   const { authState, dispatchAuth } = useAuth();
   const { account, authSetup } = authState;
+  console.log({ account });
   const [successModal, setSuccessModal] = useState(false);
   const [razorpayResposne, setRazorpayResponse] = useState(null);
+  console.log({ cart });
   const navigate = useNavigate();
   useEffect(() => {
     async function Run() {
@@ -32,12 +34,14 @@ export function Checkout() {
       totalItems = 0;
       totalPrice = 0;
     } else {
-      totalItems = cart.reduce(
-        (totalQunatity, product) => totalQunatity + product.quantity,
-        0
-      );
+      totalItems = cart.length;
+      //   cart.reduce(
+      //   (totalQunatity, product) => totalQunatity + product.quantity,
+      //   0
+      // );
       totalPrice = cart.reduce(
-        (totalPrice, product) => totalPrice + product.price * product.quantity,
+        (totalPrice, product) =>
+          totalPrice + product.product.price * product.quantity,
         0
       );
     }
@@ -108,27 +112,29 @@ export function Checkout() {
           ) : (
             <>
               <div className="checkout-product">
-                {cart.map((item) => (
+                {cart.map(({ product, quantity }) => (
                   <Link
-                    key={item._id}
+                    key={product._id}
                     to={{
-                      pathname: `/products/${item._id}`,
+                      pathname: `/products/${product._id}`,
                     }}
-                    state={{ product: item }}
+                    state={{ product: product }}
                     style={{
                       boxShadow: "0px 0px 3px 0px #6b7280",
                       margin: ".5rem",
                       display: "flex",
+                      textDecoration: "none",
                     }}
                   >
                     <img
                       alt="product pic"
                       className="checkout-image"
                       src={`data:image/png;base64,${new Buffer(
-                        item.img.data.data,
+                        product.img.data.data,
                         "binary"
                       ).toString("base64")}`}
                     />
+                    <p>Quantity: {quantity}</p>
                     <p
                       style={{
                         marginLeft: "auto",
@@ -136,14 +142,16 @@ export function Checkout() {
                         textDecoration: "none",
                       }}
                     >
-                      Rs. {item.price}
+                      Rs. <span>{product.price}</span> X <span>{quantity}</span>
                     </p>
                   </Link>
                 ))}
               </div>
-              <p>Total Items : {totalItems} </p>
-              <p>Total Price : {totalPrice}</p>
-              <p>
+              <p style={{ marginLeft: "auto" }}>Total Items : {totalItems} </p>
+              <p style={{ marginLeft: "auto", fontWeight: "bold" }}>
+                Total Price : {totalPrice}
+              </p>
+              <p style={{ marginLeft: "auto" }}>
                 Discount: <span style={{ color: "#10B981" }}>20</span>
               </p>
               <button
