@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useEcom } from "../ecom-context/ecom-context";
 import { AddToCart } from "../../services/Operations";
 import { useAuth } from "../../contexts/AuthContext";
+import { SpinLoader } from "../Loader/SpinnerLoader";
 export function Product({ cart }) {
   const { state } = useLocation();
   const { product } = state;
@@ -23,7 +24,7 @@ export function Product({ cart }) {
     (item) => item.product._id === product._id
   );
   return cart === null ? (
-    <div>loading...</div>
+    <SpinLoader />
   ) : (
     <div className="single-product-outer">
       <p className="product-name">{product.name}</p>
