@@ -27,9 +27,6 @@ export function setupAuthExceptionHandler(dispatchAuth, navigate) {
 }
 
 export async function UserSignUp(userDetails) {
-  //   const signUpDataFromView = {
-  //     userDetails: userDetails,
-  //   };
   let isSignUpSuccessfull;
   try {
     const response = await axios.post(BASE_URL + "/user/signup", userDetails);
@@ -94,7 +91,6 @@ export async function RemoveAddress(addressId) {
     const response = await axios.post(BASE_URL + "/user/removeaddress", {
       addressId,
     });
-    console.log({ response });
     if (response.data.status) {
       return response.data.addresses;
     }
@@ -145,8 +141,4 @@ export async function UpdatePassword(data) {
   } catch (error) {
     return error.response.data.message;
   }
-  // } catch (error) {
-  //   console.log({ error });
-  //   return error.response.data.message;
-  // }
 }

@@ -4,50 +4,22 @@ import { Link, useNavigate } from "react-router-dom";
 import { UserSignIn } from "../../services/users";
 import { useAuth } from "../../contexts/AuthContext";
 import { useEcom } from "../ecom-context/ecom-context";
-// import { useForm } from "react-hook-form";
 const LoginContext = createContext();
 export function Login() {
-  //   const { user, setUser } = useLogin();
-  //   let testuname = "test";
-  //   let testpw = "test123";
-  //   const { register, handleSubmit } = useForm();
-  //   const [username, setUsername] = useState("");
-  //   const [password, setPassword] = useState("");
-  //   const [innetText, setInnerText] = useState(false);
-  //   const [failure, setFailure] = useState("none");
-
-  //   useEffect(() => {
-  //     const loggedInUser = localStorage.getItem("user");
-  //     if (loggedInUser) {
-  //       const foundUser = JSON.parse(loggedInUser);
-  //       setUser(foundUser);
-  //     }
-  //   }, [user]);
-  //   const onSubmit = ({ username, password }) => {
-  //     let unBox = document.querySelector(".username");
-  //     let pwBox = document.querySelector(".password");
-  //     const data = { username, password };
-  //     if (username === testuname && password === testpw) {
-  //       // set the state of the user
-  //       setUser(data);
-  //       // store the user in localStorage
-  //       localStorage.setItem("user", JSON.stringify(data));
-  //     } else {
-  //       // unBox.innerText = ''
-  //       // pwBox.innetText = ''
-  //       setFailure("block");
-  //     }
-  //   };
   const { dispatchAuth } = useAuth();
   const [userDetails, setUserDetails] = useState(null);
   const [displayError, setDisplayError] = useState("none");
   const [loginButtonText, setLoginButtonText] = useState("Login");
   const { dispatch } = useEcom();
   const navigate = useNavigate();
-  async function handleLogin(e) {
+  async function handleLogin({ e, guest }) {
     e.preventDefault();
     setLoginButtonText("Logging you in...");
-    const response = await UserSignIn(userDetails);
+    const response = await UserSignIn(
+      guest
+        ? { username: "peter_parker", password: "Peterparker@123" }
+        : userDetails
+    );
     setLoginButtonText("Login");
     if (response.allowUser === false) {
       setDisplayError("block");
@@ -61,8 +33,13 @@ export function Login() {
       navigate("/products");
     }
   }
+  async function guestLoginHandler(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    await handleLogin({ e, guest: true });
+  }
   return (
-    <form className="form" onSubmit={(e) => handleLogin(e)}>
+    <form className="form" onSubmit={(e) => handleLogin({ e })}>
       <div className="login-main">
         <h1 className="login-heading">Login</h1>
         <p
@@ -96,19 +73,22 @@ export function Login() {
           className="button button-outline login-button"
           value={loginButtonText}
         />
-        {/* <Link to="#" className="password-reset">
-          Forgot Password?
-        </Link> */}
         <p>
           Don't have an account?{" "}
           <Link className="signup-link" to="/signup">
             Sign up
           </Link>
         </p>
+        <button
+          type="submit"
+          className="button button-primary"
+          onClick={(e) => guestLoginHandler(e)}
+        >
+          Login as Guest
+        </button>
       </div>
     </form>
   );
-  // }
 }
 
 export function LoginProvider({ children }) {
