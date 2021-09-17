@@ -21,7 +21,6 @@ export function Login() {
     } else {
       response = await UserSignIn(userDetails);
     }
-
     setLoginButtonText("Login");
     if (response.allowUser === false) {
       setDisplayError("block");
@@ -35,11 +34,7 @@ export function Login() {
       navigate("/products");
     }
   }
-  // async function guestLoginHandler(e) {
-  //   e.preventDefault();
-  //   e.stopPropagation();
-  //   await handleLogin({ e, guest: true });
-  // }
+
   return (
     <form className="form" onSubmit={(e) => handleLogin({ e })}>
       <div className="login-main">

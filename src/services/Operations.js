@@ -108,10 +108,9 @@ export async function ChangeQuantity({
     }
     if (paramCase === "dec" && quantity !== 1) {
       setLoader(true);
-      const response = await axios.put(BASE_URL + `/cart/?case=dec`, {
+      await axios.put(BASE_URL + `/cart/?case=dec`, {
         wholeProductId,
       });
-      console.log("decrement case ", response);
       setLoader(false);
       dispatch({ type: "DECREASE_QUANTITY", payload: { productId } });
     }
