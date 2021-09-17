@@ -1,7 +1,7 @@
 import "./Login.css";
 import { useState, createContext, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { UserSignIn } from "../../services/users";
+import { GuestAccess, UserSignIn } from "../../services/users";
 import { useAuth } from "../../contexts/AuthContext";
 import { useEcom } from "../ecom-context/ecom-context";
 const LoginContext = createContext();
@@ -13,13 +13,15 @@ export function Login() {
   const { dispatch } = useEcom();
   const navigate = useNavigate();
   async function handleLogin({ e, guest }) {
+    let response;
     e.preventDefault();
     setLoginButtonText("Logging you in...");
-    const response = await UserSignIn(
-      guest
-        ? { username: "peter_parker", password: "Peterparker@123" }
-        : userDetails
-    );
+    if (guest) {
+      response = await GuestAccess();
+    } else {
+      response = await UserSignIn(userDetails);
+    }
+
     setLoginButtonText("Login");
     if (response.allowUser === false) {
       setDisplayError("block");
@@ -33,11 +35,11 @@ export function Login() {
       navigate("/products");
     }
   }
-  async function guestLoginHandler(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    await handleLogin({ e, guest: true });
-  }
+  // async function guestLoginHandler(e) {
+  //   e.preventDefault();
+  //   e.stopPropagation();
+  //   await handleLogin({ e, guest: true });
+  // }
   return (
     <form className="form" onSubmit={(e) => handleLogin({ e })}>
       <div className="login-main">
@@ -82,7 +84,7 @@ export function Login() {
         <button
           type="submit"
           className="button button-primary"
-          onClick={(e) => guestLoginHandler(e)}
+          onClick={(e) => handleLogin({ e, guest: true })}
         >
           Login as Guest
         </button>

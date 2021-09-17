@@ -62,7 +62,14 @@ export async function UserSignIn(userDetails) {
     console.log("error ocurred ", error.message);
   }
 }
-
+export async function GuestAccess() {
+  try {
+    const response = await axios.post(BASE_URL + "/user/guest");
+    return response.data;
+  } catch (error) {
+    console.log("error ocurred ", error.message);
+  }
+}
 export async function FetchAccount() {
   try {
     const response = await axios.post(BASE_URL + "/user/account");
