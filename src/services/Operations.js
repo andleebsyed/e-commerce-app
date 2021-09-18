@@ -3,14 +3,12 @@ import { BASE_URL } from "./api";
 
 export async function AddToCart(product, dispatch, loader, setLoader) {
   try {
-    console.log({ product });
     setLoader(true);
     const productId = product._id;
     await axios.delete(BASE_URL + `/wishlist/${productId}`);
     const responseCart = await axios.post(BASE_URL + "/cart", { productId });
     setLoader(false);
     if (responseCart.status === 200) {
-      console.log(responseCart);
       dispatch({
         type: "ADD_TO_CART",
         payload: { cartItems: responseCart.data.response.cart, productId },
@@ -120,7 +118,6 @@ export async function ChangeQuantity({
       const response = await axios.put(BASE_URL + "/cart/?case=inc", {
         wholeProductId,
       });
-      console.log("im crement case ", response);
       if (response.data.status) {
         setLoader(false);
         dispatch({ type: "INCREASE_QUANTITY", payload: { productId } });

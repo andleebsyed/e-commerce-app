@@ -3,11 +3,11 @@ import { Link, useLocation } from "react-router-dom";
 import { useEcom } from "../ecom-context/ecom-context";
 import { AddToCart } from "../../services/Operations";
 import { useAuth } from "../../contexts/AuthContext";
-import { SpinLoader } from "../Loader/SpinnerLoader";
-export function Product({ cart }) {
-  const { state } = useLocation();
-  const { product } = state;
-  const { dispatch, loader, setLoader } = useEcom();
+export function Product() {
+  const { state: myState } = useLocation();
+  const { product } = myState;
+  const { dispatch, loader, setLoader, state } = useEcom();
+  const { cart } = state;
   const { authState } = useAuth();
   const { authorized } = authState;
   const clicked = {
@@ -23,9 +23,7 @@ export function Product({ cart }) {
   let ifProductInCart = cart?.filter(
     (item) => item.product._id === product._id
   );
-  return cart === null ? (
-    <SpinLoader />
-  ) : (
+  return (
     <div className="single-product-outer">
       <p className="product-name">{product.name}</p>
       <img

@@ -4,12 +4,14 @@ import { useState } from "react";
 import { RemoveAddress } from "../../services/users";
 import { AddAddressModal } from "../AddAddress/AddAddress";
 export function Addresses() {
-  const { dispatch } = useEcom();
+  const { dispatch, setLoader } = useEcom();
   const { state } = useEcom();
   const { addresses } = state;
   const [modalStatus, setModalStatus] = useState(false);
   async function removeAddressHandler(addressId) {
+    setLoader(true);
     const addresses = await RemoveAddress(addressId);
+    setLoader(false);
     dispatch({ type: "ADDRESS_ADDED", payload: { addresses } });
   }
 
@@ -28,7 +30,7 @@ export function Addresses() {
       </div>
       {addresses.length === 0 ? (
         <div>
-          <p>you have no saved addresses</p>
+          <p>You have no saved addresses</p>
         </div>
       ) : (
         <div>

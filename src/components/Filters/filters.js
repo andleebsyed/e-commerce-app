@@ -68,14 +68,14 @@ export function Filters() {
             />
             <label>Fast Delivery</label>
           </li>
-          <li>
+          {/* <li>
             <button
               className="clear-button"
               onClick={() => dispatch({ type: "REMOVE_ALL_CONDITIONS" })}
             >
               Clear All
             </button>
-          </li>
+          </li> */}
         </ul>
       </div>
     </div>

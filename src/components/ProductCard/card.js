@@ -37,9 +37,14 @@ export function Card({ product }) {
 
   const [showItem, setShowItem] = useState(false);
   return (
-    <div>
+    <div className={product.inStock ? "" : "product-disabled"}>
+      {!product.inStock && <p className="out-of-stock">Out of Stock</p>}
+      {product.fastDelivery && product.inStock && (
+        <p className="fast-delivery">Fast Delivery</p>
+      )}
+
       <div
-        className="ecom-card"
+        className={product.inStock ? "ecom-card" : "ecom-card-disabled "}
         onClick={() => (showItem ? setShowItem(false) : setShowItem(true))}
       >
         <Link
@@ -49,7 +54,7 @@ export function Card({ product }) {
           state={{ product: product }}
         >
           <img
-            className="card-image"
+            className={product.inStock ? "card-image" : "card-image-disabled"}
             alt="product"
             src={`data:image/png;base64,${new Buffer(
               product.img.data.data,

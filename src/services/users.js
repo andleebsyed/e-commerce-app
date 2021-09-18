@@ -84,7 +84,6 @@ export async function AddAddress(address) {
     const response = await axios.post(BASE_URL + "/user/addaddress", {
       address,
     });
-    console.log({ response });
     if (response.data.status) {
       return response.data.addresses;
     }
@@ -139,7 +138,6 @@ export async function UpdateProfile(accountDetails) {
 export async function UpdatePassword(data) {
   try {
     const response = await axios.post(BASE_URL + "/user/updatepassword", data);
-    console.log({ response });
     if (response.data.status) {
       return response.data;
     } else {

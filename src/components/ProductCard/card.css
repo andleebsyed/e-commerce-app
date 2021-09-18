@@ -1,58 +1,84 @@
-body{
-    --fill-color : red;
+body {
+  --fill-color: red;
 }
 
 .ecom-card {
-    display: flex;
-    flex-direction: column;
-    width: 210px;
-    overflow: hidden;
-    margin : 0.5rem;
+  display: flex;
+  flex-direction: column;
+  width: 210px;
+  overflow: hidden;
+  margin: 0.5rem;
 }
-.card-image{
-    width:  210px ;
-    height : 210px;
+.ecom-card-disabled {
+  display: flex;
+  flex-direction: column;
+  width: 210px;
+  overflow: hidden;
+  margin: 0.5rem;
+  opacity: 0.4;
+}
+.card-image {
+  width: 210px;
+  height: 210px;
+}
+.card-image-disabled {
+  width: 210px;
+  height: 210px;
+  /* opacity: 0.5; */
 }
 .card-info {
-    margin-left: 0.3rem;
-    text-align: left
+  margin-left: 0.3rem;
+  text-align: left;
 }
 
 .card-button {
-    padding: 0.3rem;
-    margin-bottom: 0.2rem;
-
+  padding: 0.3rem;
+  margin-bottom: 0.2rem;
 }
 
 .button-encloser {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .basic-button {
-    cursor: pointer;
-    outline: none;
-    border: none;
-    height : 2rem;
-    width: 2rem;
-    border-radius: 50%;
-    background: none;
-    background-color: #E5E7EB;
-    position: relative;
-    bottom: 12.5rem;
-    left : 10.5rem;
-    font-size: large;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  height: 2rem;
+  width: 2rem;
+  border-radius: 50%;
+  background: none;
+  background-color: #e5e7eb;
+  position: relative;
+  bottom: 12.5rem;
+  left: 10.5rem;
+  font-size: large;
 }
 
 .basic-button svg {
-    fill: var(--fill-color);
-    top : 2rem;
+  fill: var(--fill-color);
+  top: 2rem;
 }
 
-
-.cart-link{
-    width: 90%;
-    margin-right: 1rem;
-    margin-left: 1rem;
+.cart-link {
+  width: 90%;
+  margin-right: 1rem;
+  margin-left: 1rem;
+}
+.product-disabled {
+  pointer-events: none;
+}
+.out-of-stock {
+  position: absolute;
+  color: red;
+  font-weight: bold;
+  margin-left: 0.5rem;
+}
+.fast-delivery {
+  position: absolute;
+  color: var(--primary-color);
+  font-weight: bold;
+  margin-left: 0.5rem;
 }

@@ -46,7 +46,6 @@ export function PasswordReset() {
         newPassword: passwords.newPassword,
       };
       const response = await UpdatePassword(data);
-      console.log({ response }, " response in view after password update");
       if (response.status) {
         setPasswordsError(null);
         setSuccessMessage(true);
