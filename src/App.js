@@ -20,6 +20,7 @@ import {
   setUpAuthHeaderForServiceCalls,
 } from "./services/users";
 import { Checkout } from "./components/Checkout/checkout";
+import { NotFound } from "./components/NotFound/NotFound";
 
 function App() {
   const { loader, state, dispatch } = useEcom();
@@ -136,6 +137,7 @@ function App() {
           }
         />
         <Route path="/checkout" element={<Checkout />} />
+        <Route path="/*" element={<NotFound />} />
       </Routes>
     </div>
   );
