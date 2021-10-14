@@ -60,13 +60,14 @@ function App() {
       <div className="app-header">
         <Header />
       </div>
-      <Loader loader={loader} />
 
       <Routes>
         <Route
           path="/"
           element={
             <div className="homepage">
+              <Loader loader={loader} />
+
               <Homepage />
             </div>
           }
@@ -75,6 +76,8 @@ function App() {
           path="/products"
           element={
             <div className="products">
+              <Loader loader={loader} />
+
               <Products />
             </div>
           }
@@ -100,6 +103,8 @@ function App() {
           path="/search"
           element={
             <div className="searched-products">
+              <Loader loader={loader} />
+
               <Search />
             </div>
           }

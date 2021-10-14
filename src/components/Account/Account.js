@@ -28,7 +28,9 @@ export function Account() {
   }, [dispatchAuth, account, authSetup]);
   if (authorized) {
     return account === null ? (
-      <SpinLoader />
+      <div style={{ minHeight: "100vh" }}>
+        <SpinLoader />
+      </div>
     ) : (
       <div className="outer-div">
         <div className="heading">
