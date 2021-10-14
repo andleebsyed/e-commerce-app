@@ -31,7 +31,7 @@ export function Wishlist() {
             />
 
             <div className="card-info">
-              <strong>{product.productName}</strong>
+              <strong>{product.name}</strong>
               <p>{product.description}</p>
               <strong>Rs {product.price}</strong>
             </div>
