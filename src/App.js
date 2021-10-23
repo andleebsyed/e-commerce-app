@@ -40,12 +40,14 @@ function App() {
   useEffect(() => {
     async function Run() {
       const response = await FetchAccount();
-      dispatch({ type: "INITIAL_DATA", payload: response });
+      if (response) {
+        dispatch({ type: "INITIAL_DATA", payload: response });
+      }
     }
-    if (cart === null && authSetup && localStorage.getItem("token")) {
+    if (cart === null && authSetup && authorized) {
       Run();
     }
-  }, [dispatch, cart, authSetup]);
+  }, [dispatch, cart, authSetup, authorized]);
   // custom route to redirect user to account if logged  in
   function LoginRoute({ props, element }) {
     if (authorized) {
