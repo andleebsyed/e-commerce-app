@@ -1,0 +1,14 @@
+.sort-container{
+    display: flex;
+    height: 3.85rem;
+}
+.sort-box{
+    margin-top: 1rem;
+    margin-left : 1rem;
+    width : 11rem;
+}
+.drop-down-box{
+    outline: none;
+    border: none;
+    cursor: pointer;
+}

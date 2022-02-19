@@ -1,0 +1,67 @@
+body{
+    --products-bg-color : #475841;
+    --box-bordor-color : black;
+}
+.products-outer{
+    display: grid;
+    grid-template-columns: 20rem auto ;
+    grid-template-rows: 8rem auto;
+    grid-template-areas: "sidebar products-main"
+    "sidebar products-main"
+}
+.image-resize{
+    height: 250px;
+    width: 250px;
+}
+
+.products-main{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-badge{
+    margin: 0.2rem;
+    align-items: center;
+    justify-items: center;
+}
+
+
+.bold{
+    margin: 0;
+}
+
+.filter-check-boxes{
+    list-style: none;
+    border-left: none;
+
+}
+.filter-box{
+    margin-top: 1rem;
+    border : 1px solid var(--box-bordor-color);
+}
+.filters-div{
+    margin-bottom: 3rem;
+}
+
+.products-link{
+    text-decoration: none;
+}
+.search-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  
+}
+@media only screen and (max-width: 600px) {
+  
+    .products-main{
+        display: flex;
+        flex-wrap: wrap;
+       
+    }
+
+}

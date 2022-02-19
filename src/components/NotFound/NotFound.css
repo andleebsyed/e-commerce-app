@@ -1,0 +1,33 @@
+.not-found-outer {
+  height: calc(100vh - 3.3rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0.5rem;
+}
+.not-found-back-button {
+  padding: 0.5rem;
+
+  position: relative;
+  text-decoration: none;
+  cursor: pointer;
+  height: 2rem;
+  border: 2.5px solid var(--primary-color);
+  border-radius: 0.5rem;
+  color: black;
+  font-weight: bold;
+  padding-top: 1rem;
+  background-color: transparent;
+  text-align: center;
+}
+
+.not-found-text {
+  color: red;
+  text-align: center;
+}
+
+.not-found-image {
+  width: 50%;
+  height: 50%;
+}

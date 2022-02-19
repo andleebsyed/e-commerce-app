@@ -1,0 +1,35 @@
+.cart-main {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.cart-buttons {
+  display: flex;
+}
+
+.quantity-manager {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quantity-count {
+  margin: 0.3rem;
+}
+
+.cart-heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.checkout-link {
+  text-decoration: none;
+  padding: 1rem;
+  padding-left: 3rem;
+  padding-right: 3rem;
+  font-weight: bold;
+  /* width: 10rem; */
+}

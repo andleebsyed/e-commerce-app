@@ -1,0 +1,104 @@
+.filters-main-outer{
+    display: flex;
+    flex-direction: column;
+}
+.container-of-sort-and-filter{
+    display: flex;
+}
+.sort-radio-buttons {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    right : 2rem;
+}
+.side-div{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.heading-of-filters{
+    margin-left: 1rem;
+}
+
+.reset-button{
+    margin-left : 5rem;
+   
+}
+
+.filter-button{
+    margin-top: 1rem;
+    padding-bottom: 1.05rem;
+    border: 1px solid white;
+    background: transparent;
+    border-left: none;
+    cursor: pointer;
+    outline: none;}
+
+.sort-radio-buttons{
+    display: flex;
+    justify-content: space-evenly;
+}
+.sort-radio-buttons li{
+    display: flex;
+    margin-right: 1rem;
+    justify-content: space-evenly;
+}
+.sort-radio-buttons input{
+    justify-content: space-between;
+}
+
+.filter-container{
+    margin-top: .5rem;
+    display: flex;
+    position: relative;
+    left : 1rem;
+}
+
+.clear-button{
+    font-size: small;
+    margin-top: 1rem;
+    padding-bottom: 1.05rem;
+    padding-top : .7rem;
+    border: 1px solid white;
+    background: transparent;
+    border-left: none;
+    outline: none;
+    cursor: pointer;
+    position: relative;
+    bottom: 1.5rem;
+}
+
+@media only screen and (min-width: 600px) {
+ .filter-container{
+     max-width: 400px;
+    margin-top: .5rem;
+    display: flex;
+    position: relative;
+    left : 1rem;
+}
+}
+
+@media only screen and (max-width: 600px) {
+  .sort-radio-buttons {
+    list-style: none;
+    display: flex;
+    font-size: small;
+    justify-content: center;
+}
+.filter-container{
+    display: flex;
+    position: relative;
+}
+.sort-radio-buttons li{
+    display: flex;
+    justify-content: space-evenly;
+    position: relative;
+}
+.container-of-sort-and-filter{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+}
