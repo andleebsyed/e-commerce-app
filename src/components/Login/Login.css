@@ -1,0 +1,11 @@
+.login-main {
+  margin-top: 5rem;
+  border: none;
+  border: 1px solid #d1d5db;
+  width: 21rem;
+  height: 28rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
